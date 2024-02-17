@@ -1,0 +1,44 @@
+name: code_geeks
+description: "A new Flutter project."
+
+# Prevent the package from being accidentally published to pub.dev
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# Define the version and build number for your application
+version: 1.0.0+1
+
+# Define the minimum Dart SDK version required for your project
+environment:
+  sdk: '>=3.2.6 <4.0.0'
+
+# Dependencies specify other packages that your package needs in order to work
+dependencies:
+  # Firebase packages for Firestore and Authentication
+  cloud_firestore: ^4.15.4
+  firebase_auth: ^4.17.4
+  firebase_core: ^2.25.4
+  
+  # Flutter SDK and built-in packages
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  google_fonts: ^6.1.0
+  
+  # External packages for sign-in button and smooth page indicator
+  sign_in_button: ^3.2.0
+  smooth_page_indicator: ^1.1.0
+
+# Development dependencies (currently empty)
+dev_dependencies:
+  flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
+
+# Flutter-specific configuration
+flutter:
+  # Ensure that Material Icons font is included with your application
+  uses-material-design: true
+
+  # Specify assets used in your application
+  assets:
+    - lib/assets/  # Path to directory containing assets
