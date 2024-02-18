@@ -1,9 +1,16 @@
-import 'package:code_geeks/presentation/pages/homepage/homepage.dart';
-import 'package:code_geeks/presentation/pages/signup/signup.dart';
+import 'package:code_geeks/domain/bnb_bloc/bnb_bloc.dart';
+import 'package:code_geeks/presentation/screens/bnb.dart';
+import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
+import 'package:code_geeks/presentation/screens/loading/onboarding_screen.dart';
+import 'package:code_geeks/presentation/screens/login/login.dart';
+import 'package:code_geeks/presentation/screens/signup/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sign_in_button/sign_in_button.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+final GoogleSignIn _googleSignIn = GoogleSignIn(scopes:['email'] );
 
 class LoginCheckPage extends StatelessWidget {
   const LoginCheckPage({super.key});
@@ -21,10 +28,11 @@ class LoginCheckPage extends StatelessWidget {
             return Center(child: Text("something not right"));
           }
           else if(snapshot.hasData){
+            // return Center(child: Text("something  right"));
             return HomePage();
           }
           else{
-            return EntryPage();
+            return OnBoardingPage();
           } 
         },
       ),
@@ -58,7 +66,7 @@ class EntryPage extends StatelessWidget {
 
             //hola
             Text("Hola !",style: GoogleFonts.orbit(
-              fontSize: 20,fontWeight: FontWeight.w700
+              fontSize: 20,fontWeight: FontWeight.w700,color: Colors.black54
             ),),
 
             SizedBox(height: 40,),
@@ -68,7 +76,9 @@ class EntryPage extends StatelessWidget {
               width: screenWidth-100,
               height: 50,
               child: ElevatedButton(
-                onPressed: (){},
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(),));
+                },
                 style: const ButtonStyle(
                   foregroundColor: MaterialStatePropertyAll(Colors.white),
                   backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 110, 132, 214))
@@ -88,7 +98,9 @@ class EntryPage extends StatelessWidget {
               width: screenWidth-100,
               height: 50,
               child: ElevatedButton(
-                onPressed: (){},
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage(),));
+                },
                 style: const ButtonStyle(
                   foregroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 110, 132, 214)),
                   backgroundColor: MaterialStatePropertyAll(Colors.white),
@@ -105,21 +117,48 @@ class EntryPage extends StatelessWidget {
               ),
 
               //continue with
-              const Row(
+               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircleAvatar(
-                    backgroundImage: NetworkImage('https://w7.pngwing.com/pngs/989/129/png-transparent-google-logo-google-search-meng-meng-company-text-logo-thumbnail.png'),),
-                    SizedBox(width: 10,),
-                  CircleAvatar(backgroundImage: NetworkImage('https://w7.pngwing.com/pngs/646/324/png-transparent-github-computer-icons-github-logo-monochrome-head.png'),),
+                  GestureDetector(
+                    onTap: () {
+                      _signInWithGoogle(context);
+                    },
+                    child: const CircleAvatar(
+                      backgroundImage: NetworkImage('https://w7.pngwing.com/pngs/989/129/png-transparent-google-logo-google-search-meng-meng-company-text-logo-thumbnail.png'),),
+                  ),
+                    const SizedBox(width: 10,),
+                  const CircleAvatar(backgroundImage: NetworkImage('https://w7.pngwing.com/pngs/646/324/png-transparent-github-computer-icons-github-logo-monochrome-head.png'),),
                 ],
-              ),
-
-              
-              
+              ) 
           ],
         ),
       ),
     );
   }
+  Future _signInWithGoogle(BuildContext context)async{
+    print("clicked");
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
+    try{
+      print("1");
+      final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
+      print("2");
+      if(googleSignInAccount !=  null){
+        final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+      print("3");
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          idToken: googleSignInAuthentication.idToken,
+          accessToken: googleSignInAuthentication.accessToken
+        );
+        print("4");
+        await FirebaseAuth.instance.signInWithCredential(credential);
+         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomePage(),), (route) => false);
+      }
+    }
+    catch(e){
+        print("exception is : $e");
+    }
+  }
+
+
 }
