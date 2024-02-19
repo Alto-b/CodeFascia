@@ -1,3 +1,4 @@
+import 'package:code_geeks/presentation/screens/signup/profile_setup.dart';
 import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -119,7 +120,7 @@ class SignUpPage extends StatelessWidget {
         email: _emailController.text, 
         password: _passwordController.text);
 
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => BnbPage(),), (route) => false);
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ProfileSetupPage(),), (route) => false);
    }
    catch(e){  
     print(e);
