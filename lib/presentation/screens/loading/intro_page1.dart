@@ -25,7 +25,7 @@ class IntroPage1 extends StatelessWidget {
                 width: 300,
                 height: 300,
                 decoration: BoxDecoration(
-                  image: DecorationImage(image: AssetImage('lib/assets/source.gif'),fit:BoxFit.cover)
+                  image: DecorationImage(image: AssetImage('lib/assets/anim1.gif'),fit:BoxFit.cover)
                 ),
                 )
             ],

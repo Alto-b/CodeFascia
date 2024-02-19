@@ -1,6 +1,7 @@
 
 import 'package:code_geeks/domain/bnb_bloc/bnb_bloc.dart';
 import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
+import 'package:code_geeks/presentation/screens/signup/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,7 +14,7 @@ class BnbPage extends StatelessWidget {
     HomePage(),
     HomePage(),
     HomePage(),
-    HomePage()
+    SignUpPage()
   ];
 
   @override
@@ -24,9 +25,9 @@ class BnbPage extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
-    
-          body: screens.elementAt(indexNum),
-    
+          
+          body: screens.elementAt(state.tabIndex),
+              
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
@@ -38,6 +39,7 @@ class BnbPage extends StatelessWidget {
               ),
               
               child: BottomNavigationBar(
+                
                 items: [
                   BottomNavigationBarItem(icon: Icon(Icons.home),label: "a"),
                   BottomNavigationBarItem(icon: Icon(Icons.safety_check),label: "a"),
@@ -45,11 +47,11 @@ class BnbPage extends StatelessWidget {
                   BottomNavigationBarItem(icon: Icon(Icons.person),label: "a"),
               ],
               showUnselectedLabels: true,
-              backgroundColor: Colors.white70,
+              backgroundColor: Color.fromARGB(156, 255, 255, 255),
               selectedItemColor: Color.fromARGB(255, 110, 132, 214),
-              unselectedItemColor: Colors.black45,
+              unselectedItemColor: Colors.green,
               showSelectedLabels: true,
-              currentIndex: indexNum,
+              currentIndex: state.tabIndex,
               type: BottomNavigationBarType.fixed,
               onTap: (index) {
                BlocProvider.of<BnbBloc>(context).add(TabChangeEvent(tabIndex: index));

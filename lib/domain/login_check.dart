@@ -29,7 +29,7 @@ class LoginCheckPage extends StatelessWidget {
           }
           else if(snapshot.hasData){
             // return Center(child: Text("something  right"));
-            return HomePage();
+            return BnbPage();
           }
           else{
             return OnBoardingPage();
@@ -137,22 +137,22 @@ class EntryPage extends StatelessWidget {
     );
   }
   Future _signInWithGoogle(BuildContext context)async{
-    print("clicked");
+    // print("clicked");
     final GoogleSignIn _googleSignIn = GoogleSignIn();
     try{
-      print("1");
+      // print("1");
       final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
-      print("2");
+      // print("2");
       if(googleSignInAccount !=  null){
         final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
-      print("3");
+      // print("3");
         final AuthCredential credential = GoogleAuthProvider.credential(
           idToken: googleSignInAuthentication.idToken,
           accessToken: googleSignInAuthentication.accessToken
         );
-        print("4");
+        // print("4");
         await FirebaseAuth.instance.signInWithCredential(credential);
-         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomePage(),), (route) => false);
+         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => BnbPage(),), (route) => false);
       }
     }
     catch(e){

@@ -1,7 +1,7 @@
 part of 'bnb_bloc.dart';
 
-sealed class BnbState extends Equatable {
-  const BnbState(this.tabIndex);
+abstract class BnbState extends Equatable {
+  const BnbState({required this.tabIndex});
   
   @override
   List<Object> get props => [];
@@ -11,5 +11,6 @@ sealed class BnbState extends Equatable {
 }
 
 final class BnbInitial extends BnbState {
- const BnbInitial(super.tabIndex);
+ const BnbInitial({required super.tabIndex});
+
 }
