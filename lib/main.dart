@@ -1,8 +1,9 @@
 import 'dart:io';
 
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:code_geeks/domain/bnb_bloc/bnb_bloc.dart';
 import 'package:code_geeks/domain/login_check.dart';
-import 'package:code_geeks/presentation/screens/bnb.dart';
+import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:code_geeks/presentation/screens/loading/onboarding_screen.dart';
 import 'package:code_geeks/presentation/screens/login/login.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -30,17 +31,22 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        // useMaterial3: true,
-      ),
-      home: BlocProvider<BnbBloc>(
-        create: (context) => BnbBloc(),
-        child: const LoginCheckPage(),
-      )
+    return BlocProvider(
+      create: (context) => BnbBloc(),
+
+      child: AdaptiveTheme(
+      light: ThemeData.light(useMaterial3: true),
+      dark: ThemeData.dark(useMaterial3: true),
+      initial: AdaptiveThemeMode.light,
+      builder: (theme, darkTheme) => 
+      MaterialApp(
+        title: 'Code Geeks',
+        debugShowCheckedModeBanner: false,
+        theme: theme,
+        darkTheme: darkTheme,
+
+        home: LoginCheckPage(),
+      ),)
     );
   }
 }

@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
     final user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       appBar: AppBar(
-        title: Text(user!.email!),
+        title: Text(user!.uid),
         actions: [
           IconButton(onPressed: (){
             FirebaseAuth.instance.signOut();

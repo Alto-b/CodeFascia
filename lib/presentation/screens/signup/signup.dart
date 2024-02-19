@@ -1,4 +1,4 @@
-import 'package:code_geeks/presentation/screens/bnb.dart';
+import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -113,11 +113,13 @@ class SignUpPage extends StatelessWidget {
       email: _emailController.text, 
       password: _passwordController.text);
 
+
+
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _emailController.text, 
         password: _passwordController.text);
 
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomePage(),), (route) => false);
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => BnbPage(),), (route) => false);
    }
    catch(e){  
     print(e);

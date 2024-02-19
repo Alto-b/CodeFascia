@@ -1,4 +1,4 @@
-import 'package:code_geeks/presentation/screens/bnb.dart';
+import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +9,7 @@ class LoginPage extends StatelessWidget {
 
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +42,7 @@ class LoginPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(25, 10, 25, 10),
                 child: Form(
+                  key: _formKey,
                   child: Column(
                     children: [
                       TextFormField(
@@ -64,12 +66,19 @@ class LoginPage extends StatelessWidget {
                           )
                         ),
                       ),
-                      const SizedBox(height: 40,),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(onPressed: (){forgotPassword(_emailController.text);}, child: Text("Forgot password?",style: TextStyle(fontSize: 12),),)),
+                      const SizedBox(height: 30,),
         
                       Container(
                         width: double.infinity,
                         child: ElevatedButton(onPressed: (){
+                          if(_formKey.currentState!.validate()){
+                        
                           signIn(context);
+                          }
+                          
                         }, child: const Text("Login"),style: const ButtonStyle(
                           foregroundColor: MaterialStatePropertyAll(Colors.white),
                     backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 110, 132, 214))
@@ -99,10 +108,15 @@ class LoginPage extends StatelessWidget {
     await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: _emailController.text, 
       password: _passwordController.text);
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder:(context) => HomePage() ), (route) => false);
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder:(context) => BnbPage() ), (route) => false);
    }
    catch(e){  
     print(e);
    }
   }
+
+  forgotPassword(String email)async{
+
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+   }
 }

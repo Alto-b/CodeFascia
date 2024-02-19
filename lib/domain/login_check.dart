@@ -1,5 +1,5 @@
 import 'package:code_geeks/domain/bnb_bloc/bnb_bloc.dart';
-import 'package:code_geeks/presentation/screens/bnb.dart';
+import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
 import 'package:code_geeks/presentation/screens/loading/onboarding_screen.dart';
 import 'package:code_geeks/presentation/screens/login/login.dart';
