@@ -1,4 +1,4 @@
-import 'package:code_geeks/domain/bnb_bloc/bnb_bloc.dart';
+
 import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
 import 'package:code_geeks/presentation/screens/loading/onboarding_screen.dart';
@@ -50,88 +50,90 @@ class EntryPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
 
-      body: Center(
-        child: Column(
-          children: [
-            //logo
-            Container(
-              height: screenHeight-(screenHeight/1.5),
-              width: screenWidth-80,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('lib/assets/logo.png'),
-                  fit: BoxFit.cover)
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              //logo
+              Container(
+                height: screenHeight-(screenHeight/1.5),
+                width: screenWidth-80,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('lib/assets/logo.png'),
+                    fit: BoxFit.cover)
+                ),
               ),
-            ),
-
-            //hola
-            Text("Hola !",style: GoogleFonts.orbit(
-              fontSize: 20,fontWeight: FontWeight.w700,color: Colors.black54
-            ),),
-
-            SizedBox(height: 40,),
-
-            //login button
-            Container(
-              width: screenWidth-100,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(),));
-                },
-                style: const ButtonStyle(
-                  foregroundColor: MaterialStatePropertyAll(Colors.white),
-                  backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 110, 132, 214))
-                ), 
-                child: Text("Login"),
-                )),
-                SizedBox(height: 20,),
-
-                //signup button
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    border: Border.all(
-                      color:(Color.fromARGB(255, 110, 132, 214)),
-                    )
-                  ),
-              width: screenWidth-100,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage(),));
-                },
-                style: const ButtonStyle(
-                  foregroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 110, 132, 214)),
-                  backgroundColor: MaterialStatePropertyAll(Colors.white),
-                ), 
-                child: const Text("Signup"),
-                )),
-
-              // SizedBox(height: 20,),
-
-              //divider
-              const Padding(
-                padding: EdgeInsets.fromLTRB(20, 40, 20, 40),
-                child: Divider(thickness: 2,),
-              ),
-
-              //continue with
-               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      _signInWithGoogle(context);
-                    },
-                    child: const CircleAvatar(
-                      backgroundImage: NetworkImage('https://w7.pngwing.com/pngs/989/129/png-transparent-google-logo-google-search-meng-meng-company-text-logo-thumbnail.png'),),
-                  ),
-                    const SizedBox(width: 10,),
-                  const CircleAvatar(backgroundImage: NetworkImage('https://w7.pngwing.com/pngs/646/324/png-transparent-github-computer-icons-github-logo-monochrome-head.png'),),
-                ],
-              ) 
-          ],
+        
+              //hola
+              Text("Hola !",style: GoogleFonts.orbit(
+                fontSize: 20,fontWeight: FontWeight.w700,color: Colors.black54
+              ),),
+        
+              SizedBox(height: 40,),
+        
+              //login button
+              Container(
+                width: screenWidth-100,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(),));
+                  },
+                  style: const ButtonStyle(
+                    foregroundColor: MaterialStatePropertyAll(Colors.white),
+                    backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 110, 132, 214))
+                  ), 
+                  child: Text("Login"),
+                  )),
+                  SizedBox(height: 20,),
+        
+                  //signup button
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      border: Border.all(
+                        color:(Color.fromARGB(255, 110, 132, 214)),
+                      )
+                    ),
+                width: screenWidth-100,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage(),));
+                  },
+                  style: const ButtonStyle(
+                    foregroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 110, 132, 214)),
+                    backgroundColor: MaterialStatePropertyAll(Colors.white),
+                  ), 
+                  child: const Text("Signup"),
+                  )),
+        
+                // SizedBox(height: 20,),
+        
+                //divider
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(20, 40, 20, 40),
+                  child: Divider(thickness: 2,),
+                ),
+        
+                //continue with
+                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        _signInWithGoogle(context);
+                      },
+                      child: const CircleAvatar(
+                        backgroundImage: NetworkImage('https://w7.pngwing.com/pngs/989/129/png-transparent-google-logo-google-search-meng-meng-company-text-logo-thumbnail.png'),),
+                    ),
+                      const SizedBox(width: 10,),
+                    const CircleAvatar(backgroundImage: NetworkImage('https://w7.pngwing.com/pngs/646/324/png-transparent-github-computer-icons-github-logo-monochrome-head.png'),),
+                  ],
+                ) 
+            ],
+          ),
         ),
       ),
     );

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:code_geeks/domain/bnb_bloc/bnb_bloc.dart';
+import 'package:code_geeks/application/bnb_bloc/bnb_bloc.dart';
 import 'package:code_geeks/domain/login_check.dart';
 import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:code_geeks/presentation/screens/loading/onboarding_screen.dart';
@@ -14,11 +14,11 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Platform.isAndroid? await Firebase.initializeApp( 
       options: const FirebaseOptions( 
-          apiKey: "AIzaSyBLZ1YwqrUYwK-ZMaPPMIKjLzVg0WLkwpc", 
-          projectId: "1:420845583497:android:4ca387c2fad8f8941a5a58", 
-          messagingSenderId: "420845583497", 
-          appId: "code-geeks-78d47",
-          storageBucket: 'code-geeks-78d47.appspot.com' 
+          apiKey: "AIzaSyDFLURsPEzl6KV3Aau3POzWV3JUJd9plz0", 
+          projectId: "code-geeks-ff98c", 
+          messagingSenderId: "688360665265", 
+          appId: "1:688360665265:android:a76df499c29b711251f290",
+          storageBucket: 'code-geeks-ff98c.appspot.com', 
         ) 
   ):
  await Firebase.initializeApp();

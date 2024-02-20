@@ -113,9 +113,7 @@ class SignUpPage extends StatelessWidget {
      await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: _emailController.text, 
       password: _passwordController.text);
-
-
-
+      
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _emailController.text, 
         password: _passwordController.text);
@@ -127,6 +125,4 @@ class SignUpPage extends StatelessWidget {
    }
     }
   }
-
-  
 }
