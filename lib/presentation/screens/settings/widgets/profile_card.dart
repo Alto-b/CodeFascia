@@ -29,12 +29,11 @@ class ProfileCard extends StatelessWidget {
             height: 150,
             child: Column(
               children: [
-                const CircleAvatar(
+                 CircleAvatar(
                   radius: 40,
-                  backgroundImage: NetworkImage('https://cdn.pixabay.com/animation/2022/12/01/17/03/17-03-11-60_512.gif', 
-                  ),
+                  backgroundImage: NetworkImage(user?.photoURL!??"")
                 ),const SizedBox(height: 10,),
-                Text(user!.email!,style: GoogleFonts.taiHeritagePro(fontWeight: FontWeight.w600,fontSize: 18),),                       
+                Text(user?.displayName??"username",style: GoogleFonts.taiHeritagePro(fontWeight: FontWeight.w600,fontSize: 18),),                       
               ],
             ),
           ),

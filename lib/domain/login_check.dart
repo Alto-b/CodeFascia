@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
 import 'package:code_geeks/presentation/screens/loading/onboarding_screen.dart';
@@ -153,7 +154,14 @@ class EntryPage extends StatelessWidget {
           accessToken: googleSignInAuthentication.accessToken
         );
         // print("4");
-        await FirebaseAuth.instance.signInWithCredential(credential);
+      UserCredential userCredential =  await FirebaseAuth.instance.signInWithCredential(credential);
+        User? user = userCredential.user;
+        await FirebaseFirestore.instance.collection("users").doc(user!.uid).set({
+          "uid": user.uid,
+          "Name": user.displayName,
+          "Email": user.email,
+          "profile": user.photoURL
+        });
          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => BnbPage(),), (route) => false);
       }
     }

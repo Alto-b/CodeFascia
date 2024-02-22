@@ -1,13 +1,21 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:code_geeks/application/image_picker_bloc/image_picker_bloc.dart';
+import 'package:code_geeks/application/sign%20up%20bloc/image_update_bloc/image_bloc.dart';
 import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebasestorage;
 
 
 class ProfileSetupPage extends StatelessWidget {
@@ -24,12 +32,16 @@ class ProfileSetupPage extends StatelessWidget {
 
   String? selectedSkill;
 
-  PlatformFile? selectedImage;
-  bool imageAvailable = false;
+  XFile? newImge;
+
+
+
 
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
+
+    
     _emailController.text = user!.email!;
     return Scaffold(
       appBar: AppBar(),
@@ -40,47 +52,49 @@ class ProfileSetupPage extends StatelessWidget {
           child: Column(
             children: [
               Text("Set up your profile",style: GoogleFonts.orbit(fontSize: 25,fontWeight: FontWeight.w800,color: Colors.grey),),
-              SizedBox(height: 30,),
+              const SizedBox(height: 30,),
               Form(
                 key: _formKey,
                 child: Column(
                 children: [
-        
-                  GestureDetector(
-                    onTap: () async{
-                      final result = await FilePicker.platform.pickFiles(type: FileType.image);
-                      if(result==null)return;
-                        selectedImage = result.files.first;
-                    },
-                    child: CircleAvatar(
-                      radius: 60,
-                      child: Container(
-                        child: imageAvailable?Image.file(selectedImage as File):Icon(Icons.photo),
-                      )
-                    ),
-                  ),
-                  SizedBox(height: 30,),
+                  BlocBuilder<ImagePickerBloc,ImagePickerState>(
+                    builder: (context,state){
+                      if(state.file==null){
+                        return InkWell(
+                          onTap: () {
+                            context.read<ImagePickerBloc>().add(GalleryPicker());
+                            newImge = state.file;
+                            
+                          },
+                          child: const CircleAvatar(child:  Icon(Icons.add_a_photo),),
+                        );
+                      }
+                      else{
+                        return Image.file(File(state.file!.path.toString()));
+                      }
+                    }),
+                  const SizedBox(height: 30,),
         
                   TextFormField(
                     controller: _nameController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       label: Text("Name")
                     ),
                   ),
         
-                  SizedBox(height: 30,),
+                  const SizedBox(height: 30,),
 
                   TextFormField(
                     controller: _emailController,
                     readOnly: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       label: Text("Email")
                     ),
                   ),
         
-                  SizedBox(height: 30,),
+                  const SizedBox(height: 30,),
         
                   DropdownButtonFormField2<String>(
                     validator: (value) {
@@ -93,12 +107,12 @@ class ProfileSetupPage extends StatelessWidget {
                     },
                     isExpanded: true,
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(vertical: 16),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 16),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(0),
                       )
                     ),
-                    hint: Text("Select your profession"),
+                    hint: const Text("Select your profession"),
                     items: skillItems.map((item) => 
                     DropdownMenuItem(
                       value: item,
@@ -110,12 +124,17 @@ class ProfileSetupPage extends StatelessWidget {
                         selectedSkill = value.toString();
                       },
                     ),
-                    SizedBox(height: 30,),
+                    const SizedBox(height: 30,),
                   
         
-                    ActionChip.elevated(label: Text("Proceed"),onPressed: () {
-                      profileSetup(context);
-                    },)
+                    BlocBuilder<ImagePickerBloc, ImagePickerState>(
+                      builder: (context, state) {
+                        return ActionChip.elevated(label: const Text("Proceed"),onPressed: () {
+                                          // profileSetup(context,selectedImage);
+                                          profileSetup(context,state.file!.path.toString());
+                                        },);
+                      },
+                    )
                 ],
               ))
             ],
@@ -123,23 +142,75 @@ class ProfileSetupPage extends StatelessWidget {
         ),
       ),
     );
+  } 
+
+  // void pickUploadImage()async{
+  //   final result = await ImagePicker().pickImage(source: ImageSource.gallery,maxHeight: 512,maxWidth: 512,imageQuality: 75);
+  //   Reference ref = FirebaseStorage.instance.ref().child("profilepic.jpg");
+  //   await ref.putFile(File(result!.path));
+  //   ref.getDownloadURL().then((value){
+  //     print("image link $value");
+  //   });
+  // }
+
+  //  Future uploadImageToFirebase(BuildContext context) async {
+  //   String fileName = basename(selectedImage!.path);
+  //   Reference ref = FirebaseStorage.instance.ref().child("profilepic.jpg");
+  //   await ref.putFile(File(fileName));
+  //   ref.getDownloadURL().then((value){
+  //     print("image link $value");
+  //     return value;
+  //   });
+  // }
+
+Future<void> profileSetup(BuildContext context, String newImg) async {
+  print("selected image $newImg");
+  File file = File(newImg);
+
+  if (!file.existsSync()) {
+    print("Error: File does not exist");
+    return;
   }
 
-  Future<void> profileSetup(BuildContext context)async{
+  String fileName = basename(newImg);
+  firebasestorage.Reference ref = firebasestorage.FirebaseStorage.instance.ref("profilepic${FirebaseAuth.instance.currentUser!.uid}");
+  firebasestorage.UploadTask uploadTask = ref.putFile(file);
 
+  try {
+    await uploadTask;
+    var downloadUrl = await ref.getDownloadURL();
+    print("image link $downloadUrl");
 
+     Map<String, String> data = {
+    "id": FirebaseAuth.instance.currentUser!.uid,
+    "Name": _nameController.text,
+    "Profession": selectedSkill!,
+    "Email": _emailController.text,
+    "profile": downloadUrl // Use imageLink here
+  };
 
-    Map<String,String> data ={
-      "id" : FirebaseAuth.instance.currentUser!.uid,
-      "Name" : _nameController.text,
-      "Profession" : selectedSkill!,
-      "Email" : _emailController.text
-    };
-    print("fire1");
-    await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).set(data)
-    .onError((error, _) => print("error is $error"));
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => BnbPage(),), (route) => false);
+    await FirebaseFirestore.instance
+      .collection('users')
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .set(data)
+      .then((_) {
+    // Navigate to BnbPage after Firestore operation is complete
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => BnbPage()),
+      (route) => false,
+    );
+      });
+
+    // Rest of your code to save the downloadUrl to Firestore...
+
+  } catch (error) {
+    print("Error uploading file: $error");
+    // Handle the error gracefully, e.g., show an error message to the user
   }
+}
+
+
 
   // Future _photoImage() async {
   //   // final picker = ImagePicker();
@@ -153,5 +224,23 @@ class ProfileSetupPage extends StatelessWidget {
   //   final result = await FilePicker.platform.pickFiles(type: FileType.image);
   //   if(result==null)return;
   //   final  pickedFile = result.files.first;
+  // }
+
+//   Future pickImage( context) async {
+//     final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+//   _imageFile = File(pickedFile!.path);
+//     // setState(() {
+//     //   _imageFile = File(pickedFile.path);
+//     // });
+// uploadImageToFirebase(context);
+//   }
+
+  // Future uploadImageToFirebase(BuildContext context) async {
+  //   String fileName = basename(_imageFile!.path);
+  //   Reference ref = FirebaseStorage.instance.ref().child("profilepic.jpg");
+  //   await ref.putFile(File(fileName));
+  //   ref.getDownloadURL().then((value){
+  //     print("image link $value");
+  //   });
   // }
 }

@@ -2,6 +2,9 @@ import 'dart:io';
 
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:code_geeks/application/bnb_bloc/bnb_bloc.dart';
+import 'package:code_geeks/application/image_picker_bloc/image_picker_bloc.dart';
+import 'package:code_geeks/application/image_picker_utils.dart';
+import 'package:code_geeks/application/sign%20up%20bloc/image_update_bloc/image_bloc.dart';
 import 'package:code_geeks/domain/login_check.dart';
 import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:code_geeks/presentation/screens/loading/onboarding_screen.dart';
@@ -39,13 +42,25 @@ class MyApp extends StatelessWidget {
       dark: ThemeData.dark(useMaterial3: true),
       initial: AdaptiveThemeMode.light,
       builder: (theme, darkTheme) => 
-      MaterialApp(
-        title: 'Code Geeks',
-        debugShowCheckedModeBanner: false,
-        theme: theme,
-        darkTheme: darkTheme,
-
-        home: LoginCheckPage(),
+      MultiBlocProvider(
+          providers: [
+              BlocProvider(
+              create: (context) => ImageBloc(),
+      
+            ),
+              BlocProvider(
+                  create: (context) => ImagePickerBloc(ImagePickerUtils()),
+              ),
+          ],
+                  child: MaterialApp(
+                    title: 'Code Geeks',
+                    debugShowCheckedModeBanner: false,
+                    theme: theme,
+                    darkTheme: darkTheme,
+                    
+            
+                    home: LoginCheckPage(),
+                  ),
       ),)
     );
   }

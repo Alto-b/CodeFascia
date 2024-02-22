@@ -4,6 +4,7 @@ import 'package:code_geeks/presentation/screens/settings/profile.dart';
 import 'package:code_geeks/presentation/screens/settings/widgets/button.dart';
 import 'package:code_geeks/presentation/screens/settings/widgets/menu_items.dart';
 import 'package:code_geeks/presentation/screens/settings/widgets/profile_card.dart';
+import 'package:code_geeks/presentation/screens/signup/profile_setup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glass_kit/glass_kit.dart';
@@ -29,7 +30,7 @@ class SettingsPage extends StatelessWidget {
             Text("Settings",style: GoogleFonts.orbitron(fontSize: 30,fontWeight: FontWeight.w800,color: Colors.grey)),
             const SizedBox(height: 30,),
             Center(
-              child: ProfileCard(user: user),
+              // child: ProfileCard(user: user),
             ),const SizedBox(height: 20,),
              ListTile(
               leading: Icon(Icons.person),
@@ -42,6 +43,11 @@ class SettingsPage extends StatelessWidget {
               onTap: () {
                 AdaptiveTheme.of(context).toggleThemeMode();
               },
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text("Profile setup"),
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileSetupPage(),)),
             ),
             ListTile(
               leading: const Icon(Icons.logout),
