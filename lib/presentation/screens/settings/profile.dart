@@ -24,6 +24,7 @@ class ProfilePage extends StatelessWidget {
             ProfileCard(user: user)
           ],
         ),
+      
       ),
     );
   }

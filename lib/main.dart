@@ -2,10 +2,13 @@ import 'dart:io';
 
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:code_geeks/application/bnb_bloc/bnb_bloc.dart';
+import 'package:code_geeks/application/gemini_bloc/gemini_bloc.dart';
 import 'package:code_geeks/application/image_picker_bloc/image_picker_bloc.dart';
 import 'package:code_geeks/application/image_picker_utils.dart';
 import 'package:code_geeks/application/sign%20up%20bloc/image_update_bloc/image_bloc.dart';
+import 'package:code_geeks/application/user_bloc/user_bloc.dart';
 import 'package:code_geeks/domain/login_check.dart';
+import 'package:code_geeks/infrastructure/user_repo.dart';
 import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:code_geeks/presentation/screens/loading/onboarding_screen.dart';
 import 'package:code_geeks/presentation/screens/login/login.dart';
@@ -50,6 +53,12 @@ class MyApp extends StatelessWidget {
             ),
               BlocProvider(
                   create: (context) => ImagePickerBloc(ImagePickerUtils()),
+              ),
+               BlocProvider(
+                  create: (context) => GeminiBloc(),
+              ),
+              BlocProvider(
+                  create: (context) => UserBloc(UserRepo()),
               ),
           ],
                   child: MaterialApp(

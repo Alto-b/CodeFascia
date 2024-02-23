@@ -1,5 +1,6 @@
 
 import 'package:code_geeks/application/bnb_bloc/bnb_bloc.dart';
+import 'package:code_geeks/presentation/screens/gemini/gemini.dart';
 import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
 import 'package:code_geeks/presentation/screens/settings/settings.dart';
 import 'package:code_geeks/presentation/screens/signup/signup.dart';
@@ -72,7 +73,9 @@ class BnbPage extends StatelessWidget {
 
         floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
         floatingActionButton: FloatingActionButton(
-        onPressed: (){},
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => GeminiPage(),));
+        },
         child: Image.asset('lib/assets/logo.png',
         fit: BoxFit.cover,
         ),

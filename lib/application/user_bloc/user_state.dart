@@ -9,12 +9,18 @@ sealed class UserState extends Equatable {
 
 final class UserInitialState extends UserState {}
 
-class UserLoadingState extends UserState{}
+class UserLoadingState extends UserState{
+  @override
+  List<Object> get props => [];
+}
 
 class UserLoadedState extends UserState{
+
   final List<UserModel> userList;
 
   UserLoadedState({required this.userList});
+  @override
+  List<Object> get props => [userList];
 }
 
 class UserSuccessState extends UserState{
