@@ -29,6 +29,8 @@ class GeminiBloc extends Bloc<GeminiEvent, GeminiState> {
   generating = true;
      String generatedText = await GeminiRepo.geminiTextGenerationRepo(messages);
      if(generatedText.isNotEmpty){
+      generatedText = _parseText1(generatedText);
+      generatedText = _parseText2(generatedText);
       messages.add(GeminiMessageModel(role: 'model', parts: [
         GeminiPartModel(text: generatedText)
       ]));
@@ -36,4 +38,12 @@ class GeminiBloc extends Bloc<GeminiEvent, GeminiState> {
      }
      generating = false;
     }
+   String _parseText1(String text) {
+    // Remove formatting characters
+    return text.replaceAll("'''", '');
+  }
+  String _parseText2(String text) {
+    // Remove formatting characters
+    return text.replaceAll("*", '');
+  }
 }

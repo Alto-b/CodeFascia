@@ -58,4 +58,5 @@ flutter:
     - lib/assets/anim2.gif
     - lib/assets/logo.png
     - lib/assets/loader.json
+    - lib/assets/signup_loader.json
     - lib/assets/

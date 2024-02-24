@@ -18,6 +18,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   UserRepo userRepo = UserRepo();
 
   UserBloc(this.userRepo) : super(UserInitialState()) {
+
     on<LoadUserEvent>((event, emit)async {
     //   try{
     //     emit(UserLoadingState());
@@ -26,13 +27,14 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     //   }catch(e){
 
     //   }
+
     emit(UserLoadingState());
       await Future.delayed(Duration(seconds: 1));
     try{
       // await Future.delayed(Duration(seconds: 1));
-      final data = await userRepo.get();
+      final data = await userRepo.getUser();
       print("data from bloc : ${data}");
-      emit(UserLoadedState(userList: data));
+      emit(UserLoadedState(userList:data ));
     }
     catch(e){
       emit(UserErroState(errorMessage: "error loading user"));

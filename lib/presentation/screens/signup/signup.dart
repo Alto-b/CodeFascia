@@ -11,6 +11,7 @@ class SignUpPage extends StatelessWidget {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _cpasswordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
 
   @override
@@ -22,7 +23,7 @@ class SignUpPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 100,),
+              SizedBox(height: 80,),
               Card(
                 color: Colors.white,
                 child: Container(
@@ -42,38 +43,54 @@ class SignUpPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(25, 10, 25, 10),
                 child: Form(
+                  key: _formKey,
                   child: Column(
                     children: [
-                      TextFormField(
-                        controller: _emailController,
-                        decoration: const InputDecoration(
-                          // hintText: "email id",
-                          label: Text("Email"),
-                          border: OutlineInputBorder(
-                            
-                          )
+                      Card(
+                        color: Colors.transparent,
+                        child: TextFormField(
+                          validator: validateEmail,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          controller: _emailController,
+                          decoration: const InputDecoration(
+                            // hintText: "email id",
+                            label: Text("Email"),
+                            border: OutlineInputBorder(
+                              
+                            )
+                          ),
                         ),
                       ),
                       const SizedBox(height: 10,),
-                      TextFormField(
-                        controller: _passwordController,
-                        decoration: const InputDecoration(
-                          // hintText: "email id",
-                          label: Text("Password"),
-                          border: OutlineInputBorder(
-                            
-                          )
+                      Card(
+                        color: Colors.transparent,
+                        child: TextFormField(
+                          // validator: validatePassword,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          controller: _passwordController,
+                          decoration: const InputDecoration(
+                            // hintText: "email id",
+                            label: Text("Password"),
+                            border: OutlineInputBorder(
+                              
+                            )
+                          ),
                         ),
                       ),
                       const SizedBox(height: 10,),
-                      TextFormField(
-                        controller: _cpasswordController,
-                        decoration: const InputDecoration(
-                          hintText: "Confirm Password",
-                          // label: Text("password"),
-                          border: OutlineInputBorder(
-                            
-                          )
+                      Card(
+                        color: Colors.transparent,
+                        child: TextFormField(
+                          // validator: validatePassword,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          controller: _cpasswordController,
+                          decoration: const InputDecoration(
+                            hintText: "Confirm Password",
+                            // label: Text("password"),
+                            border: OutlineInputBorder(
+                              
+                            )
+                          ),
                         ),
                       ),
                       const SizedBox(height: 40,),
@@ -81,7 +98,10 @@ class SignUpPage extends StatelessWidget {
                       Container(
                         width: double.infinity,
                         child: ElevatedButton(onPressed: (){
-                          signUp(context);
+                          if(_formKey.currentState!.validate()){
+                                      signUp(context);
+                                    }
+                          // signUp(context);
                         }, child: const Text("Sign up"),style: const ButtonStyle(
                           foregroundColor: MaterialStatePropertyAll(Colors.white),
                     backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 110, 132, 214))
@@ -107,8 +127,14 @@ class SignUpPage extends StatelessWidget {
     );
   }
 
+  // void validateForm(){
+  //   if(_formKey.currentState!.validate()){
+  //     signUp(context);
+  //   }
+  // }
+
   Future signUp(BuildContext context)async{
-    if(_passwordController.text.trim()==_cpasswordController.text.trim()){
+    if(_passwordController.text.trim()==_cpasswordController.text.trim() && _formKey.currentState!.validate()){
        try{
      await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: _emailController.text, 
@@ -117,12 +143,53 @@ class SignUpPage extends StatelessWidget {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _emailController.text, 
         password: _passwordController.text);
-
+      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text(""),backgroundColor: Colors.green,duration: Duration(seconds: 2),));
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ProfileSetupPage(),), (route) => false);
    }
-   catch(e){  
+    on FirebaseAuthException catch(e){ 
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("${e.message}"),backgroundColor: Colors.red)); 
     print(e);
    }
     }
   }
+
+       //to validate email
+String? validateEmail(String? value) {
+  
+  final trimmedValue = value?.trim();
+
+  if (trimmedValue == null || trimmedValue.isEmpty) {
+    return 'Email is required';
+  }
+
+  final RegExp emailRegExp = RegExp(
+    r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$',
+  );
+
+  if (!emailRegExp.hasMatch(trimmedValue)) {
+    return 'Invalid email address';
+  }
+
+  return null; 
+}
+
+//to validate password
+String? validatePassword(String? value) {
+  final trimmedValue = value?.trim();
+
+  if (trimmedValue == null || trimmedValue.isEmpty) {
+    return 'Password cannot be empty';
+  }
+
+  final passwordRegExp = RegExp(
+    r'^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#\$%^&*()_+])[a-zA-Z\d!@#\$%^&*()_+]{8,}$',
+  );
+
+  if (!passwordRegExp.hasMatch(trimmedValue)) {
+    return 'One alphabet, one number, and one special symbol';
+  }
+
+  return null;
+}
+
 }

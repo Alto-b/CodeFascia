@@ -10,6 +10,7 @@ class LoginPage extends StatelessWidget {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -45,25 +46,32 @@ class LoginPage extends StatelessWidget {
                   key: _formKey,
                   child: Column(
                     children: [
-                      TextFormField(
-                        controller: _emailController,
-                        decoration: const InputDecoration(
-                          // hintText: "email id",
-                          label: Text("Email"),
-                          border: OutlineInputBorder(
-                            
-                          )
+                      Card(
+                        color: Colors.transparent,
+                        child: TextFormField(     
+                          validator: validateEmail,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          controller: _emailController,
+                          decoration: const InputDecoration(
+                            label: Text("Email"),
+                            border: OutlineInputBorder(
+                            )
+                          ),
                         ),
                       ),
                       const SizedBox(height: 10,),
-                      TextFormField(
-                        controller: _passwordController,
-                        decoration: const InputDecoration(
-                          // hintText: "email id",
-                          label: Text("Password"),
-                          border: OutlineInputBorder(
-                            
-                          )
+                      Card(
+                        color: Colors.transparent,
+                        child: TextFormField(
+                          // validator: validatePassword,
+                          controller: _passwordController,
+                          decoration: const InputDecoration(
+                            // hintText: "email id",
+                            label: Text("Password"),
+                            border: OutlineInputBorder(
+                              
+                            )
+                          ),
                         ),
                       ),
                       Align(
@@ -108,9 +116,15 @@ class LoginPage extends StatelessWidget {
     await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: _emailController.text, 
       password: _passwordController.text);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Welcome aboard !"),backgroundColor: Colors.green,duration: Duration(seconds: 1),));
+      await Future.delayed(Duration(seconds:2));
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder:(context) => BnbPage() ), (route) => false);
    }
-   catch(e){  
+   on FirebaseAuthException catch(e){  
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("${e.message}"),backgroundColor: Colors.red));
+    // _scaffoldKey.currentState?.showSnackBar(SnackBar(
+    //     content: Text(e.toString()),
+    //   ));
     print(e);
    }
   }
@@ -119,4 +133,46 @@ class LoginPage extends StatelessWidget {
 
     await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
    }
+
+     
+     //to validate email
+String? validateEmail(String? value) {
+  
+  final trimmedValue = value?.trim();
+
+  if (trimmedValue == null || trimmedValue.isEmpty) {
+    return 'Email is required';
+  }
+
+  final RegExp emailRegExp = RegExp(
+    r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$',
+  );
+
+  if (!emailRegExp.hasMatch(trimmedValue)) {
+    return 'Invalid email address';
+  }
+
+  return null; 
+}
+
+//to validate password
+String? validatePassword(String? value) {
+  final trimmedValue = value?.trim();
+
+  if (trimmedValue == null || trimmedValue.isEmpty) {
+    return 'Password cannot be empty';
+  }
+
+  final passwordRegExp = RegExp(
+    r'^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#\$%^&*()_+])[a-zA-Z\d!@#\$%^&*()_+]{8,}$',
+  );
+
+  if (!passwordRegExp.hasMatch(trimmedValue)) {
+    return 'One alphabet, one number, and one special symbol';
+  }
+
+  return null;
+}
+
+
 }

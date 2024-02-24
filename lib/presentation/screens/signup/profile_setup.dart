@@ -3,13 +3,11 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:code_geeks/application/image_picker_bloc/image_picker_bloc.dart';
-import 'package:code_geeks/application/sign%20up%20bloc/image_update_bloc/image_bloc.dart';
+import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
 import 'package:code_geeks/presentation/widgets/bnb.dart';
+import 'package:code_geeks/presentation/widgets/loader.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -70,7 +68,17 @@ class ProfileSetupPage extends StatelessWidget {
                         );
                       }
                       else{
-                        return Image.file(File(state.file!.path.toString()));
+                        return GestureDetector(
+                                onTap: () {
+                                  context.read<ImagePickerBloc>().add(GalleryPicker());
+                                  newImge = state.file;
+                                },
+                                child: CircleAvatar(
+                                     radius: 60,
+                                 // child: Image.file(File(state.file!.path.toString()))
+                                  backgroundImage: FileImage(File(state.file!.path.toString()))
+                                ),
+                              );
                       }
                     }),
                   const SizedBox(height: 30,),
@@ -172,7 +180,7 @@ Future<void> profileSetup(BuildContext context, String newImg) async {
     return;
   }
 
-  String fileName = basename(newImg);
+  // String fileName = basename(newImg);
   firebasestorage.Reference ref = firebasestorage.FirebaseStorage.instance.ref("profilepic${FirebaseAuth.instance.currentUser!.uid}");
   firebasestorage.UploadTask uploadTask = ref.putFile(file);
 
@@ -195,6 +203,7 @@ Future<void> profileSetup(BuildContext context, String newImg) async {
       .set(data)
       .then((_) {
     // Navigate to BnbPage after Firestore operation is complete
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Profile Created !"),backgroundColor: Colors.green,duration: Duration(seconds: 2),));
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => BnbPage()),
@@ -204,8 +213,10 @@ Future<void> profileSetup(BuildContext context, String newImg) async {
 
     // Rest of your code to save the downloadUrl to Firestore...
 
-  } catch (error) {
+  }
+  on FirebaseAuthException catch (error) {
     print("Error uploading file: $error");
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("${error.message}"),backgroundColor: Colors.red,duration: Duration(seconds: 2),));
     // Handle the error gracefully, e.g., show an error message to the user
   }
 }

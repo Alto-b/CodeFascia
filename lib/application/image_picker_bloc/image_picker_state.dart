@@ -9,7 +9,7 @@ part of 'image_picker_bloc.dart';
   }
   
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [file];
 }
 
 final class ImagePickerInitial extends ImagePickerState {}

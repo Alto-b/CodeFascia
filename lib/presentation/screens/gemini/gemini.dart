@@ -10,6 +10,16 @@ class GeminiPage extends StatelessWidget {
 
   TextEditingController textEditingController = TextEditingController();
   final GeminiBloc geminiBloc = GeminiBloc();
+
+  ScrollController chatScrollController = ScrollController();
+
+   void scrollToBottom() {
+    if (chatScrollController.hasClients) {
+      final position = chatScrollController.position.maxScrollExtent;
+      chatScrollController.animateTo(position,
+          duration: Duration(seconds: 1), curve: Curves.easeOut);
+    }
+  }
   
 
   @override
@@ -24,13 +34,18 @@ class GeminiPage extends StatelessWidget {
           case GeminiSuccessState:
             List<GeminiMessageModel> messages = (state as GeminiSuccessState).messages;
             return Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            actions: [
+              IconButton(onPressed: (){scrollToBottom();}, icon: Icon(Icons.abc))
+            ],
+          ),
+          extendBodyBehindAppBar: true,
     
           body:Container(
             width: double.maxFinite,
             height: double.maxFinite,
             decoration: BoxDecoration(
-              color: Colors.white,
+              // color: Colors.white,
             ),
             child: Column(
               children: [
@@ -49,15 +64,29 @@ class GeminiPage extends StatelessWidget {
                       // margin: EdgeInsets.only(bottom: 12),
                       // padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: Colors.grey,
+                        // borderRadius: BorderRadius.circular(16),
+                        color: messages[index].role == "user" ? Color(0XFF04A3FF).withOpacity(.4) :Color.fromARGB(255, 79, 79, 79)
+                                        .withOpacity(.5),
+                         borderRadius: messages[index].role == "user"
+                                    ? BorderRadius.only(
+                                        bottomRight: Radius.circular(50),
+                                        topLeft: Radius.circular(50),
+                                        bottomLeft: Radius.circular(50))
+                                    : BorderRadius.only(
+                                        bottomRight: Radius.circular(50),
+                                        // bottomLeft: Radius.circular(50),
+                                        topLeft: Radius.circular(50),
+                                        topRight: Radius.circular(50)),
                         
                       ),
-                      child: Column(
-                        children: [
-                          Text(messages[index].role == "user"?"user":"ai",),
-                          Text(messages[index].parts.first.text,),
-                        ],
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Text(messages[index].role == "user"?"You":"AI",),
+                            Text(messages[index].parts.first.text,),
+                          ],
+                        ),
                       )),
                   );
                 })),
@@ -72,12 +101,13 @@ class GeminiPage extends StatelessWidget {
                     children: [
                       TextField(
                         controller: textEditingController,
-                        style: TextStyle(color: Colors.black),
+                        // style: TextStyle(color: Colors.black),
                         decoration: InputDecoration(
+                          prefixIcon: Image.asset('lib/assets/logo.png',width: 15,height: 15,),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.green),
                             borderRadius: BorderRadius.circular(100),
-                          ),fillColor: Colors.white,filled: true,hintText: "Ask me something",
+                          ),fillColor: Colors.transparent,filled: true,hintText: "Ask me something",
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(100),
                             borderSide: BorderSide(color: Theme.of(context).primaryColor)
@@ -86,7 +116,8 @@ class GeminiPage extends StatelessWidget {
                       ),
                       SizedBox(width: 12,),
                       Positioned(
-                        right: 10,
+                        right: 0,
+                        bottom: 1,
                         child: CircleAvatar(
                           radius: 30,
                           backgroundColor: Colors.transparent,
@@ -96,7 +127,9 @@ class GeminiPage extends StatelessWidget {
                               textEditingController.clear();
                               geminiBloc.add(ChatGenerateNewTextMessageEvent(inputMessage: text));
                             }
-                          }, icon: Icon(Icons.send,color: Colors.blue,)),
+                          }, icon: Icon(Icons.send,
+                          // color: Colors.blue,
+                          )),
                         ),
                       )
                       

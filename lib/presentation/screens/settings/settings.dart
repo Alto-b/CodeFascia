@@ -1,5 +1,6 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:code_geeks/domain/login_check.dart';
+import 'package:code_geeks/presentation/screens/feedback/feedback.dart';
 import 'package:code_geeks/presentation/screens/settings/profile.dart';
 import 'package:code_geeks/presentation/screens/settings/widgets/button.dart';
 import 'package:code_geeks/presentation/screens/settings/widgets/menu_items.dart';
@@ -22,42 +23,49 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(
         actions: [ModeButton()],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [ 
-            Text("Settings",style: GoogleFonts.orbitron(fontSize: 30,fontWeight: FontWeight.w800,color: Colors.grey)),
-            const SizedBox(height: 30,),
-            Center(
-              // child: ProfileCard(user: user),
-            ),const SizedBox(height: 20,),
-             ListTile(
-              leading: Icon(Icons.person),
-              title: Text("Profile"),
-              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage(),)),
-            ),
-             ListTile(
-              leading: Icon(Icons.light_mode_outlined),
-              title: Text("Light/Dark Mode"),
-              onTap: () {
-                AdaptiveTheme.of(context).toggleThemeMode();
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.person),
-              title: Text("Profile setup"),
-              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileSetupPage(),)),
-            ),
-            ListTile(
-              leading: const Icon(Icons.logout),
-              title: const Text("Logout"),
-              trailing: const Icon(Icons.keyboard_arrow_right_outlined),
-              onTap: () {
-               showLogOutDialog(context);
-              } 
-            ),  
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [ 
+              Text("Settings",style: GoogleFonts.orbitron(fontSize: 30,fontWeight: FontWeight.w800,color: Colors.grey)),
+              const SizedBox(height: 30,),
+              Center(
+                child: ProfileCard(),
+              ),const SizedBox(height: 20,),
+               ListTile(
+                leading: Icon(Icons.person),
+                title: Text("Profile"),
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage(),)),
+              ),
+               ListTile(
+                leading: Icon(Icons.light_mode_outlined),
+                title: Text("Light/Dark Mode"),
+                onTap: () {
+                  AdaptiveTheme.of(context).toggleThemeMode();
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.person),
+                title: Text("Profile setup"),
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileSetupPage(),)),
+              ),
+              ListTile(
+                leading: Icon(Icons.feedback_outlined),
+                title: Text("Feedback"),
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FeedBackPage(),)),
+              ),
+              ListTile(
+                leading: const Icon(Icons.logout),
+                title: const Text("Logout"),
+                trailing: const Icon(Icons.keyboard_arrow_right_outlined),
+                onTap: () {
+                 showLogOutDialog(context);
+                } 
+              ),  
+            ],
+          ),
         ),
       ),
     );
@@ -74,7 +82,8 @@ class SettingsPage extends StatelessWidget {
     child: const Text("Continue"),
     onPressed:  () {
       FirebaseAuth.instance.signOut();
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const EntryPage(),), (route) => false);
+      // FirebaseAuth.instance.s/
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const EntryPage(),), (route) => false);
     },
   );
   //AlertDialog

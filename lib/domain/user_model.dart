@@ -13,7 +13,7 @@ class UserModel{
     required this.profile,
     required this.profession
   });
-
+}
   // UserModel copyWith({
   //   String? id,
   //   String? name,
@@ -29,24 +29,24 @@ class UserModel{
   //     profession: profession ?? this.profession);
   // }
 
-  factory UserModel.fromJson(Map<String,dynamic>json){
-    return UserModel(
-      id: json['id'], 
-      name: json['name'], 
-      email: json['email'], 
-      profile: json['profile'], 
-      profession: json['profession']
-      );
-  }
+//   factory UserModel.fromJson(Map<String,dynamic>json){
+//     return UserModel(
+//       id: json['id'], 
+//       name: json['name'], 
+//       email: json['email'], 
+//       profile: json['profile'], 
+//       profession: json['profession']
+//       );
+//   }
 
-  Map<String,dynamic> toJson(){
-    final Map<String,dynamic> data = new Map<String,dynamic>();
-    data['uid'] = this.id;
-    data['name'] = this.name;
-    data['email'] = this.email;
-    data['profile'] = this.profile;
-    data['profession'] = this.profession;
-    return data;
-  }
+//   Map<String,dynamic> toJson(){
+//     final Map<String,dynamic> data = new Map<String,dynamic>();
+//     data['uid'] = this.id;
+//     data['name'] = this.name;
+//     data['email'] = this.email;
+//     data['profile'] = this.profile;
+//     data['profession'] = this.profession;
+//     return data;
+//   }
 
-}
+// }
