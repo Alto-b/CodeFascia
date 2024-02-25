@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:code_geeks/application/bnb_bloc/bnb_bloc.dart';
+import 'package:code_geeks/application/feedback_bloc/feedback_bloc.dart';
 import 'package:code_geeks/application/gemini_bloc/gemini_bloc.dart';
+import 'package:code_geeks/application/home_page_bloc/home_bloc.dart';
 import 'package:code_geeks/application/image_picker_bloc/image_picker_bloc.dart';
 import 'package:code_geeks/application/image_picker_utils.dart';
 import 'package:code_geeks/application/sign%20up%20bloc/image_update_bloc/image_bloc.dart';
@@ -47,6 +49,12 @@ class MyApp extends StatelessWidget {
       builder: (theme, darkTheme) => 
       MultiBlocProvider(
           providers: [
+            BlocProvider(
+              create: (context) => HomeBloc(),
+            ),
+            BlocProvider(
+              create: (context) => FeedbackBloc(),
+            ),
               BlocProvider(
               create: (context) => ImageBloc(),
       

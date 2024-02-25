@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:code_geeks/application/feedback_bloc/feedback_bloc.dart';
 import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FeedBackPage extends StatelessWidget {
    FeedBackPage({super.key});
@@ -64,18 +66,15 @@ class FeedBackPage extends StatelessWidget {
       "Email" : FirebaseAuth.instance.currentUser?.email,
       "Feedback" : _feedbackController.text.trim()
     };
-    await FirebaseFirestore.instance.
-    collection("Feedbacks")
-    .doc()
-    .set(data)
-    .then((value){
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Feedback Submitted"),backgroundColor: Colors.green,duration: Duration(seconds: 2),));
+    context.read<FeedbackBloc>().add(FeedbackSentEvent(data: data));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Feedback send"),backgroundColor: Colors.green,duration: Duration(seconds: 1),));
+      await Future.delayed(Duration(seconds:2));
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => BnbPage()),
       (route) => false,
     );
-    });
+
   }
 
 }

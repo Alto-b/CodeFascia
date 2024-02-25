@@ -1,7 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:code_geeks/application/home_page_bloc/home_bloc.dart';
 import 'package:code_geeks/domain/login_check.dart';
+import 'package:code_geeks/presentation/screens/homepage/homescreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,6 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<HomeBloc>(context).add(HomeLoadingEvent());
     final user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       appBar: AppBar(
@@ -25,46 +29,27 @@ class _HomePageState extends State<HomePage> {
           }, icon: Icon(Icons.logout))
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: 200,width: 500,
-              color: Colors.blue,
-              child: Icon(Icons.abc,size: 50,),
-            ),
-            CarouselSlider(
-                options: CarouselOptions(
-                  height: 200, 
-                  enlargeCenterPage: true, 
-                  aspectRatio: 16/9, 
-                  //aspectRatio: 4/3,
-                  enableInfiniteScroll: true,
-                  autoPlay: true, 
-                  autoPlayInterval: Duration(seconds: 3), 
-                  autoPlayAnimationDuration: Duration(milliseconds: 1000), 
-                  autoPlayCurve: Curves.fastOutSlowIn, 
-                  //autoPlayCurve: Curves.easeIn,
-                  enlargeStrategy: CenterPageEnlargeStrategy.height, 
-                ),
-                items: [
-                  // Add your carousel items here, e.g., Container, Image, or any widget
-                  Container(
-                    //color: Colors.red,
-                    child: Center(child: Image.asset('lib/assets/logo.png')),
-                  ),
-                  Container(
-                    //color: Colors.blue,
-                    child: Center(child: Image.asset('lib/assets/logo.png')),
-                  ),
-                  Container(
-                    //color: Colors.green,
-                    child: Center(child: Image.asset('lib/assets/logo.png')),
-                  ),
-                ],
-              ),
-          ],
-        ),
+      body: BlocConsumer<HomeBloc, HomeState>(
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          print(state.runtimeType);
+          switch (state.runtimeType) {
+            case HomePageLoadingState:
+           return Shimmer.fromColors(
+            baseColor: Colors.transparent,
+            highlightColor: Colors.grey.shade500,
+            child: HomeScreen());
+              
+            case HomePageLoadedState:
+              return HomeScreen();
+            case HomePageErrorState:
+              return Center(child: Text("error"));
+            default:
+          }
+          return CircularProgressIndicator();
+        },
       ),
 
       // floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
@@ -80,3 +65,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+
+
+

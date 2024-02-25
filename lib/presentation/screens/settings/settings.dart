@@ -1,17 +1,17 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:code_geeks/application/bnb_bloc/bnb_bloc.dart';
 import 'package:code_geeks/domain/login_check.dart';
 import 'package:code_geeks/presentation/screens/feedback/feedback.dart';
 import 'package:code_geeks/presentation/screens/settings/profile.dart';
 import 'package:code_geeks/presentation/screens/settings/widgets/button.dart';
-import 'package:code_geeks/presentation/screens/settings/widgets/menu_items.dart';
 import 'package:code_geeks/presentation/screens/settings/widgets/profile_card.dart';
 import 'package:code_geeks/presentation/screens/signup/profile_setup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:glass_kit/glass_kit.dart';
-import 'package:glassmorphism/glassmorphism.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:popover/popover.dart';
+
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -47,7 +47,7 @@ class SettingsPage extends StatelessWidget {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.person),
+                leading: Icon(Icons.person_2_outlined),
                 title: Text("Profile setup"),
                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileSetupPage(),)),
               ),
@@ -55,6 +55,21 @@ class SettingsPage extends StatelessWidget {
                 leading: Icon(Icons.feedback_outlined),
                 title: Text("Feedback"),
                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FeedBackPage(),)),
+              ),
+              ListTile(
+                leading: Icon(Icons.description_outlined),
+                title: Text("Terms & Conditions"),
+                // onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FeedBackPage(),)),
+              ),
+              ListTile(
+                leading: Icon(Icons.security_outlined),
+                title: Text("Privacy Policy"),
+                // onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FeedBackPage(),)),
+              ),
+              ListTile(
+                leading: Icon(Icons.info_outline),
+                title: Text("About us"),
+                // onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FeedBackPage(),)),
               ),
               ListTile(
                 leading: const Icon(Icons.logout),
@@ -83,6 +98,8 @@ class SettingsPage extends StatelessWidget {
     onPressed:  () {
       FirebaseAuth.instance.signOut();
       // FirebaseAuth.instance.s/
+      // FirebaseFirestore.instance.clearPersistence();
+      context.read<BnbBloc>().add(TabChangeEvent(tabIndex: 0));
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const EntryPage(),), (route) => false);
     },
   );
