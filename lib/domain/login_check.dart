@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:github_sign_in/github_sign_in.dart';
 
 final GoogleSignIn _googleSignIn = GoogleSignIn(scopes:['email'] );
 
@@ -169,6 +170,10 @@ class EntryPage extends StatelessWidget {
         print("exception is : $e");
     }
   }
+
+//   Future<UserCredential> signInWithGitHub() async {
+  
+// }
 
 
 }

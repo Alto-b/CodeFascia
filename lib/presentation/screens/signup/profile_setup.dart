@@ -140,6 +140,7 @@ class ProfileSetupPage extends StatelessWidget {
                         return ActionChip.elevated(label: const Text("Proceed"),onPressed: () {
                                           // profileSetup(context,selectedImage);
                                           profileSetup(context,state.file!.path.toString());
+                                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Creating profile !"),backgroundColor: Colors.blue,duration: Duration(seconds: 3),));
                                         },);
                       },
                     )

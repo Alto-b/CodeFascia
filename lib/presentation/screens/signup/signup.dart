@@ -4,6 +4,7 @@ import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:passwordfield/passwordfield.dart';
 
 class SignUpPage extends StatelessWidget {
    SignUpPage({super.key});
@@ -62,38 +63,100 @@ class SignUpPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 10,),
+                      // Card(
+                      //   color: Colors.transparent,
+                      //   child: TextFormField(
+                      //     // validator: validatePassword,
+                      //     autovalidateMode: AutovalidateMode.onUserInteraction,
+                      //     controller: _passwordController,
+                      //     decoration: const InputDecoration(
+                      //       // hintText: "email id",
+                      //       label: Text("Password"),
+                      //       border: OutlineInputBorder(
+                              
+                      //       )
+                      //     ),
+                      //   ),
+                      // ),
                       Card(
                         color: Colors.transparent,
-                        child: TextFormField(
-                          // validator: validatePassword,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                        child: PasswordField(
                           controller: _passwordController,
-                          decoration: const InputDecoration(
-                            // hintText: "email id",
-                            label: Text("Password"),
+                          color: Colors.blue,
+                          passwordConstraint: r'^(?=.*[@$#.*])(?=.*[0-9])[A-Za-z\d@$#.*]{6,}$',
+                          hintText: 'Password',
+                          border: PasswordBorder(
                             border: OutlineInputBorder(
-                              
-                            )
+                              borderSide: BorderSide(
+                                color: Colors.blue.shade100,
+                              ),
+                              borderRadius: BorderRadius.circular(0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.blue.shade100,
+                              ),
+                              borderRadius: BorderRadius.circular(0),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(0),
+                              borderSide:
+                                  BorderSide(width: 2, color: Colors.red.shade200),
+                            ),
                           ),
+                          errorMessage:
+                              'must include special character & 6 characters',
                         ),
                       ),
                       const SizedBox(height: 10,),
+                      // Card(
+                      //   color: Colors.transparent,
+                      //   child: TextFormField(
+                      //     // validator: validatePassword,
+                      //     autovalidateMode: AutovalidateMode.onUserInteraction,
+                      //     controller: _cpasswordController,
+                      //     decoration: const InputDecoration(
+                      //       hintText: "Confirm Password",
+                      //       // label: Text("password"),
+                      //       border: OutlineInputBorder(
+                              
+                      //       )
+                      //     ),
+                      //   ),
+                      // ),
                       Card(
                         color: Colors.transparent,
-                        child: TextFormField(
-                          // validator: validatePassword,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                        child: PasswordField(
                           controller: _cpasswordController,
-                          decoration: const InputDecoration(
-                            hintText: "Confirm Password",
-                            // label: Text("password"),
+                          color: Colors.blue,
+                          passwordConstraint: r'^(?=.*[@$#.*])(?=.*[0-9])[A-Za-z\d@$#.*]{6,}$',
+                          hintText: 'Confirm Password',
+                          border: PasswordBorder(
                             border: OutlineInputBorder(
-                              
-                            )
+                              borderSide: BorderSide(
+                                color: Colors.blue.shade100,
+                              ),
+                              borderRadius: BorderRadius.circular(0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.blue.shade100,
+                              ),
+                              borderRadius: BorderRadius.circular(0),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(0),
+                              borderSide:
+                                  BorderSide(width: 2, color: Colors.red.shade200),
+                            ),
                           ),
+                          errorMessage:
+                              'must include special character & 6 characters',
                         ),
                       ),
                       const SizedBox(height: 40,),
+
+                     
        
                       Container(
                         width: double.infinity,

@@ -21,7 +21,7 @@ class SettingsPage extends StatelessWidget {
     final user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       appBar: AppBar(
-        actions: [ModeButton()],
+        actions: [ModeButton(),SizedBox(width: 5,), IconButton(onPressed: (){showLogOutDialog(context);}, icon: Icon(Icons.logout))],
       ),
       body: SingleChildScrollView(
         child: Padding(
