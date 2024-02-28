@@ -48,7 +48,7 @@ class LoginPage extends StatelessWidget {
                   child: Column(
                     children: [
                       Card(
-                        color: Colors.transparent,
+                        // color: Colors.white70,
                         child: TextFormField(     
                           validator: validateEmail,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -76,7 +76,7 @@ class LoginPage extends StatelessWidget {
                       //   ),
                       // ),
                       Card(
-                        color: Colors.transparent,
+                        // color: Colors.black12,
                         child: PasswordField(
                           controller: _passwordController,
                           color: Colors.blue,

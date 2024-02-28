@@ -48,7 +48,7 @@ class SignUpPage extends StatelessWidget {
                   child: Column(
                     children: [
                       Card(
-                        color: Colors.transparent,
+                        // color: Colors.transparent,
                         child: TextFormField(
                           validator: validateEmail,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -79,7 +79,7 @@ class SignUpPage extends StatelessWidget {
                       //   ),
                       // ),
                       Card(
-                        color: Colors.transparent,
+                        // color: Colors.transparent,
                         child: PasswordField(
                           controller: _passwordController,
                           color: Colors.blue,
@@ -125,7 +125,7 @@ class SignUpPage extends StatelessWidget {
                       //   ),
                       // ),
                       Card(
-                        color: Colors.transparent,
+                        // color: Colors.transparent,
                         child: PasswordField(
                           controller: _cpasswordController,
                           color: Colors.blue,

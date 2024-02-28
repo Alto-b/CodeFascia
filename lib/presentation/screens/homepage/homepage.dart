@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:code_geeks/application/home_page_bloc/home_bloc.dart';
 import 'package:code_geeks/domain/login_check.dart';
-import 'package:code_geeks/presentation/screens/homepage/homescreen.dart';
+import 'package:code_geeks/presentation/screens/homepage/widgets/homescreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,10 +45,10 @@ class _HomePageState extends State<HomePage> {
             case HomePageLoadedState:
               return HomeScreen();
             case HomePageErrorState:
-              return Center(child: Text("error"));
+              return Center(child: Text("Error Loading HomePage"));
             default:
           }
-          return CircularProgressIndicator();
+          return HomeScreen();
         },
       ),
 

@@ -12,3 +12,7 @@ class HomeLoadingEvent extends HomeEvent{}
 class HomePageLoadedEvent extends HomeEvent{}
 
 class HomePageErrorEvent extends HomeEvent{}
+
+class LanguageLoadEvent extends HomeEvent{}
+
+class MentorLoadEvent extends HomeEvent{}

@@ -8,8 +8,12 @@ import 'package:code_geeks/application/home_page_bloc/home_bloc.dart';
 import 'package:code_geeks/application/image_picker_bloc/image_picker_bloc.dart';
 import 'package:code_geeks/application/image_picker_utils.dart';
 import 'package:code_geeks/application/sign%20up%20bloc/image_update_bloc/image_bloc.dart';
+import 'package:code_geeks/application/subscription_bloc/subscription_bloc.dart';
 import 'package:code_geeks/application/user_bloc/user_bloc.dart';
 import 'package:code_geeks/domain/login_check.dart';
+import 'package:code_geeks/infrastructure/language_repo.dart';
+import 'package:code_geeks/infrastructure/mentor_repo.dart';
+import 'package:code_geeks/infrastructure/subscription_repo.dart';
 import 'package:code_geeks/infrastructure/user_repo.dart';
 import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:code_geeks/presentation/screens/loading/onboarding_screen.dart';
@@ -50,7 +54,7 @@ class MyApp extends StatelessWidget {
       MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (context) => HomeBloc(),
+              create: (context) => HomeBloc(LanguageRepo(),MentorRepo()),
             ),
             BlocProvider(
               create: (context) => FeedbackBloc(),
@@ -67,6 +71,9 @@ class MyApp extends StatelessWidget {
               ),
               BlocProvider(
                   create: (context) => UserBloc(UserRepo()),
+              ),
+              BlocProvider(
+                  create: (context) => SubscriptionBloc(SubscriptionRepo()),
               ),
           ],
                   child: MaterialApp(

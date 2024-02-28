@@ -21,7 +21,7 @@ class SettingsPage extends StatelessWidget {
     final user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       appBar: AppBar(
-        actions: [ModeButton(),SizedBox(width: 5,), IconButton(onPressed: (){showLogOutDialog(context);}, icon: Icon(Icons.logout))],
+        actions: [const ModeButton(),const SizedBox(width: 5,), IconButton(onPressed: (){showLogOutDialog(context);}, icon: const Icon(Icons.logout))],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -31,42 +31,42 @@ class SettingsPage extends StatelessWidget {
             children: [ 
               Text("Settings",style: GoogleFonts.orbitron(fontSize: 30,fontWeight: FontWeight.w800,color: Colors.grey)),
               const SizedBox(height: 30,),
-              Center(
+              const Center(
                 child: ProfileCard(),
               ),const SizedBox(height: 20,),
                ListTile(
-                leading: Icon(Icons.person),
-                title: Text("Profile"),
-                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage(),)),
+                leading: const Icon(Icons.person),
+                title: const Text("Profile"),
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfilePage(),)),
               ),
                ListTile(
-                leading: Icon(Icons.light_mode_outlined),
-                title: Text("Light/Dark Mode"),
+                leading: const Icon(Icons.light_mode_outlined),
+                title: const Text("Light/Dark Mode"),
                 onTap: () {
                   AdaptiveTheme.of(context).toggleThemeMode();
                 },
               ),
               ListTile(
-                leading: Icon(Icons.person_2_outlined),
-                title: Text("Profile setup"),
+                leading: const Icon(Icons.person_2_outlined),
+                title: const Text("Profile setup"),
                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileSetupPage(),)),
               ),
               ListTile(
-                leading: Icon(Icons.feedback_outlined),
-                title: Text("Feedback"),
+                leading: const Icon(Icons.feedback_outlined),
+                title: const Text("Feedback"),
                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FeedBackPage(),)),
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(Icons.description_outlined),
                 title: Text("Terms & Conditions"),
                 // onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FeedBackPage(),)),
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(Icons.security_outlined),
                 title: Text("Privacy Policy"),
                 // onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FeedBackPage(),)),
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(Icons.info_outline),
                 title: Text("About us"),
                 // onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FeedBackPage(),)),

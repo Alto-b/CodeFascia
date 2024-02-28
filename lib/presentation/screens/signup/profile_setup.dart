@@ -3,6 +3,8 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:code_geeks/application/image_picker_bloc/image_picker_bloc.dart';
+import 'package:code_geeks/application/user_bloc/user_bloc.dart';
+import 'package:code_geeks/infrastructure/user_repo.dart';
 import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
 import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:code_geeks/presentation/widgets/loader.dart';
@@ -17,6 +19,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebasestorage;
 
 
 class ProfileSetupPage extends StatelessWidget {
+  // final _bloc = ImagePickerBloc();
    ProfileSetupPage({super.key});
 
   final _formKey = GlobalKey<FormState>();
@@ -32,7 +35,10 @@ class ProfileSetupPage extends StatelessWidget {
 
   XFile? newImge;
 
-
+  // @override
+  // void dispose(){
+  //   _bloc.close();
+  // }
 
 
   @override
@@ -140,7 +146,7 @@ class ProfileSetupPage extends StatelessWidget {
                         return ActionChip.elevated(label: const Text("Proceed"),onPressed: () {
                                           // profileSetup(context,selectedImage);
                                           profileSetup(context,state.file!.path.toString());
-                                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Creating profile !"),backgroundColor: Colors.blue,duration: Duration(seconds: 3),));
+                                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Creating profile !"),backgroundColor: Colors.blue,duration: Duration(seconds: 5),));
                                         },);
                       },
                     )
@@ -198,12 +204,17 @@ Future<void> profileSetup(BuildContext context, String newImg) async {
     "profile": downloadUrl // Use imageLink here
   };
 
+    //trying to fix the user data accuracy issue 
+    await FirebaseAuth.instance.currentUser!.updateDisplayName(_nameController.text.trim());
+    await FirebaseAuth.instance.currentUser!.updatePhotoURL(downloadUrl);
+
     await FirebaseFirestore.instance
       .collection('users')
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .set(data)
       .then((_) {
     // Navigate to BnbPage after Firestore operation is complete
+    
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Profile Created !"),backgroundColor: Colors.green,duration: Duration(seconds: 2),));
     Navigator.pushAndRemoveUntil(
       context,

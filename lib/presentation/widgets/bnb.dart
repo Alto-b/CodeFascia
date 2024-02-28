@@ -1,9 +1,11 @@
 
 import 'package:code_geeks/application/bnb_bloc/bnb_bloc.dart';
+import 'package:code_geeks/presentation/screens/community/community_chat.dart';
 import 'package:code_geeks/presentation/screens/gemini/gemini.dart';
 import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
 import 'package:code_geeks/presentation/screens/settings/settings.dart';
 import 'package:code_geeks/presentation/screens/signup/signup.dart';
+import 'package:code_geeks/presentation/screens/subscriptions/subscriptions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,8 +16,8 @@ class BnbPage extends StatelessWidget {
 
   final screens = [
     HomePage(),
-    HomePage(),
-    HomePage(),
+    CommunityPage(),
+    SubscriptionsPage(),
     SettingsPage()
   ];
 
@@ -46,12 +48,13 @@ class BnbPage extends StatelessWidget {
               child: BottomNavigationBar(
                 
                 items: const [
-                  BottomNavigationBarItem(icon: Icon(Icons.home),label: "a"),
-                  BottomNavigationBarItem(icon: Icon(Icons.safety_check,),label: "a"),
-                  BottomNavigationBarItem(icon: Icon(Icons.person),label: "a"),
-                  BottomNavigationBarItem(icon: Icon(Icons.settings),label: "a"),
+                  BottomNavigationBarItem(icon: Icon(Icons.home),label: "Home"),
+                  BottomNavigationBarItem(icon: Icon(Icons.chat_rounded,),label: "Community"),
+                  BottomNavigationBarItem(icon: Icon(Icons.subscriptions),label: "Subscriptions"),
+                  BottomNavigationBarItem(icon: Icon(Icons.settings),label: "Settings"),
               ],
               showUnselectedLabels: false,
+              showSelectedLabels: false,
               
               backgroundColor:  Color.fromARGB(255, 110, 132, 214),
               selectedIconTheme: IconThemeData(
@@ -60,7 +63,6 @@ class BnbPage extends StatelessWidget {
               ),
               selectedItemColor: Colors.white,
               unselectedItemColor: Colors.white.withOpacity(.45),
-              showSelectedLabels: false,
               currentIndex: state.tabIndex,
               type: BottomNavigationBarType.fixed,
               onTap: (index) {

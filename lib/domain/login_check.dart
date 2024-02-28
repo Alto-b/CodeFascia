@@ -1,4 +1,5 @@
 
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 // import 'package:github_sign_in/github_sign_in.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 final GoogleSignIn _googleSignIn = GoogleSignIn(scopes:['email'] );
 
@@ -50,7 +52,11 @@ class EntryPage extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [IconButton(onPressed: (){
+          AdaptiveTheme.of(context).toggleThemeMode();
+        }, icon: Icon(Icons.light_mode_outlined))],
+      ),
 
       body: SingleChildScrollView(
         child: Center(
@@ -130,8 +136,13 @@ class EntryPage extends StatelessWidget {
                       child: const CircleAvatar(
                         backgroundImage: NetworkImage('https://w7.pngwing.com/pngs/989/129/png-transparent-google-logo-google-search-meng-meng-company-text-logo-thumbnail.png'),),
                     ),
-                      const SizedBox(width: 10,),
-                    const CircleAvatar(backgroundImage: NetworkImage('https://w7.pngwing.com/pngs/646/324/png-transparent-github-computer-icons-github-logo-monochrome-head.png'),),
+                    //   const SizedBox(width: 10,),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     signInWithFacebook();
+                    //   },
+                    //   child: const CircleAvatar(backgroundImage: NetworkImage('https://w7.pngwing.com/pngs/646/324/png-transparent-github-computer-icons-github-logo-monochrome-head.png'),)
+                    //   ),
                   ],
                 ) 
             ],
@@ -174,6 +185,17 @@ class EntryPage extends StatelessWidget {
 //   Future<UserCredential> signInWithGitHub() async {
   
 // }
+
+Future<UserCredential> signInWithFacebook() async {
+  // Trigger the sign-in flow
+  final LoginResult loginResult = await FacebookAuth.instance.login();
+
+  // Create a credential from the access token
+  final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+  // Once signed in, return the UserCredential
+  return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+}
 
 
 }

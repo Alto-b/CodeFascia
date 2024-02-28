@@ -52,7 +52,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               onTap: (){
                 _controller.jumpToPage(2);
               },
-              child: const Text("Skip",style: TextStyle(color:Colors.white),)
+              child: const Text("Skip",style: TextStyle(color:Colors.white,fontSize: 15,fontWeight: FontWeight.w700),)
               ),
 
             //dots
@@ -64,14 +64,14 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               onTap: (){
                 Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => EntryPage(),),(route) => false,);
               },
-              child: const Text("Proceed",style: TextStyle(color:Colors.white),)
+              child: const Text("Proceed",style: TextStyle(color:Colors.white,fontSize: 15,fontWeight: FontWeight.w700),)
               )
               :
               GestureDetector(
               onTap: (){
                 _controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeIn);
               },
-              child: const Text("Next",style: TextStyle(color:Colors.white),)
+              child: const Text("Next",style: TextStyle(color:Colors.white,fontSize: 15,fontWeight: FontWeight.w700),)
               )
              
           ],

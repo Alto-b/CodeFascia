@@ -6,8 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glass_kit/glass_kit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shimmer/shimmer.dart';
 
-class ProfileCard extends StatefulWidget {
+class ProfileCard extends StatelessWidget {
   const ProfileCard({
     super.key,
     // required this.user,
@@ -15,20 +16,10 @@ class ProfileCard extends StatefulWidget {
 
   // final User? user;
 
-  @override
-  State<ProfileCard> createState() => _ProfileCardState();
-}
-
-class _ProfileCardState extends State<ProfileCard> {
-
-@override
-void initState() {
-    BlocProvider.of<UserBloc>(context).add(LoadUserEvent());
-    super.initState();
-  }
-
+// @override
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<UserBloc>(context).add(LoadUserEvent());
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
@@ -84,12 +75,27 @@ void initState() {
         }
         else if(state is UserLoadingState){
           return Center(child: Lottie.asset('lib/assets/loader.json',height: 80,width: 80));
+          // return Shimmer.fromColors(
+          //   baseColor: Colors.transparent,
+          //   highlightColor: Colors.grey,
+          //   period: Duration(seconds: 1),
+          //   direction: ShimmerDirection.ltr,
+          //   loop: 1,
+          //   child: Container(
+          //     height: screenHeight/7,
+          //       width: screenWidth-50,
+          //       decoration: BoxDecoration(
+          //         color: Colors.black,
+          //         borderRadius: BorderRadius.circular(50),
+          //       ),
+          //   ),
+          // );
         }
         else if(state is UserErroState){
-          return const Text("error");
+          return const Text("Error loading profile");
         }
         else{
-          return const Text("err");
+          return const Text("Something's not right");
         }
       },
     );
