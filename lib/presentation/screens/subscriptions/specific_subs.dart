@@ -68,7 +68,7 @@ class _SpecificSubsPageState extends State<SpecificSubsPage> {
                   ],
                 ),
               ),
-              toolbarHeight: screenHeight / 3,
+              toolbarHeight: screenHeight / 5,
               backgroundColor: Colors.grey,
               
             ),
@@ -86,39 +86,84 @@ class _SpecificSubsPageState extends State<SpecificSubsPage> {
                           fontSize: 25,
                           fontWeight: FontWeight.w600
                         ),),
+                        trailing: Text("₹ ${state.specSubsList[0].amount}/day"),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(state.specSubsList[0].LangImg),
+                          ),
+                          tileColor: Colors.black12,
                           title: Text(state.specSubsList[0].language,style: GoogleFonts.poppins(
                             fontSize: 15,
                             fontWeight: FontWeight.w400
                           ),),
-                          trailing: Text("₹ ${state.specSubsList[0].amount}"),
+                          trailing: IconButton(onPressed: (){
+                            showDialog<void>(
+                                          context: context,
+                                          barrierDismissible: true, 
+                                          barrierColor: Colors.black87,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              backgroundColor: Colors.white,
+                                              icon:Image.network(state.specSubsList[0].LangImg,height: 35,) ,
+                                              title:  Text(state.specSubsList[0].language),
+                                              content:  SingleChildScrollView(
+                                                child: ListBody(
+                                                  children: <Widget>[
+                                                    Text(state.specSubsList[0].LangDesc,style: TextStyle(fontSize: 20),),
+                                                  ],
+                                                ),
+                                              ),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                  child: const Icon(Icons.arrow_back_ios_new),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                          }, icon: Icon(Icons.read_more)),
                         ),
                       ),
               
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(state.specSubsList[0].descritpion,style: TextStyle(
-                          fontWeight: FontWeight.w400,fontSize: 15
+                        child: Text(state.specSubsList[0].LangDesc,style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w400,fontSize: 18
                         ),),
                       ),
-                      SizedBox(height: 20,),
-                      Container(
-                        width: screenWidth,
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll(Colors.green)
-                          ),
-                          onPressed: (){}, child: Text("Subscribe now",style: TextStyle(
-                            color: Colors.white
-                          ),)))
+                      Divider(),
+                      SizedBox(height: 60,),
+                      
+                      // Container(
+                      //   width: screenWidth,
+                      //   child: ElevatedButton(
+                      //     style: ButtonStyle(
+                      //       backgroundColor: MaterialStatePropertyAll(Colors.green)
+                      //     ),
+                      //     onPressed: (){}, child: Text("Subscribe now",style: TextStyle(
+                      //       color: Colors.white
+                      //     ),))
+                      //     )
                     ],
                   ),
                 ),
               ),
             ),    
+            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: Container(
+              width: screenWidth,
+              child: FloatingActionButton.extended(
+                elevation: 5,
+                backgroundColor: Colors.green,
+                onPressed: (){
+
+                }, label: Text("Subscribe Now",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700,fontSize: 15),))),
          );
         }
         //if error loading the page --> shimmer
@@ -162,4 +207,32 @@ class _SpecificSubsPageState extends State<SpecificSubsPage> {
       },
     );
         }
+
+//         Future<void> _showLangDialog() async {
+//   return showDialog<void>(
+//     context: context,
+//     barrierDismissible: false, // user must tap button!
+//     builder: (BuildContext context) {
+//       return AlertDialog(
+//         title: const Text(),
+//         content: const SingleChildScrollView(
+//           child: ListBody(
+//             children: <Widget>[
+//               Text('This is a demo alert dialog.'),
+//               Text('Would you like to approve of this message?'),
+//             ],
+//           ),
+//         ),
+//         actions: <Widget>[
+//           TextButton(
+//             child: const Text('Approve'),
+//             onPressed: () {
+//               Navigator.of(context).pop();
+//             },
+//           ),
+//         ],
+//       );
+//     },
+//   );
+// }
 }

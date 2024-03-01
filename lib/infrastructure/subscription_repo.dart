@@ -18,7 +18,9 @@ class SubscriptionRepo{
           language: data['language'], 
           descritpion: data['description'], 
           photo: data['photo'], 
-          amount: data['amount']);
+          amount: data['amount'],
+          LangImg : data['LangImg'],
+          LangDesc: data['LangDesc']);
 
           subscriptionList.add(subscription);
       });
@@ -43,7 +45,9 @@ class SubscriptionRepo{
           language: data['language'], 
           descritpion: data['description'], 
           photo: data['photo'], 
-          amount: data['amount']);
+          amount: data['amount'],
+          LangImg : data['LangImg'],
+          LangDesc: data['LangDesc']);
 
           specSubsList.add(specSubs);
       });

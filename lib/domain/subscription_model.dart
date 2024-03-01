@@ -5,6 +5,8 @@ class SubscriptionModel{
   String descritpion;
   String photo;
   String amount;
+  String LangImg;
+  String LangDesc;
 
   SubscriptionModel({
     required this.subsId,
@@ -12,6 +14,8 @@ class SubscriptionModel{
     required this.language,
     required this.descritpion,
     required this.photo,
-    required this.amount
+    required this.amount,
+    required this.LangImg,
+    required this.LangDesc
   });
 }

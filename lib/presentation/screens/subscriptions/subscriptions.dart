@@ -14,7 +14,41 @@ class SubscriptionsPage extends StatelessWidget {
     context.read<SubscriptionBloc>().add(SubscriptionLoadEvent());
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Browse Subscriptions"),
+        // backgroundColor: Colors.grey,
+        backgroundColor:  Color.fromARGB(255, 110, 132, 214),
+        elevation: 5,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(22),bottomRight: Radius.circular(22))
+        ),
+        toolbarHeight: (screenHeight/10)+10,
+        // title: const Text("Browse Subscriptions"),
+        title: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(35)
+            ),
+            child: TextFormField(
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder( 
+                          borderRadius: BorderRadius.circular(35)
+                        ),
+                        prefixIcon: InkWell(
+                          onTap: () {
+                            //search button
+                          },
+                          child: Icon(Icons.search)),
+                        suffixIcon: InkWell(
+                          onTap: () {
+                            //filter button
+                          },
+                          child: Icon(Icons.filter_list))
+                      ),
+                    ),
+          ),
+        ),
         centerTitle: true,
       ),
 
@@ -22,7 +56,28 @@ class SubscriptionsPage extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              const Text("asd"),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                // child: TextFormField(
+
+                //   decoration: InputDecoration(
+
+                //     border: OutlineInputBorder(
+                      
+                //     ),
+                //     prefixIcon: InkWell(
+                //       onTap: () {
+                //         //search button
+                //       },
+                //       child: Icon(Icons.search)),
+                //     suffixIcon: InkWell(
+                //       onTap: () {
+                //         //filter button
+                //       },
+                //       child: Icon(Icons.filter_list))
+                //   ),
+                // ),
+              ),
         
               Container
               ( 

@@ -35,7 +35,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   HomeCarousal(),
 
                   SizedBox(height: 20,),
+
+                  //languages
+                  language_avatars(runtimeType: runtimeType, screenHeight: screenHeight, screenWidth: screenWidth),
+
+                  SizedBox(height: 20,),
                   
+                  //community card
                   Container(
                     height: screenHeight/6,
                     width: screenWidth-50,
@@ -51,14 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     fit: BoxFit.contain,),
                   ),
 
-                  SizedBox(height: 20,),
+                  SizedBox(height: 50,),
 
-
-                  //languages
-                  language_avatars(runtimeType: runtimeType, screenHeight: screenHeight, screenWidth: screenWidth),
-
-                  SizedBox(height: 20,),
-                  
                   //mentors
                   MentorCardHPWidget(runtimeType: runtimeType, screenHeight: screenHeight, screenWidth: screenWidth),
                   
