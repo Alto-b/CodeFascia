@@ -35,12 +35,80 @@ class language_avatars extends StatelessWidget {
                               onTap: () {
                                 print("tapped");
                               },
-                              child: CircleAvatar(
-                                backgroundColor: Colors.blueGrey,
-                                radius: 40,
-                                // child: Image.network(state.languageList[index].photo),
-                                backgroundImage: NetworkImage(state.languageList[index].photo),
+                              // child: CircleAvatar(
+                              //   // backgroundColor: Colors.blueGrey,
+                              //   radius: 35,
+                              //   // child: Image.network(state.languageList[index].photo,fit: BoxFit.cover,
+                              //   // filterQuality: FilterQuality.high,
+                              //   // colorBlendMode: BlendMode.clear,
+                              //   // ),
+                              //   backgroundImage: NetworkImage(state.languageList[index].photo),
+                              // ),
+                              child:InkWell(
+                                onTap: () {
+                                  ///////////////
+                                  showModalBottomSheet<void>(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Card(
+                                              elevation: 5,
+                                              clipBehavior: Clip.antiAlias,
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: Container(
+                                                  height: screenHeight,
+                                                  // color: Colors.amber,
+                                                  child: Center(
+                                                    child: SingleChildScrollView(
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.all(8.0),
+                                                        child: Column(
+                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                          mainAxisSize: MainAxisSize.min,
+                                                          children: <Widget>[
+                                                            // Text(state.languageList[index].name),
+                                                            CircleAvatar(
+                                                              backgroundImage: NetworkImage(state.languageList[index].photo),
+                                                            ),
+                                                            SizedBox(height: 20,),
+                                                             Text(state.languageList[index].description,style: TextStyle(fontSize: 20),),
+                                                            // ElevatedButton(
+                                                            //   child: const Text('Close BottomSheet'),
+                                                            //   onPressed: () => Navigator.pop(context),
+                                                            // ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      );
+                                  //////////////
+                                },
+                                child: ClipOval(
+                                    child: Container(
+                                      width: 50,
+                                      height: 50, // Set a specific height to ensure it's a perfect circle
+                                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(width: 0.1,color: Colors.grey),
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          image: NetworkImage(state.languageList[index].photo),
+                                          fit: BoxFit.contain,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                               ),
+
                             )
                           );
                         },),

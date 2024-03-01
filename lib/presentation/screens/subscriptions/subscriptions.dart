@@ -1,4 +1,6 @@
 import 'package:code_geeks/application/subscription_bloc/subscription_bloc.dart';
+import 'package:code_geeks/presentation/screens/subscriptions/specific_subs.dart';
+import 'package:code_geeks/presentation/screens/subscriptions/widget/subscription_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,7 +14,8 @@ class SubscriptionsPage extends StatelessWidget {
     context.read<SubscriptionBloc>().add(SubscriptionLoadEvent());
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Subscriptions"),
+        title: const Text("Browse Subscriptions"),
+        centerTitle: true,
       ),
 
       body: SingleChildScrollView(
@@ -21,40 +24,15 @@ class SubscriptionsPage extends StatelessWidget {
             children: [
               const Text("asd"),
         
-              Container(
-                height: screenHeight,
+              Container
+              ( 
+                // color: Colors.amber,
+                height: screenHeight-200,
                 width: screenWidth,
-                child: BlocBuilder<SubscriptionBloc, SubscriptionState>(
-                  builder: (context, state) {
-                    print(state.runtimeType);
-                    if(state is SubscriptionLoadedState){
-                      return GridView.builder(
-                                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                                  itemCount: state.subscritpionList.length,
-                                  itemBuilder: (context, index) {
-                                  return  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Card(
-                                      child: Column(
-                                        children: [
-                                          Expanded(
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(image: NetworkImage(state.subscritpionList[index].photo))
-                                              ),
-                                            ),
-                                          ),
-                                          Text(state.subscritpionList[index].title)
-                                        ],
-                                      ),
-                                    )
-                                  );
-                                },);
-                    }
-                    return const CircularProgressIndicator();
-                  },
-                ),
-              )
+                child: SubscriptionCard(runtimeType: runtimeType, screenHeight: screenHeight, screenWidth: screenWidth),
+
+              ),
+              SizedBox(height: 450,)
             ],
           ),
         ),

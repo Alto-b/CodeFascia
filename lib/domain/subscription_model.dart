@@ -1,4 +1,5 @@
 class SubscriptionModel{
+  String subsId;
   String title;
   String language;
   String descritpion;
@@ -6,6 +7,7 @@ class SubscriptionModel{
   String amount;
 
   SubscriptionModel({
+    required this.subsId,
     required this.title,
     required this.language,
     required this.descritpion,

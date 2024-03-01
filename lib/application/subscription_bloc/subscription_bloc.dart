@@ -13,6 +13,7 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
   SubscriptionBloc(this.subscriptionRepo) : super(SubscriptionInitial()) {
     
     on<SubscriptionLoadEvent>(getSubsriptions);
+    on<SpecificSubsLoadEvent>(getSpecificSubs);
   }
 
   FutureOr<void> getSubsriptions(SubscriptionLoadEvent event, Emitter<SubscriptionState> emit)async{
@@ -21,4 +22,9 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
     emit(SubscriptionLoadedState(subscritpionList: subs));
   }
 
+
+  FutureOr<void> getSpecificSubs(SpecificSubsLoadEvent event, Emitter<SubscriptionState> emit)async {
+    final specSubs = await subscriptionRepo.getSpecificSubs(event.SubsId);
+    emit(SpecificSubsLoadedState(specSubsList: specSubs));
+  }
 }

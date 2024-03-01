@@ -13,6 +13,7 @@ class SubscriptionRepo{
       datas.docs.forEach((element) {
         final data = element.data();
         final subscription = SubscriptionModel(
+          subsId: data['SubsId'],
           title: data['title'], 
           language: data['language'], 
           descritpion: data['description'], 
@@ -27,5 +28,30 @@ class SubscriptionRepo{
       debugPrint("expection getting subscritpions. : ${e.message}");
     }
     return subscriptionList;
+  }
+
+
+  Future<List<SubscriptionModel>> getSpecificSubs(String subsId)async{
+    List<SubscriptionModel> specSubsList = [];
+    try{
+      final datas = await FirebaseFirestore.instance.collection("subscriptions").where('SubsId',isEqualTo: subsId).get();
+      datas.docs.forEach((element) {
+        final data = element.data();
+        final specSubs = SubscriptionModel(
+          subsId: subsId, 
+          title: data['title'], 
+          language: data['language'], 
+          descritpion: data['description'], 
+          photo: data['photo'], 
+          amount: data['amount']);
+
+          specSubsList.add(specSubs);
+      });
+      return specSubsList;
+    }
+    on FirebaseException catch(e){
+      debugPrint("expection getting specific subscritpions. : ${e.message}");
+    }
+    return specSubsList;
   }
 }

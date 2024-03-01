@@ -35,6 +35,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   HomeCarousal(),
 
                   SizedBox(height: 20,),
+                  
+                  Container(
+                    height: screenHeight/6,
+                    width: screenWidth-50,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(
+                        width: 0.5,
+                        color: Colors.grey
+                      )
+                    ),
+                    child: Image.network('https://www.2020spaces.com/wp-content/uploads/2022/11/1280x720-Community_EN_Transparent-Draft04D.gif',
+                    fit: BoxFit.contain,),
+                  ),
+
+                  SizedBox(height: 20,),
+
 
                   //languages
                   language_avatars(runtimeType: runtimeType, screenHeight: screenHeight, screenWidth: screenWidth),

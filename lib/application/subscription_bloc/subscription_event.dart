@@ -8,3 +8,10 @@ part of 'subscription_bloc.dart';
 }
 
 class SubscriptionLoadEvent extends SubscriptionEvent{}
+
+class SpecificSubsLoadEvent extends SubscriptionEvent{
+  String SubsId;
+  SpecificSubsLoadEvent({
+    required this.SubsId
+  });
+}

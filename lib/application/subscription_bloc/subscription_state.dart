@@ -18,3 +18,10 @@ class SubscriptionLoadedState extends SubscriptionState{
 }
 
 class SubscriptionErrorState extends SubscriptionState{}
+
+class SpecificSubsLoadedState extends SubscriptionState{
+  final List<SubscriptionModel> specSubsList;
+  SpecificSubsLoadedState({
+    required this.specSubsList
+  });
+}
