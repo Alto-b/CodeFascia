@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 
 class IntroPage1 extends StatelessWidget {
   const IntroPage1({super.key});
@@ -24,9 +25,8 @@ class IntroPage1 extends StatelessWidget {
               Container(
                 width: 300,
                 height: 300,
-                decoration: BoxDecoration(
-                  image: DecorationImage(image: AssetImage('lib/assets/anim1.gif'),fit:BoxFit.cover)
-                ),
+                child: Lottie.asset('lib/assets/intro1.json'),
+                // child: Lottie.network('https://lottie.host/56bea1ab-1ba1-4f54-9021-95f7991dfd19/OIQLFl42G0.json'),
                 )
             ],
         ),

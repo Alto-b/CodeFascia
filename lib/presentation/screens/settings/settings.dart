@@ -18,9 +18,14 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;    
     final user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: screenHeight/8,
+        // backgroundColor:  Color.fromARGB(69, 110, 132, 214),
+         title:  Text("Settings",style: GoogleFonts.orbitron(fontSize: 30,fontWeight: FontWeight.w800,color: Colors.grey)),
         actions: [const ModeButton(),const SizedBox(width: 5,), IconButton(onPressed: (){showLogOutDialog(context);}, icon: const Icon(Icons.logout))],
       ),
       body: SingleChildScrollView(
@@ -29,8 +34,9 @@ class SettingsPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [ 
-              Text("Settings",style: GoogleFonts.orbitron(fontSize: 30,fontWeight: FontWeight.w800,color: Colors.grey)),
-              const SizedBox(height: 30,),
+              // SizedBox(height: 30,),
+              // Text("Settings",style: GoogleFonts.orbitron(fontSize: 30,fontWeight: FontWeight.w800,color: Colors.grey)),
+              // const SizedBox(height: 30,),
               const Center(
                 child: ProfileCard(),
               ),const SizedBox(height: 20,),
@@ -46,11 +52,11 @@ class SettingsPage extends StatelessWidget {
                   AdaptiveTheme.of(context).toggleThemeMode();
                 },
               ),
-              ListTile(
-                leading: const Icon(Icons.person_2_outlined),
-                title: const Text("Profile setup"),
-                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileSetupPage(),)),
-              ),
+              // ListTile(
+              //   leading: const Icon(Icons.person_2_outlined),
+              //   title: const Text("Profile setup"),
+              //   onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileSetupPage(),)),
+              // ),
               ListTile(
                 leading: const Icon(Icons.feedback_outlined),
                 title: const Text("Feedback"),

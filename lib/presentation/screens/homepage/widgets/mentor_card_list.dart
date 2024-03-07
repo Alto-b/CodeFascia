@@ -1,5 +1,6 @@
 
 import 'package:code_geeks/application/home_page_bloc/home_bloc.dart';
+import 'package:code_geeks/presentation/screens/mentors/mentors_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +26,15 @@ class MentorCardHPWidget extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Meet our mentors",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 20,),),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Meet our mentors",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 20,),),
+                  IconButton(onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => MentorsPage(),));
+                  }, icon: Icon(Icons.keyboard_arrow_right_rounded))
+                ],
+              ),
               Container(
                             height: (screenHeight/4)+20,
                             width: screenWidth,
@@ -53,10 +62,11 @@ class MentorCardHPWidget extends StatelessWidget {
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))
                                           ),
-                                          child: Image.network(state.mentorList[index].photo,fit: BoxFit.cover,),
+                                          child: Image.network(state.mentorList[index].photo,fit: BoxFit.cover,
+                                          ),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.fromLTRB(5, 5, 0, 0),
+                                          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                                           child: Text(state.mentorList[index].name,style: TextStyle(fontWeight: FontWeight.w500),),
                                         ),
                                         Padding(
@@ -72,6 +82,7 @@ class MentorCardHPWidget extends StatelessWidget {
                           ),
             ],
           );
+          
         }
         return SizedBox();
       },

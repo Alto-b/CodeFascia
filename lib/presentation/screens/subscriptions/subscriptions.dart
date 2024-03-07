@@ -9,12 +9,17 @@ class SubscriptionsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    context.read<SubscriptionBloc>().add(SubscriptionLoadEvent());
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    context.read<SubscriptionBloc>().add(SubscriptionLoadEvent());
+
+    final _searchController = TextEditingController();
+
+    String searchWord;
+    
     return Scaffold(
       appBar: AppBar(
-        // backgroundColor: Colors.grey,
         backgroundColor:  Color.fromARGB(255, 110, 132, 214),
         elevation: 5,
         shape: RoundedRectangleBorder(
@@ -30,6 +35,11 @@ class SubscriptionsPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(35)
             ),
             child: TextFormField(
+              controller: _searchController,
+              onChanged: (value) {
+                searchWord = _searchController.text.trim();
+                print(searchWord);
+              },
                       decoration: InputDecoration(
                         fillColor: Colors.white,
                         border: OutlineInputBorder( 
@@ -58,25 +68,6 @@ class SubscriptionsPage extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                // child: TextFormField(
-
-                //   decoration: InputDecoration(
-
-                //     border: OutlineInputBorder(
-                      
-                //     ),
-                //     prefixIcon: InkWell(
-                //       onTap: () {
-                //         //search button
-                //       },
-                //       child: Icon(Icons.search)),
-                //     suffixIcon: InkWell(
-                //       onTap: () {
-                //         //filter button
-                //       },
-                //       child: Icon(Icons.filter_list))
-                //   ),
-                // ),
               ),
         
               Container

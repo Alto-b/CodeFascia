@@ -18,6 +18,7 @@ class SubscriptionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<SubscriptionBloc>().add(SubscriptionLoadEvent());
     return BlocBuilder<SubscriptionBloc, SubscriptionState>(
       builder: (context, state) {
         print(state.runtimeType);
@@ -39,7 +40,6 @@ class SubscriptionCard extends StatelessWidget {
                       child: Column(
                         children: [
                           Container(
-                            
                             height: screenHeight/8,
                             width: screenWidth/2,
                             child: Image.network(state.subscritpionList[index].photo,filterQuality: FilterQuality.high,fit: BoxFit.fill,),
@@ -51,7 +51,7 @@ class SubscriptionCard extends StatelessWidget {
                               children: [
                                 Text(state.subscritpionList[index].language,),
                                 const SizedBox(height: 10,),
-                                Text("${state.subscritpionList[index].descritpion.substring(0,12)}....",),
+                                Text("${state.subscritpionList[index].descritpion.substring(0,3) }....",),
                               ],
                             ),
                             ),

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:code_geeks/application/home_page_bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,15 +36,6 @@ class language_avatars extends StatelessWidget {
                               onTap: () {
                                 print("tapped");
                               },
-                              // child: CircleAvatar(
-                              //   // backgroundColor: Colors.blueGrey,
-                              //   radius: 35,
-                              //   // child: Image.network(state.languageList[index].photo,fit: BoxFit.cover,
-                              //   // filterQuality: FilterQuality.high,
-                              //   // colorBlendMode: BlendMode.clear,
-                              //   // ),
-                              //   backgroundImage: NetworkImage(state.languageList[index].photo),
-                              // ),
                               child:InkWell(
                                 onTap: () {
                                   ///////////////
@@ -100,11 +92,11 @@ class language_avatars extends StatelessWidget {
                                         color: Colors.white,
                                         border: Border.all(width: 0.1,color: Colors.grey),
                                         shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                          image: NetworkImage(state.languageList[index].photo),
-                                          fit: BoxFit.contain,
-                                        ),
                                       ),
+                                      child:CachedNetworkImage(
+                                        filterQuality: FilterQuality.high,
+                                        fadeOutDuration: Duration(seconds: 1),
+                                        imageUrl: state.languageList[index].photo),
                                     ),
                                   ),
                               ),

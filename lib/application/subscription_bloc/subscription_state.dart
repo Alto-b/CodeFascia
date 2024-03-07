@@ -9,6 +9,8 @@ part of 'subscription_bloc.dart';
 
 class SubscriptionInitial extends SubscriptionState {}
 
+class SubscriptionLoadingState extends SubscriptionState{}
+
 class SubscriptionLoadedState extends SubscriptionState{
   final List<SubscriptionModel> subscritpionList;
 
@@ -16,8 +18,6 @@ class SubscriptionLoadedState extends SubscriptionState{
     required this.subscritpionList
   });
 }
-
-class SubscriptionErrorState extends SubscriptionState{}
 
 class SpecificSubsLoadedState extends SubscriptionState{
   final List<SubscriptionModel> specSubsList;

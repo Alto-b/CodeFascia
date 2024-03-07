@@ -20,15 +20,12 @@ class _HomePageState extends State<HomePage> {
     BlocProvider.of<HomeBloc>(context).add(HomeLoadingEvent());
     final user = FirebaseAuth.instance.currentUser;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(user!.uid),
-        actions: [
-          IconButton(onPressed: (){
-            FirebaseAuth.instance.signOut();
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => EntryPage(),), (route) => false);
-          }, icon: Icon(Icons.logout))
-        ],
-      ),
+      // appBar: AppBar(
+      //  leading: CircleAvatar(
+        
+      //  ),
+      // ),
+
       body: BlocConsumer<HomeBloc, HomeState>(
         listener: (context, state) {
           // TODO: implement listener
