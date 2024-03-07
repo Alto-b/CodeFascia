@@ -76,6 +76,60 @@ class SubscriptionCard extends StatelessWidget {
               
             );
         }
+        else if (state is SearchLoadedState){
+          return GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisExtent: (screenHeight/3)+40),
+              itemCount: state.searchSubsList.length,
+              itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      shape: ContinuousRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        side: const BorderSide(
+                          width: 0.2,color: Colors.white
+                        )
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: screenHeight/8,
+                            width: screenWidth/2,
+                            child: Image.network(state.searchSubsList[index].photo,filterQuality: FilterQuality.high,fit: BoxFit.fill,),
+                          ),
+                          ListTile(
+                            title: Text(state.searchSubsList[index].title,style: const TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(state.searchSubsList[index].language,),
+                                const SizedBox(height: 10,),
+                                Text("${state.searchSubsList[index].descritpion.substring(0,3) }....",),
+                              ],
+                            ),
+                            ),
+    
+                        const SizedBox(height: 20,),
+    
+                        ElevatedButton(onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>  SpecificSubsPage(subsId: state.searchSubsList[index].subsId),));
+                        },style: const ButtonStyle(
+                          backgroundColor:MaterialStatePropertyAll(Colors.green),elevation: MaterialStatePropertyAll(5),overlayColor: MaterialStatePropertyAll(Colors.grey)
+                        ), child: const Text("View More",style: TextStyle(
+                          color: Colors.white
+                        ),),),
+                        
+                        const SizedBox(height: 10,)
+                            
+                        ],
+                      ),
+                    ),
+                  );
+              },
+              
+            );
+        }
         //gridview for not loaded state
         return GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisExtent: (screenHeight/3)+40),

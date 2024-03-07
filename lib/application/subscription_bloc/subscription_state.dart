@@ -25,3 +25,12 @@ class SpecificSubsLoadedState extends SubscriptionState{
     required this.specSubsList
   });
 }
+
+class SearchLoadedState extends SubscriptionState{
+  final List<SubscriptionModel> searchSubsList;
+  SearchLoadedState({
+    required this.searchSubsList
+  });
+  @override
+  List<Object> get props => [];
+}

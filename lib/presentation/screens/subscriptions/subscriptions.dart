@@ -37,8 +37,12 @@ class SubscriptionsPage extends StatelessWidget {
             child: TextFormField(
               controller: _searchController,
               onChanged: (value) {
-                searchWord = _searchController.text.trim();
-                print(searchWord);
+                // searchWord = value;
+                // print(searchWord);
+                // if(value.isEmpty || value.length<=0){
+                //   context.read<SubscriptionBloc>().add(SubscriptionLoadEvent());
+                // }
+                context.read<SubscriptionBloc>().add(SearchSubscriptionsEvent(searchWord: value));
               },
                       decoration: InputDecoration(
                         fillColor: Colors.white,

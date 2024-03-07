@@ -36,11 +36,47 @@ class SubscriptionRepo{
   Future<List<SubscriptionModel>> getSpecificSubs(String subsId)async{
     List<SubscriptionModel> specSubsList = [];
     try{
-      final datas = await FirebaseFirestore.instance.collection("subscriptions").where('SubsId',isEqualTo: subsId).get();
+      final datas = await FirebaseFirestore.instance.collection("subscriptions")
+      .where('SubsId',isEqualTo: subsId)
+       .get();
+
       datas.docs.forEach((element) {
         final data = element.data();
         final specSubs = SubscriptionModel(
           subsId: subsId, 
+          title: data['title'], 
+          language: data['language'], 
+          descritpion: data['description'], 
+          photo: data['photo'], 
+          amount: data['amount'],
+          LangImg : data['LangImg'],
+          LangDesc: data['LangDesc']);
+
+          specSubsList.add(specSubs);
+      });
+      return specSubsList;
+    }
+    on FirebaseException catch(e){
+      debugPrint("expection getting specific subscritpions. : ${e.message}");
+    }
+    return specSubsList;
+  }
+
+  Future<List<SubscriptionModel>> searchSubscriptions(String keyword)async{
+    List<SubscriptionModel> specSubsList = [];
+    try{
+      // final datas = await FirebaseFirestore.instance.collection("subscriptions")
+      // .where('SubsId',isEqualTo: subsId).get();
+
+      final datas = await FirebaseFirestore.instance.collection("subscriptions")
+                    .where('title',isNotEqualTo: keyword)
+                    .orderBy('title')
+                    .get();
+
+      datas.docs.forEach((element) {
+        final data = element.data();
+        final specSubs = SubscriptionModel(
+          subsId: data['SubsId'], 
           title: data['title'], 
           language: data['language'], 
           descritpion: data['description'], 

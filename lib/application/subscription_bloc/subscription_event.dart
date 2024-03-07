@@ -15,3 +15,10 @@ class SpecificSubsLoadEvent extends SubscriptionEvent{
     required this.SubsId
   });
 }
+
+class SearchSubscriptionsEvent extends SubscriptionEvent{
+  String searchWord;
+  SearchSubscriptionsEvent({
+    required this.searchWord
+  });
+}

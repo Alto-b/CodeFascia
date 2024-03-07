@@ -21,31 +21,6 @@ class SpecificSubsPage extends StatefulWidget {
 class _SpecificSubsPageState extends State<SpecificSubsPage> {
   int duration=1;
 
-  // Razorpay? _razorpay;
-
-  //  @override
-  // void initState(){
-  //   _razorpay = Razorpay();
-  //   _razorpay?.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
-  //   _razorpay?.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
-  //   _razorpay?.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
-  //   super.initState();
-  // }
-
-  // void _handlePaymentSuccess(PaymentSuccessResponse response){
-  //   Fluttertoast.showToast(msg: "Payment successful ${response.orderId}");
-  // }
-
-  // void _handlePaymentError(PaymentFailureResponse response){
-  //   Fluttertoast.showToast(msg: "Payment Failed ${response.message}");
-  // }
-
-  // void _handleExternalWallet(ExternalWalletResponse response){
-  //   Fluttertoast.showToast(msg: "External wallet is  ${response.walletName}");
-  // }
-
-
-
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
