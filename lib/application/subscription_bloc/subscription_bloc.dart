@@ -33,7 +33,7 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
     // final searchSubs = await subscriptionRepo.searchSubscriptions(event.searchWord);
     // emit(SearchLoadedState(searchSubsList: searchSubs));
     try{
-      if(event.searchWord.isNotEmpty &&  event.searchWord.length>0){
+      if(event.searchWord.isNotEmpty){
         print("bloc spec subs evnt start");
         print(event.searchWord);
         final searchSubs = await subscriptionRepo.searchSubscriptions(event.searchWord);

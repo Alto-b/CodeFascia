@@ -14,6 +14,8 @@ class SpecificSubsLoadEvent extends SubscriptionEvent{
   SpecificSubsLoadEvent({
     required this.SubsId
   });
+  @override
+  List<Object> get props => [SubsId];
 }
 
 class SearchSubscriptionsEvent extends SubscriptionEvent{
@@ -21,4 +23,6 @@ class SearchSubscriptionsEvent extends SubscriptionEvent{
   SearchSubscriptionsEvent({
     required this.searchWord
   });
+  @override
+  List<Object> get props => [searchWord];
 }

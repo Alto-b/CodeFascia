@@ -9,7 +9,10 @@ class SubscriptionRepo{
     List<SubscriptionModel> subscriptionList = [];
 
     try{
-      final datas = await FirebaseFirestore.instance.collection("subscriptions").get();
+      final datas = await FirebaseFirestore.instance.collection("subscriptions")
+      .orderBy('title')
+      .get();
+
       datas.docs.forEach((element) {
         final data = element.data();
         final subscription = SubscriptionModel(
@@ -71,7 +74,13 @@ class SubscriptionRepo{
       final datas = await FirebaseFirestore.instance.collection("subscriptions")
                     .where('title',isNotEqualTo: keyword)
                     .orderBy('title')
+                    .startAt([keyword])
+                    // .endAt([keyword + '\uf8ff'])
                     .get();
+  //         final datas = await FirebaseFirestore.instance.collection("subscriptions")
+  // .where('title', arrayContains: keyword)
+  // .get();
+
 
       datas.docs.forEach((element) {
         final data = element.data();
@@ -87,6 +96,13 @@ class SubscriptionRepo{
 
           specSubsList.add(specSubs);
       });
+      specSubsList.forEach((specSubs) {
+  print(specSubs.subsId);
+  print(specSubs.title);
+  print(specSubs.language);
+  // Print other fields as needed
+});
+
       return specSubsList;
     }
     on FirebaseException catch(e){

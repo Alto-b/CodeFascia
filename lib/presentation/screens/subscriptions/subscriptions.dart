@@ -17,6 +17,8 @@ class SubscriptionsPage extends StatelessWidget {
     final _searchController = TextEditingController();
 
     String searchWord;
+
+
     
     return Scaffold(
       appBar: AppBar(
