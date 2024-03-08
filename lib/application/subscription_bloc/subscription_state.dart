@@ -41,9 +41,12 @@ class MySubscriptionErrorState extends SubscriptionState{}
 
 class MySubscritpionsLoadedState  extends SubscriptionState{
   final List<BookingModel> mySubsList;
+  // final List<SubscriptionModel> subsList;
   final UserModel userList;
+
   MySubscritpionsLoadedState({
     required this.mySubsList,
+    // required this.subsList,
     required this.userList
   });
   @override

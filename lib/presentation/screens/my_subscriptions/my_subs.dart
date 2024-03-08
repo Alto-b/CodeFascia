@@ -48,7 +48,7 @@ class MySubscriptionsPage extends StatelessWidget {
                                           child: Column(               
                                             children: [
                                               Text(state.mySubsList[index].sub_id),
-                                              
+                                              // Text(state.subsList[index].title)
                                             ],
                                           ),
                                         ),
