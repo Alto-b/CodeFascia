@@ -26,3 +26,23 @@ class SearchSubscriptionsEvent extends SubscriptionEvent{
   @override
   List<Object> get props => [searchWord];
 }
+
+class BookSubscriptionEvent extends SubscriptionEvent{
+  Map<String,dynamic> data = {};
+  String bookingId;
+  BookSubscriptionEvent({
+    required this.data,
+    required this.bookingId
+  });
+}
+
+class MySubscritpionLoadEvent extends SubscriptionEvent{
+    String uid;
+    // Map<String,dynamic> data = {};
+    // String subId;
+    MySubscritpionLoadEvent({
+      required this.uid,
+      // required this.subId
+      // required this.data
+    });
+}

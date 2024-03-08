@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
                   create: (context) => UserBloc(UserRepo()),
               ),
               BlocProvider(
-                  create: (context) => SubscriptionBloc(SubscriptionRepo()),
+                  create: (context) => SubscriptionBloc(SubscriptionRepo(),UserRepo()),
               ),
           ],
                   child: MaterialApp(

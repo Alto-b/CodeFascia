@@ -51,7 +51,7 @@ class BnbPage extends StatelessWidget {
                   BottomNavigationBarItem(icon: Icon(Icons.home),label: "Home"),
                   BottomNavigationBarItem(icon: Icon(Icons.chat_rounded,),label: "Community"),
                   BottomNavigationBarItem(icon: Icon(Icons.subscriptions),label: "Subscriptions"),
-                  BottomNavigationBarItem(icon: Icon(Icons.settings),label: "Settings"),
+                  BottomNavigationBarItem(icon: Icon(Icons.person),label: "Settings"),
               ],
               showUnselectedLabels: false,
               showSelectedLabels: false,

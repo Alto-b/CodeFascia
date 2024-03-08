@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:code_geeks/application/subscription_bloc/subscription_bloc.dart';
 import 'package:code_geeks/presentation/screens/subscriptions/subscriptions.dart';
 import 'package:code_geeks/presentation/widgets/bnb.dart';
@@ -41,26 +42,36 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
     super.initState();
   }
 
+  String? bookId;
+  Map<String,dynamic> detail = {};
+  
+
   void _handlePaymentSuccess(PaymentSuccessResponse response){
-    Fluttertoast.showToast(msg: "Payment successful ${response.orderId}");
+    Fluttertoast.showToast(msg: "Payment successful");    
+     context.read<SubscriptionBloc>().add(BookSubscriptionEvent(data: detail, bookingId: bookId!));
   }
 
   void _handlePaymentError(PaymentFailureResponse response){
-    Fluttertoast.showToast(msg: "Payment Failed ${response.message}");
+    Fluttertoast.showToast(msg: "Payment Failed");
   }
 
   void _handleExternalWallet(ExternalWalletResponse response){
     Fluttertoast.showToast(msg: "External wallet is  ${response.walletName}");
   }
 
-  void makePayments(
-    SubscriptionState state,
-    // String amount,
-    // String name,
-    // String subscription,
-    // String prefill
-    Map<String,dynamic> ops
-    )async{
+  void bookSubscription(SubscriptionState state,Map<String,dynamic> data,Map<String,dynamic> ops)async{
+    try{
+        
+    String bookingId = FirebaseFirestore.instance.collection("bookings").doc().id;
+    Map<String,dynamic> details ={
+      "booking_id" : bookingId, 
+      "user_id" : data['user_id'],
+      "date" : data['booking_date'],
+      "sub_id" : data['sub_id'],
+      "booking_amount" : data['booking_amount'],
+      "status" : "pending",
+      "guide_id" : ""
+    };
     var options ={
                       'key' : 'rzp_test_om7emjnNEbQYMJ',
                       'amount' : ops['amount'],
@@ -68,12 +79,15 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
                       'subscritpion' : ops['subscriptions'],
                       'prefill' : ops['prefill']
                     };
-      try{
-        _razorpay?.open(options);
-      }
-      catch(e){
-        debugPrint(e.toString());
-      }
+
+    bookId = bookingId;
+    detail = details;
+    _razorpay?.open(options); 
+    // context.read<SubscriptionBloc>().add(BookSubscriptionEvent(data: details, bookingId: bookingId));
+    }
+    catch(e){
+
+    }
   }
 
   @override
@@ -119,8 +133,6 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
                                 height: screenHeight/7,
                                 width: screenWidth-30,
                                 decoration: BoxDecoration(
-                                  // borderRadius: BorderRadius.circular(30),
-                                  // border: Border.all(width: 0.5)
                                   border: Border.all(
                                     color: tilebg[index]
                                   )
@@ -128,25 +140,24 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
                                 clipBehavior: Clip.antiAliasWithSaveLayer,
                                 child: ListTile(
                                   onTap: () {
-                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Long press to confirm "),backgroundColor: Colors.green,));
+                                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Long press to confirm "),backgroundColor: Colors.green,));
                                   },
                                   onLongPress: () {
-                                    //  makePayment() async{
                                             var options ={
                                               'key' : 'rzp_test_om7emjnNEbQYMJ',
                                               'amount' : '${(int.parse(state.specSubsList[0].amount) * duration[index]*100)}',
-                                              'name' : '${FirebaseAuth.instance.currentUser!.displayName}',
-                                              'subscritpion' : '${state.specSubsList[0].title}',
+                                              'name' : 'Code Geeks',
+                                              'description' : '${state.specSubsList[0].title}',
                                               'prefill' : '${FirebaseAuth.instance.currentUser?.email}'
                                             };
-                                    //         try{
-
-                                    //         }
-                                    //         catch(e){
-
-                                    //         }
-                                    //       }
-                                    makePayments(state,options);
+                                            var data = {
+                                              "user_id" : '${FirebaseAuth.instance.currentUser!.uid}',
+                                              "sub_id" : '${state.specSubsList[0].subsId}',
+                                              "booking_date" : DateTime.now(),
+                                              "booking_amount" : '${(int.parse(state.specSubsList[0].amount) * duration[index])}',
+                                              };
+                                    // makePayments(state,options);
+                                    bookSubscription(state,data,options);
                                   },
                                   splashColor: Colors.white54,
                                   // tileColor:tilebg[index],
@@ -176,8 +187,9 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
         return Scaffold(
           body: Center(child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("Some issue has happended"),
+              const Center(child: Text("Something unexpected occured")),
               IconButton(onPressed: (){
                 Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => BnbPage(),), (route) => false);
               }, icon: const Icon(Icons.arrow_back_ios))

@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:code_geeks/application/bnb_bloc/bnb_bloc.dart';
 import 'package:code_geeks/domain/login_check.dart';
 import 'package:code_geeks/presentation/screens/feedback/feedback.dart';
+import 'package:code_geeks/presentation/screens/my_subscriptions/my_subs.dart';
 import 'package:code_geeks/presentation/screens/settings/profile.dart';
 import 'package:code_geeks/presentation/screens/settings/widgets/button.dart';
 import 'package:code_geeks/presentation/screens/settings/widgets/profile_card.dart';
@@ -41,9 +42,14 @@ class SettingsPage extends StatelessWidget {
                 child: ProfileCard(),
               ),const SizedBox(height: 20,),
                ListTile(
-                leading: const Icon(Icons.person),
+                leading: const Icon(Icons.person_outline),
                 title: const Text("Profile"),
                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfilePage(),)),
+              ),
+              ListTile(
+                leading: const Icon(Icons.subscriptions_outlined),
+                title: const Text("My Subscriptions"),
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const MySubscriptionsPage(),)),
               ),
                ListTile(
                 leading: const Icon(Icons.light_mode_outlined),

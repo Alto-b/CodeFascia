@@ -36,3 +36,16 @@ class SearchLoadedState extends SubscriptionState{
   @override
   List<Object> get props => [searchSubsList];
 }
+
+class MySubscriptionErrorState extends SubscriptionState{}
+
+class MySubscritpionsLoadedState  extends SubscriptionState{
+  final List<BookingModel> mySubsList;
+  final UserModel userList;
+  MySubscritpionsLoadedState({
+    required this.mySubsList,
+    required this.userList
+  });
+  @override
+  List<Object> get props => [mySubsList,userList];
+}

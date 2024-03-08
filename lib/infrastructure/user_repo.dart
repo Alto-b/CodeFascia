@@ -36,29 +36,10 @@ class UserRepo{
 
   
   Future<UserModel> getUser()async{
-  // List<UserModel> userList=[]; 
-  print('entered repo');
-  // UserModel users;
   try{
-    // print("uid from repo${user!.uid}");
-    // // final users = await FirebaseFirestore.instance.collection("users").where('id',isEqualTo:user!.uid).get();
-    // final users = await FirebaseFirestore.instance.collection("users").doc('6CjPm9XzheX1lggRoNmCQSH5dBo2').get();
-    // print("users ${users}"); 
-    // final usera = users.data();
-    // // users.docs.forEach((element) {
-    // //   print("users1 ${users}");
-    // //   return userList.add(UserModel.fromJson(element.data()));
-    // // }
-    // // );
-
-    // return usera;
-    print("emtr try");
     final data = await FirebaseFirestore.instance.collection("users").doc(user!.uid).get();
-    print("emtr try1");
     final usera = data.data();
-    print("emtr try2 ${usera}");
     final users = UserModel(id: usera!['id'], name: usera['Name'], email: usera['Email'], profile: usera['profile'], profession: usera['Profession']);
-    print("asd${users}");
     return users;
   }
   on FirebaseException catch(e){

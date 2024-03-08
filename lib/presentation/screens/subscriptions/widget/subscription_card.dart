@@ -51,7 +51,7 @@ class SubscriptionCard extends StatelessWidget {
                               children: [
                                 Text(state.subscritpionList[index].language,),
                                 const SizedBox(height: 10,),
-                                Text("${state.subscritpionList[index].descritpion.substring(0,3) }....",),
+                                Text("${state.subscritpionList[index].description.substring(0,3) }....",),
                               ],
                             ),
                             ),
@@ -105,7 +105,7 @@ class SubscriptionCard extends StatelessWidget {
                               children: [
                                 Text(state.searchSubsList[index].language,),
                                 const SizedBox(height: 10,),
-                                Text("${state.searchSubsList[index].descritpion.substring(0,3) }....",),
+                                Text("${state.searchSubsList[index].description.substring(0,3) }....",),
                               ],
                             ),
                             ),
