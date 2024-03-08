@@ -68,6 +68,8 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
       "user_id" : data['user_id'],
       "date" : data['booking_date'],
       "sub_id" : data['sub_id'],
+      "sub_title" : data['sub_title'],
+      "sub_lang" : data['sub_lang'],
       "booking_amount" : data['booking_amount'],
       "status" : "pending",
       "guide_id" : ""
@@ -153,6 +155,8 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
                                             var data = {
                                               "user_id" : '${FirebaseAuth.instance.currentUser!.uid}',
                                               "sub_id" : '${state.specSubsList[0].subsId}',
+                                              "sub_title" : '${state.specSubsList[0].title}',
+                                              "sub_lang" : '${state.specSubsList[0].language}',
                                               "booking_date" : DateTime.now(),
                                               "booking_amount" : '${(int.parse(state.specSubsList[0].amount) * duration[index])}',
                                               };

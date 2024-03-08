@@ -44,10 +44,11 @@ class MySubscriptionsPage extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                             )
-                                          ),
-                                          child: Column(
+                                          ),                                         
+                                          child: Column(               
                                             children: [
-                                              Text(state.mySubsList[index].booking_amount)
+                                              Text(state.mySubsList[index].sub_id),
+                                              
                                             ],
                                           ),
                                         ),

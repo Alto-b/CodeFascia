@@ -132,10 +132,13 @@ class SubscriptionRepo{
 
         mySubsList.add(mySubs);
       });
+      
     }
     on FirebaseException catch(e){
       debugPrint("expection getting my subscritpions. : ${e.message}");
     }
     return mySubsList;
   }
+
+
 }
