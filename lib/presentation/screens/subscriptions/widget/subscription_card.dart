@@ -34,7 +34,7 @@ class SubscriptionCard extends StatelessWidget {
                       shape: ContinuousRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                         side: const BorderSide(
-                          width: 0.2,color: Colors.white
+                          // width: 2,color: Colors.white
                         )
                       ),
                       child: Column(
@@ -45,13 +45,19 @@ class SubscriptionCard extends StatelessWidget {
                             child: Image.network(state.subscritpionList[index].photo,filterQuality: FilterQuality.high,fit: BoxFit.fill,),
                           ),
                           ListTile(
-                            title: Text(state.subscritpionList[index].title,style: const TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
+                            title: Text(state.subscritpionList[index].title,
+                              style: const TextStyle(fontSize: 17,fontWeight: FontWeight.w500),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,),
                             subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(state.subscritpionList[index].language,),
                                 const SizedBox(height: 10,),
-                                Text("${state.subscritpionList[index].description.substring(0,3) }....",),
+                                Text("${state.subscritpionList[index].description}",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,),
+                                
                               ],
                             ),
                             ),

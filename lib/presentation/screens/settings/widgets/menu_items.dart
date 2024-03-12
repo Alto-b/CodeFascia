@@ -6,36 +6,44 @@ class MenuItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-
-        GestureDetector(
-          onTap: () => AdaptiveTheme.of(context).setLight(),
-          child: Container(
-            height: 20,
-            color: Colors.white,
-            child: Text("Light mode"),
+    return Container(
+      // color: Colors.amber,
+      decoration: BoxDecoration(
+        color: Colors.grey
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SizedBox(height: 5,),
+          GestureDetector(
+            onTap: () => AdaptiveTheme.of(context).setLight(),
+            child: Container(
+              height: 30,width: 90,
+              color: Colors.white,
+              child: Text("Light Mode",style: TextStyle(color: Colors.black),),
+            ),
           ),
-        ),
-
-        GestureDetector(
-          onTap: () => AdaptiveTheme.of(context).setDark(),
-          child: Container(
-            height: 20,
-            color: Colors.black,
-            child: Text("Dark mode",style: TextStyle(color: Colors.white),),
+          SizedBox(height: 5,),
+          GestureDetector(
+            onTap: () => AdaptiveTheme.of(context).setDark(),
+            child: Container(
+              height: 30,width: 90,
+              color: Colors.black,
+              child: Text("Dark Mode",style: TextStyle(color: Colors.white),),
+            ),
           ),
-        ),
-
-        GestureDetector(
-          onTap: () => AdaptiveTheme.of(context).setSystem(),
-          child: Container(
-            height: 20,
-            color: Color.fromARGB(255, 59, 98, 206),
-            child: Text("Sytem mode"),
+          SizedBox(height: 5,),
+          GestureDetector(
+            onTap: () => AdaptiveTheme.of(context).setSystem(),
+            child: Container(
+              height: 30,width: 90,
+              color: Color.fromARGB(255, 59, 98, 206),
+              child: Text("System Mode"),
+            ),
           ),
-        ),
-      ],
+          SizedBox(height: 5,)
+        ],
+      ),
     );
   }
 }

@@ -11,8 +11,8 @@ class ModeButton extends StatelessWidget {
 
       onTap: () => showPopover(context: context, 
                 bodyBuilder: (context)=>MenuItems(),
-                width: 60,
-                height: 60,
+                width: 90,
+                height: 110,
                 direction: PopoverDirection.bottom),
                 child: Icon(Icons.light_mode),
     );

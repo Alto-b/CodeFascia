@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:code_geeks/domain/booking_model.dart';
+import 'package:code_geeks/domain/joined_subs_model.dart';
 import 'package:code_geeks/domain/subscription_model.dart';
 import 'package:code_geeks/domain/user_model.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,8 @@ class SubscriptionRepo{
           photo: data['photo'], 
           amount: data['amount'],
           LangImg : data['LangImg'],
-          LangDesc: data['LangDesc']);
+          LangDesc: data['LangDesc'],
+          videos: data['videos']);
 
           subscriptionList.add(subscription);
       });
@@ -54,7 +56,8 @@ class SubscriptionRepo{
           photo: data['photo'], 
           amount: data['amount'],
           LangImg : data['LangImg'],
-          LangDesc: data['LangDesc']);
+          LangDesc: data['LangDesc'],
+          videos: data['videos']);
 
           specSubsList.add(specSubs);
       });
@@ -93,7 +96,8 @@ class SubscriptionRepo{
           photo: data['photo'], 
           amount: data['amount'],
           LangImg : data['LangImg'],
-          LangDesc: data['LangDesc']);
+          LangDesc: data['LangDesc'],
+          videos : data['videos']);
 
           specSubsList.add(specSubs);
       });
@@ -119,16 +123,30 @@ class SubscriptionRepo{
                     .where('user_id',isEqualTo: uid)
                     .orderBy('date')
                     .get();
+      // for(var doc in subsdatas.docs){
+      //   final data = doc.data();
+      //   final subId = data['sub_id'];
+      //   final subsSnapShot = await FirebaseFirestore.instance.collection("subscritpions")
+      //                       .doc(subId).get();
+      //   final subscritpionData = subsSnapShot.data();
+      // }
+
       subsdatas.docs.forEach((element) {
           final data = element.data();
           final mySubs = BookingModel(
           sub_id: data['sub_id'], 
+          sub_title: data['sub_title'],
+          sub_lang: data['sub_lang'],
+          sub_photo: data['sub_photo'],
           booking_amount: data['booking_amount'], 
           booking_id: data['booking_id'], 
           date: data['date'].toString(), 
+          expiry: data['expiry'].toString(),
           guide_id: data['guide_id'], 
           status: data['status'], 
-          user_id: data['user_id']);
+          user_id: data['user_id'],
+          subscriptionDetails: data['subscriptionDetails']
+          );
 
         mySubsList.add(mySubs);
       });

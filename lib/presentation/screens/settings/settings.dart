@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:code_geeks/application/bnb_bloc/bnb_bloc.dart';
 import 'package:code_geeks/domain/login_check.dart';
 import 'package:code_geeks/presentation/screens/feedback/feedback.dart';
+import 'package:code_geeks/presentation/screens/join_mentor/mentor_join.dart';
 import 'package:code_geeks/presentation/screens/my_subscriptions/my_subs.dart';
 import 'package:code_geeks/presentation/screens/settings/profile.dart';
 import 'package:code_geeks/presentation/screens/settings/widgets/button.dart';
@@ -51,18 +52,18 @@ class SettingsPage extends StatelessWidget {
                 title: const Text("My Subscriptions"),
                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const MySubscriptionsPage(),)),
               ),
-               ListTile(
-                leading: const Icon(Icons.light_mode_outlined),
-                title: const Text("Light/Dark Mode"),
-                onTap: () {
-                  AdaptiveTheme.of(context).toggleThemeMode();
-                },
-              ),
-              // ListTile(
-              //   leading: const Icon(Icons.person_2_outlined),
-              //   title: const Text("Profile setup"),
-              //   onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileSetupPage(),)),
+              //  ListTile(
+              //   leading: const Icon(Icons.light_mode_outlined),
+              //   title: const Text("Light/Dark Mode"),
+              //   onTap: () {
+              //     AdaptiveTheme.of(context).toggleThemeMode();
+              //   },
               // ),
+              ListTile(
+                leading: const Icon(Icons.person_2_outlined),
+                title: const Text("Become a mentor"),
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MentorJoinPage(),)),
+              ),
               ListTile(
                 leading: const Icon(Icons.feedback_outlined),
                 title: const Text("Feedback"),

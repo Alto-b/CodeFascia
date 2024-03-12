@@ -42,17 +42,13 @@ class GeminiPage extends StatelessWidget {
           extendBodyBehindAppBar: true,
     
           body:Container(
-            width: double.maxFinite,
+            width: MediaQuery.of(context).size.width,
             height: double.maxFinite,
             decoration: BoxDecoration(
-              // color: Colors.white,
+              // color: Colors.red,
             ),
             child: Column(
               children: [
-                // Container(
-                //   height: 120,
-                //   color: Colors.red,
-                // ),
                 Expanded(child: 
                 ListView.builder(
                   itemCount: messages.length,
@@ -60,11 +56,8 @@ class GeminiPage extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
-                      width: 25,
-                      // margin: EdgeInsets.only(bottom: 12),
-                      // padding: EdgeInsets.all(20),
+                      width: 10,
                       decoration: BoxDecoration(
-                        // borderRadius: BorderRadius.circular(16),
                         color: messages[index].role == "user" ? Color(0XFF04A3FF).withOpacity(.4) :Color.fromARGB(255, 79, 79, 79)
                                         .withOpacity(.5),
                          borderRadius: messages[index].role == "user"
@@ -89,7 +82,8 @@ class GeminiPage extends StatelessWidget {
                         ),
                       )),
                   );
-                })),
+                })
+                ),
                 if(geminiBloc.generating)
                 Container(
                   width: 80,height: 80,

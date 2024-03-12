@@ -17,6 +17,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.6.0"
+  animate_icons:
+    dependency: "direct main"
+    description:
+      name: animate_icons
+      sha256: "3201c60f2051997cf3cbde4b2f07d269e01fa53a6a3a2986ef26f614419880fd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
+  animated_icon:
+    dependency: "direct main"
+    description:
+      name: animated_icon
+      sha256: "13f7516a20d1ecfc31075ba90a92e969ec43c019fea3463c6e412733a0ad61c5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.9"
+  any_link_preview:
+    dependency: "direct main"
+    description:
+      name: any_link_preview
+      sha256: be2adb74944140428c46c3688c1b843c884ead6908e13e8cae359fa31f37cf07
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   archive:
     dependency: transitive
     description:
@@ -153,6 +177,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.3"
+  csslib:
+    dependency: transitive
+    description:
+      name: csslib
+      sha256: "706b5707578e0c1b4b7550f64078f0a0f19dec3f50a178ffae7006b0a9ca58fb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -193,6 +225,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
+  fading_edge_scrollview:
+    dependency: transitive
+    description:
+      name: fading_edge_scrollview
+      sha256: c25c2231652ce774cc31824d0112f11f653881f43d7f5302c05af11942052031
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -504,6 +544,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.12.3+2"
+  html:
+    dependency: transitive
+    description:
+      name: html
+      sha256: "3a7812d5bcd2894edf53dfaf8cd640876cf6cef50a8f238745c8b8120ea74d3a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.15.4"
   http:
     dependency: transitive
     description:
@@ -616,6 +664,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.19.0"
   js:
     dependency: transitive
     description:
@@ -640,6 +696,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
+  marquee:
+    dependency: "direct main"
+    description:
+      name: marquee
+      sha256: "4b5243d2804373bdc25fc93d42c3b402d6ec1f4ee8d0bb72276edd04ae7addb8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.3"
   matcher:
     dependency: transitive
     description:
@@ -881,7 +945,7 @@ packages:
     source: hosted
     version: "0.27.7"
   shared_preferences:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: shared_preferences
       sha256: "81429e4481e1ccfb51ede496e916348668fd0921627779233bd24cc3ff6abd02"
@@ -1021,6 +1085,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  string_validator:
+    dependency: transitive
+    description:
+      name: string_validator
+      sha256: "54d4f42cd6878ae72793a58a529d9a18ebfdfbfebd9793bbe55c9b28935e8543"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   synchronized:
     dependency: transitive
     description:
@@ -1053,6 +1125,70 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.2"
+  url_launcher:
+    dependency: transitive
+    description:
+      name: url_launcher
+      sha256: "0ecc004c62fd3ed36a2ffcbe0dd9700aee63bd7532d0b642a488b1ec310f492e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.2.5"
+  url_launcher_android:
+    dependency: transitive
+    description:
+      name: url_launcher_android
+      sha256: d4ed0711849dd8e33eb2dd69c25db0d0d3fdc37e0a62e629fe32f57a22db2745
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.3.0"
+  url_launcher_ios:
+    dependency: transitive
+    description:
+      name: url_launcher_ios
+      sha256: "9149d493b075ed740901f3ee844a38a00b33116c7c5c10d7fb27df8987fb51d5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.2.5"
+  url_launcher_linux:
+    dependency: transitive
+    description:
+      name: url_launcher_linux
+      sha256: ab360eb661f8879369acac07b6bb3ff09d9471155357da8443fd5d3cf7363811
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.1"
+  url_launcher_macos:
+    dependency: transitive
+    description:
+      name: url_launcher_macos
+      sha256: b7244901ea3cf489c5335bdacda07264a6e960b1c1b1a9f91e4bc371d9e68234
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
+  url_launcher_platform_interface:
+    dependency: transitive
+    description:
+      name: url_launcher_platform_interface
+      sha256: "552f8a1e663569be95a8190206a38187b531910283c3e982193e4f2733f01029"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.2"
+  url_launcher_web:
+    dependency: transitive
+    description:
+      name: url_launcher_web
+      sha256: fff0932192afeedf63cdd50ecbb1bc825d31aed259f02bb8dba0f3b729a5e88b
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.3"
+  url_launcher_windows:
+    dependency: transitive
+    description:
+      name: url_launcher_windows
+      sha256: ecf9725510600aa2bb6d7ddabe16357691b6d2805f66216a97d1b881e21beff7
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.1"
   uuid:
     dependency: transitive
     description:

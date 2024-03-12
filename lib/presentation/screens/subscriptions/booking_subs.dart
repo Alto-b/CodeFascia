@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class SubscriptionBookingPage extends StatefulWidget {
@@ -48,11 +49,13 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
 
   void _handlePaymentSuccess(PaymentSuccessResponse response){
     Fluttertoast.showToast(msg: "Payment successful");    
+    print("detail ${detail}");
      context.read<SubscriptionBloc>().add(BookSubscriptionEvent(data: detail, bookingId: bookId!));
   }
 
   void _handlePaymentError(PaymentFailureResponse response){
     Fluttertoast.showToast(msg: "Payment Failed");
+    context.read<SubscriptionBloc>().add(BookSubscriptionEvent(data: detail, bookingId: bookId!));
   }
 
   void _handleExternalWallet(ExternalWalletResponse response){
@@ -61,21 +64,34 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
 
   void bookSubscription(SubscriptionState state,Map<String,dynamic> data,Map<String,dynamic> ops)async{
     try{
+
+      // Retrieve the specific subscription details from the "subscriptions" collection
+    final subscriptionSnapshot = await FirebaseFirestore.instance
+        .collection('subscriptions')
+        .doc(data['sub_id'])
+        .get();
+    
+    Map<String, dynamic> subscriptionData = subscriptionSnapshot.data() ?? {};
+
+    
         
     String bookingId = FirebaseFirestore.instance.collection("bookings").doc().id;
     Map<String,dynamic> details ={
       "booking_id" : bookingId, 
       "user_id" : data['user_id'],
       "date" : data['booking_date'],
+      "expiry" : data['expiry_date'],
       "sub_id" : data['sub_id'],
       "sub_title" : data['sub_title'],
       "sub_lang" : data['sub_lang'],
+      "sub_photo" : data['sub_photo'],
       "booking_amount" : data['booking_amount'],
       "status" : "pending",
-      "guide_id" : ""
+      "guide_id" : "0",
+      'subscriptionDetails': subscriptionData,
     };
     var options ={
-                      'key' : 'rzp_test_om7emjnNEbQYMJ',
+                      'key' : 'rzp_test_CrySNngXFK5H5o',
                       'amount' : ops['amount'],
                       'name' : ops['name'],
                       'subscritpion' : ops['subscriptions'],
@@ -84,6 +100,7 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
 
     bookId = bookingId;
     detail = details;
+    // print(detail);
     _razorpay?.open(options); 
     // context.read<SubscriptionBloc>().add(BookSubscriptionEvent(data: details, bookingId: bookingId));
     }
@@ -152,14 +169,24 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
                                               'description' : '${state.specSubsList[0].title}',
                                               'prefill' : '${FirebaseAuth.instance.currentUser?.email}'
                                             };
+                                            // Get current date and time
+// DateTime now = DateTime.now();
+
+// // Extract day, month, and year
+// int day = now.day;
+// int month = now.month;
+// int year = now.year;
                                             var data = {
                                               "user_id" : '${FirebaseAuth.instance.currentUser!.uid}',
                                               "sub_id" : '${state.specSubsList[0].subsId}',
                                               "sub_title" : '${state.specSubsList[0].title}',
+                                              "sub_photo" : '${state.specSubsList[0].photo}',
                                               "sub_lang" : '${state.specSubsList[0].language}',
-                                              "booking_date" : DateTime.now(),
+                                              "booking_date" : DateFormat('dd-MM-yyyy').format(DateTime.now()),
+                                              "expiry_date" :DateFormat('dd-MM-yyyy').format(DateTime.now().add(Duration(days: duration[index]))) ,
                                               "booking_amount" : '${(int.parse(state.specSubsList[0].amount) * duration[index])}',
                                               };
+                                              // print(data);
                                     // makePayments(state,options);
                                     bookSubscription(state,data,options);
                                   },

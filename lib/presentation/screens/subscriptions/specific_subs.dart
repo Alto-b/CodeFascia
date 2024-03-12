@@ -131,7 +131,7 @@ class _SpecificSubsPageState extends State<SpecificSubsPage> {
               
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(state.specSubsList[0].LangDesc,style: GoogleFonts.poppins(
+                        child: Text(state.specSubsList[0].description,style: GoogleFonts.poppins(
                           fontWeight: FontWeight.w400,fontSize: 18
                         ),),
                       ),
