@@ -7,6 +7,7 @@ import 'package:code_geeks/application/gemini_bloc/gemini_bloc.dart';
 import 'package:code_geeks/application/home_page_bloc/home_bloc.dart';
 import 'package:code_geeks/application/image_picker_bloc/image_picker_bloc.dart';
 import 'package:code_geeks/application/image_picker_utils.dart';
+import 'package:code_geeks/application/join_mentor/join_mentor_bloc.dart';
 import 'package:code_geeks/application/sign%20up%20bloc/image_update_bloc/image_bloc.dart';
 import 'package:code_geeks/application/subscription_bloc/subscription_bloc.dart';
 import 'package:code_geeks/application/user_bloc/user_bloc.dart';
@@ -71,6 +72,9 @@ class MyApp extends StatelessWidget {
               ),
               BlocProvider(
                   create: (context) => UserBloc(UserRepo()),
+              ),
+              BlocProvider(
+                  create: (context) => JoinMentorBloc(),
               ),
               BlocProvider(
                   create: (context) => SubscriptionBloc(SubscriptionRepo(),UserRepo()),

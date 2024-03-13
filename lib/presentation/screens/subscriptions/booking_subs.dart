@@ -91,7 +91,7 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
       'subscriptionDetails': subscriptionData,
     };
     var options ={
-                      'key' : 'rzp_test_CrySNngXFK5H5o',
+                      'key' : "rzp_test_CrySNngXFK5H5o",
                       'amount' : ops['amount'],
                       'name' : ops['name'],
                       'subscritpion' : ops['subscriptions'],

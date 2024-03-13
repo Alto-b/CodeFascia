@@ -25,13 +25,15 @@ dependencies:
   dio: ^5.4.1
   dropdown_button2: ^2.3.9
   equatable: ^2.0.5
-  file_picker: ^6.1.1
+  file_picker: ^6.2.0
   firebase_auth: null
   firebase_core: ^2.25.4
+  firebase_database: null
   firebase_storage: ^11.6.6
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.4
+  flutter_chat_bubble: ^2.0.2
   flutter_facebook_auth: null
   fluttertoast: null
   font_awesome_flutter: ^10.7.0
