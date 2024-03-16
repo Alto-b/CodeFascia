@@ -162,8 +162,8 @@ class CommunityPage extends StatelessWidget {
                         }, icon: Icon(Icons.photo_outlined)),
                         IconButton(onPressed: (){
                           Map<String,dynamic> data = {
-                          "senderId" : user!.uid,
-                          "avatar" : user.photoURL.toString(),
+                          "senderId" : user?.uid,
+                          "avatar" : user?.photoURL ?? "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
                           "content_type" : "text",
                           "content" : _content.text.trim(),
                           "dateTime" : DateTime.now().toIso8601String()
@@ -258,7 +258,7 @@ void sendImage(String newImg)async{
     print("image link $downloadUrl");
     Map<String,dynamic> data = {
                           "senderId" :FirebaseAuth.instance.currentUser!.uid,
-                          "avatar" : FirebaseAuth.instance.currentUser!.photoURL,
+                          "avatar" : FirebaseAuth.instance.currentUser!.photoURL ?? "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
                           "content_type" : "photo",
                           "content" : downloadUrl,
                           "dateTime" : DateTime.now().toIso8601String()

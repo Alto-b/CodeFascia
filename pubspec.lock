@@ -209,6 +209,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.9"
+  easy_loading_button:
+    dependency: "direct main"
+    description:
+      name: easy_loading_button
+      sha256: "8620b2b03ade420644ba27640678b6fda4a9be6e54cccd4cb1f6c258cd7de0ea"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.2"
   equatable:
     dependency: "direct main"
     description:
@@ -720,6 +728,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  loading_btn:
+    dependency: "direct main"
+    description:
+      name: loading_btn
+      sha256: ecc27ca22d611ee5d22db358410ca03c64b81644d952cb80f350b71746d82674
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
   lottie:
     dependency: "direct main"
     description:
@@ -920,6 +936,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.1"
+  pinch_zoom:
+    dependency: "direct main"
+    description:
+      name: pinch_zoom
+      sha256: "8e430a215db198099a708f334620e223cbea3fdc477b717d6535ab852994985e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   platform:
     dependency: transitive
     description:
@@ -1149,6 +1173,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.1"
+  timelines:
+    dependency: "direct main"
+    description:
+      name: timelines
+      sha256: "40214f5ab772ff45459cb8c15e5f60505a6828af0c0eb1eec6f29ed911a4c1c5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0"
   typed_data:
     dependency: transitive
     description:

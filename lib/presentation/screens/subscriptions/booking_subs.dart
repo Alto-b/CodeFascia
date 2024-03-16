@@ -88,6 +88,7 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
       "booking_amount" : data['booking_amount'],
       "status" : "pending",
       "guide_id" : "0",
+      "guide_name" : "0",
       'subscriptionDetails': subscriptionData,
     };
     var options ={

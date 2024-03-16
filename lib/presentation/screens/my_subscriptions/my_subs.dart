@@ -1,6 +1,9 @@
+import 'package:animated_icon/animated_icon.dart';
 import 'package:code_geeks/application/subscription_bloc/subscription_bloc.dart';
 import 'package:code_geeks/domain/user_model.dart';
+import 'package:code_geeks/infrastructure/subscription_repo.dart';
 import 'package:code_geeks/presentation/screens/my_subscriptions/my_subs_specific.dart';
+import 'package:code_geeks/presentation/screens/my_subscriptions/subs_history.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,11 +18,20 @@ class MySubscriptionsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final currentUser = FirebaseAuth.instance.currentUser!.uid;
     context.read<SubscriptionBloc>().add(MySubscritpionLoadEvent(uid: currentUser));
+    
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: Text("My Subscriptions"),
+        titleTextStyle: GoogleFonts.orbitron(
+          fontSize: 15,fontWeight: FontWeight.w600,color: Colors.grey
+        ),
+        actions: [
+          IconButton(onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => SubsHistoryPage(),));
+          }, icon: Icon(Icons.history))
+        ],
       ),
 
       body: SingleChildScrollView(
@@ -100,7 +112,20 @@ class MySubscriptionsPage extends StatelessWidget {
                                 );
                     }
                     else if(state is MySubscriptionErrorState){
-                      return Text("No subscriptions");
+                      return Column(children: [
+                        SizedBox(height: screenHeight/4,),
+                          Text("No Active Subscriptions",style: GoogleFonts.poppins(fontSize: 20,fontWeight: FontWeight.w600,color: Colors.grey),),
+                        // AnimatedIcon(icon: AnimatedIcons.ellipsis_search, progress:kAlwaysCompleteAnimation,size: 50,color: Colors.grey,)
+                        AnimateIcon(
+                          key: UniqueKey(),
+                          onTap: () {},
+                          iconType: IconType.continueAnimation,
+                          height: 70,
+                          width: 70,
+                          color:Colors.grey,
+                          animateIcon: AnimateIcons.file,
+                      )
+                      ],);
                     }
                     return  Center(child: Lottie.asset('lib/assets/loader.json',height: 100,width: 100));
                   },

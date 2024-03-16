@@ -3,6 +3,7 @@ import 'package:code_geeks/application/bnb_bloc/bnb_bloc.dart';
 import 'package:code_geeks/presentation/screens/community/community_chat.dart';
 import 'package:code_geeks/presentation/screens/gemini/gemini.dart';
 import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
+import 'package:code_geeks/presentation/screens/post_page/feed_view.dart';
 import 'package:code_geeks/presentation/screens/settings/settings.dart';
 import 'package:code_geeks/presentation/screens/signup/signup.dart';
 import 'package:code_geeks/presentation/screens/subscriptions/subscriptions.dart';
@@ -16,7 +17,7 @@ class BnbPage extends StatelessWidget {
 
   final screens = [
     HomePage(),
-    CommunityPage(),
+    PostViewPage(),
     SubscriptionsPage(),
     SettingsPage()
   ];
@@ -48,10 +49,10 @@ class BnbPage extends StatelessWidget {
               child: BottomNavigationBar(
                 
                 items: const [
-                  BottomNavigationBarItem(icon: Icon(Icons.home),label: "Home"),
-                  BottomNavigationBarItem(icon: Icon(Icons.chat_rounded,),label: "Community"),
-                  BottomNavigationBarItem(icon: Icon(Icons.subscriptions),label: "Subscriptions"),
-                  BottomNavigationBarItem(icon: Icon(Icons.person),label: "Settings"),
+                  BottomNavigationBarItem(icon: Icon(Icons.home_outlined),label: "Home"),
+                  BottomNavigationBarItem(icon: Icon(Icons.feed_outlined,),label: "Feed"),
+                  BottomNavigationBarItem(icon: Icon(Icons.subscriptions_outlined),label: "Subscriptions"),
+                  BottomNavigationBarItem(icon: Icon(Icons.person_outline),label: "Settings"),
               ],
               showUnselectedLabels: false,
               showSelectedLabels: false,

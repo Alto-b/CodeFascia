@@ -1,8 +1,10 @@
 import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
+import 'package:easy_loading_button/easy_loading_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:loading_btn/loading_btn.dart';
 import 'package:passwordfield/passwordfield.dart';
 
 class LoginPage extends StatelessWidget {
@@ -110,18 +112,47 @@ class LoginPage extends StatelessWidget {
                         child: TextButton(onPressed: (){forgotPassword(_emailController.text);}, child: Text("Forgot password?",style: TextStyle(fontSize: 12),),)),
                       const SizedBox(height: 30,),
         
-                      Container(
-                        width: double.infinity,
-                        child: ElevatedButton(onPressed: (){
-                          if(_formKey.currentState!.validate()){
+                    //   Container(
+                    //     width: double.infinity,
+                    //     child: ElevatedButton(onPressed: (){
+                    //       if(_formKey.currentState!.validate()){
                         
-                          signIn(context);
-                          }
+                    //       signIn(context);
+                    //       }
                           
-                        }, child: const Text("Login"),style: const ButtonStyle(
-                          foregroundColor: MaterialStatePropertyAll(Colors.white),
-                    backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 110, 132, 214))
-                        ),)),
+                    //     }, child: const Text("Login"),style: const ButtonStyle(
+                    //       foregroundColor: MaterialStatePropertyAll(Colors.white),
+                    // backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 110, 132, 214))
+                    //     ),)),
+              Container(
+                width: double.infinity,
+                child: LoadingBtn(
+                    height: 40,
+                    borderRadius: 8,
+                    animate: true,
+                    color: Color.fromARGB(255, 110, 132, 214),
+                    width: MediaQuery.of(context).size.width * 0.45,
+                    loader: Container(
+                        padding: const EdgeInsets.all(10),
+                        width: 40,
+                        height: 40,
+                        child: const CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                        ),
+                    ),
+                    child: const Text("Login",style: TextStyle(color: Colors.white),),
+                    onTap: (startLoading, stopLoading, btnState) async {
+                        if (btnState == ButtonState.idle) {
+                            startLoading();
+                            if(_formKey.currentState!.validate()){
+                                          signIn(context);
+                                          }
+                            await Future.delayed(const Duration(seconds: 2));
+                            stopLoading();
+                        }
+                    },
+                ),
+              ),
         
                         const SizedBox(height: 10,),
         

@@ -30,12 +30,13 @@ class SubscriptionCard extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Card(
+                      elevation: 2,
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       shape: ContinuousRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
-                        side: const BorderSide(
+                        // side: const BorderSide(
                           // width: 2,color: Colors.white
-                        )
+                        // )
                       ),
                       child: Column(
                         children: [

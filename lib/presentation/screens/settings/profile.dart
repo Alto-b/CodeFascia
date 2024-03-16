@@ -5,6 +5,7 @@ import 'package:code_geeks/application/image_picker_bloc/image_picker_bloc.dart'
 import 'package:code_geeks/application/user_bloc/user_bloc.dart';
 import 'package:code_geeks/domain/user_model.dart';
 import 'package:code_geeks/presentation/screens/settings/settings.dart';
+import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebasestorage;
@@ -224,7 +225,7 @@ class _ProfilePageState extends State<ProfilePage> {
     // Navigate to BnbPage after Firestore operation is complete
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => SettingsPage()),
+      MaterialPageRoute(builder: (context) => BnbPage()),
       (route) => false,
     );
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Profile updated"),backgroundColor: Colors.green,duration: Duration(seconds: 2),));

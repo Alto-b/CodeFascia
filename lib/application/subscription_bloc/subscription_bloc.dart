@@ -77,6 +77,7 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
 
 
   FutureOr<void> mySubscriptions(MySubscritpionLoadEvent event, Emitter<SubscriptionState> emit)async{
+    subscriptionRepo.updateSubsStats();
     final mySubs = await subscriptionRepo.mySubscriptions(event.uid);
     // final subs = await subscriptionRepo.getSpecificSubs(mySubs);
     final user = await userRepo.getUser();
