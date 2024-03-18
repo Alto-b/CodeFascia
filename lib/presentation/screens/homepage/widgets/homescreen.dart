@@ -4,6 +4,7 @@ import 'package:code_geeks/presentation/screens/homepage/widgets/carousal.dart';
 import 'package:code_geeks/presentation/screens/homepage/widgets/language_avatar.dart';
 import 'package:code_geeks/presentation/screens/homepage/widgets/mentor_card_list.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 class HomeScreen extends StatelessWidget {
@@ -133,7 +134,9 @@ class HomeScreen extends StatelessWidget {
                         fadeInDuration: Duration(seconds: 1),
                         filterQuality: FilterQuality.high,
                         fit: BoxFit.contain,
-                        placeholder: (context, url) => Text("Community"),
+                        placeholder: (context, url) => Center(child: Text("Community",style: GoogleFonts.orbitron(
+                          fontSize: 25,fontWeight: FontWeight.w600,color: Colors.grey
+                        ),)),
                         ),
                       ),
                     ),

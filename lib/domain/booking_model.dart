@@ -8,6 +8,8 @@ class BookingModel{
   String date;
   String expiry;
   String guide_id;
+  String guide_name;
+  String guide_photo;
   String status;
   String user_id;
   Map<String,dynamic> subscriptionDetails;
@@ -22,6 +24,8 @@ class BookingModel{
     required this.date,
     required this.expiry,
     required this.guide_id,
+    required this.guide_name,
+    required this.guide_photo,
     required this.status,
     required this.user_id,
     required this.subscriptionDetails

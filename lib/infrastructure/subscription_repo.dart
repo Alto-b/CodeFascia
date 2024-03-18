@@ -147,7 +147,9 @@ class SubscriptionRepo{
           guide_id: data['guide_id'], 
           status: data['status'], 
           user_id: data['user_id'],
-          subscriptionDetails: data['subscriptionDetails']
+          subscriptionDetails: data['subscriptionDetails'],
+          guide_name: data['guide_name'],
+          guide_photo: data['guide_photo']
           );
 
         mySubsList.add(mySubs);
@@ -182,7 +184,9 @@ class SubscriptionRepo{
           guide_id: data['guide_id'], 
           status: data['status'], 
           user_id: data['user_id'],
-          subscriptionDetails: data['subscriptionDetails']
+          subscriptionDetails: data['subscriptionDetails'],
+          guide_name: data['guide_name'],
+          guide_photo: data['guide_photo']
           );
 
         historylist.add(mySubs);

@@ -1,6 +1,7 @@
 
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:code_geeks/presentation/screens/signup/profile_setup.dart';
 import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
 import 'package:code_geeks/presentation/screens/loading/onboarding_screen.dart';
@@ -181,6 +182,55 @@ class EntryPage extends StatelessWidget {
         print("exception is : $e");
     }
   }
+
+//   Future<void> _signInWithGoogle(BuildContext context) async {
+//   final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+//   try {
+//     final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
+
+//     if (googleSignInAccount != null) {
+//       final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+
+//       final AuthCredential credential = GoogleAuthProvider.credential(
+//         idToken: googleSignInAuthentication.idToken,
+//         accessToken: googleSignInAuthentication.accessToken,
+//       );
+
+//       UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+//       User? user = userCredential.user;
+
+//       // Check if the user email already exists in the "users" collection
+//       var userDoc = await FirebaseFirestore.instance.collection("users").doc(user!.uid).get();
+//       if (userDoc.exists) {
+//         // User already exists, navigate to home page
+//         Navigator.pushAndRemoveUntil(
+//           context,
+//           MaterialPageRoute(builder: (context) => BnbPage()),
+//           (route) => false,
+//         );
+//       } else {
+//         // User doesn't exist, proceed to profile setup page
+//         await FirebaseFirestore.instance.collection("users").doc(user.uid).set({
+//           "uid": user.uid,
+//           "Name": user.displayName,
+//           "Email": user.email,
+//           "profile": user.photoURL,
+//         });
+
+//         Navigator.pushAndRemoveUntil(
+//           context,
+//           MaterialPageRoute(builder: (context) => ProfileSetupPage()),
+//           (route) => false,
+//         );
+//       }
+//     }
+//   } catch (e) {
+//     print("Error signing in: $e");
+//     // Handle error here
+//   }
+// }
+
 
 //   Future<UserCredential> signInWithGitHub() async {
   

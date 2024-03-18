@@ -13,7 +13,7 @@ import 'package:code_geeks/application/post_bloc/post_bloc.dart';
 import 'package:code_geeks/application/sign%20up%20bloc/image_update_bloc/image_bloc.dart';
 import 'package:code_geeks/application/subscription_bloc/subscription_bloc.dart';
 import 'package:code_geeks/application/user_bloc/user_bloc.dart';
-import 'package:code_geeks/domain/login_check.dart';
+import 'package:code_geeks/login_check.dart';
 import 'package:code_geeks/infrastructure/language_repo.dart';
 import 'package:code_geeks/infrastructure/mentor_repo.dart';
 import 'package:code_geeks/infrastructure/post_repo.dart';

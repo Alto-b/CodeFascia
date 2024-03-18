@@ -61,68 +61,86 @@ class CommunityPage extends StatelessWidget {
                           return (list[index]['senderId']==user!.uid)?
                           //send bubble
                             ChatBubble(
-                              clipper: ChatBubbleClipper1(type: BubbleType.sendBubble),
-                              alignment: Alignment.topRight,
-                              margin: EdgeInsets.only(top: 20),
-                              backGroundColor: Colors.blue,
-                              child: Container(
-                                constraints: BoxConstraints(
-                                  maxWidth: MediaQuery.of(context).size.width * 0.7,
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    (list[index]['content_type']=="text")?
-                                    Text(
-                                      list[index]['content'],
-                                      style: TextStyle(color: Colors.white,fontSize: 18),
-                                    ):
-                                    Container(
-                                      height: 100,
-                                      width: 150,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        image: DecorationImage(image: NetworkImage(list[index]['content']))
+                                clipper: ChatBubbleClipper1(type: BubbleType.sendBubble),
+                                alignment: Alignment.topRight,
+                                margin: EdgeInsets.only(top: 20),
+                                backGroundColor: Colors.blue,
+                                child: Container(
+                                  constraints: BoxConstraints(
+                                    maxWidth: MediaQuery.of(context).size.width * 0.7,
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Flexible(
+                                        child: (list[index]['content_type'] == "text")
+                                            ? Text(
+                                                list[index]['content'],
+                                                style: TextStyle(color: Colors.white, fontSize: 18),
+                                              )
+                                            : Container(
+                                                height: 100,
+                                                width: 150,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  image: DecorationImage(
+                                                    image: NetworkImage(list[index]['content']),
+                                                  ),
+                                                ),
+                                              ),
                                       ),
-                                    )
-                                    ,SizedBox(width: 10,),
-                                    CircleAvatar(backgroundImage: NetworkImage(list[index]['avatar']),radius: 10,),
-                                  ],
+                                      SizedBox(width: 10),
+                                      CircleAvatar(
+                                        backgroundImage: NetworkImage(list[index]['avatar']),
+                                        radius: 10,
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ):
+                              )
+                              :
                             //recieve bubble
                             ChatBubble(
-                          clipper: ChatBubbleClipper1(type: BubbleType.receiverBubble),
-                          backGroundColor: Color(0xffE7E7ED),
-                          margin: EdgeInsets.only(top: 20),
-                          child: Container(
-                            constraints: BoxConstraints(
-                              maxWidth: MediaQuery.of(context).size.width * 0.7,
-                            ),
-                            child:Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    CircleAvatar(backgroundImage: NetworkImage(list[index]['avatar']),radius: 10,),
-                                    SizedBox(width: 10,),
-                                    (list[index]['content_type']=="text")?
-                                    Text(
-                                      list[index]['content'],
-                                      style: TextStyle(color: const Color.fromARGB(255, 3, 3, 3),fontSize: 18),
-                                    ):
-                                    Container(
-                                      height: 100,
-                                      width: 150,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        image: DecorationImage(image: NetworkImage(list[index]['content']))
+                                clipper: ChatBubbleClipper1(type: BubbleType.receiverBubble),
+                                backGroundColor: Color(0xffE7E7ED),
+                                margin: EdgeInsets.only(top: 20),
+                                child: Container(
+                                  constraints: BoxConstraints(
+                                    maxWidth: MediaQuery.of(context).size.width * 0.7,
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      CircleAvatar(
+                                        backgroundImage: NetworkImage(list[index]['avatar']),
+                                        radius: 10,
                                       ),
-                                    )
-                                    
-                                  ],
+                                      SizedBox(width: 10),
+                                      Flexible(
+                                        child: (list[index]['content_type'] == "text")
+                                            ? Text(
+                                                list[index]['content'],
+                                                style: TextStyle(
+                                                  color: const Color.fromARGB(255, 3, 3, 3),
+                                                  fontSize: 18,
+                                                ),
+                                              )
+                                            : Container(
+                                                height: 100,
+                                                width: 150,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  image: DecorationImage(
+                                                    image: NetworkImage(list[index]['content']),
+                                                  ),
+                                                ),
+                                              ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                          ),
-                        );
+                              )
+                              ;
 
                         },
                         );
@@ -151,13 +169,6 @@ class CommunityPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         IconButton(onPressed: (){
-                      //     Map<String,dynamic> data = {
-                      //     "senderId" : user!.uid,
-                      //     "avatar" : user.photoURL.toString(),
-                      //     "content_type" : "photo",
-                      //     "content" : _content.text.trim(),
-                      //     "dateTime" : DateTime.now().toIso8601String()
-                      // };
                           _imagePickerDialog(context);
                         }, icon: Icon(Icons.photo_outlined)),
                         IconButton(onPressed: (){

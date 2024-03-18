@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:any_link_preview/any_link_preview.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:code_geeks/application/subscription_bloc/subscription_bloc.dart';
+import 'package:code_geeks/presentation/screens/chat/chat_page.dart';
 import 'package:code_geeks/presentation/screens/feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -99,7 +100,20 @@ class MySpecificSubsPage extends StatelessWidget {
       // label: Text("Chat with mentor"),
       child: AnimateIcon(
         key: UniqueKey(),
-        onTap: () {},
+        onTap: () {
+           Navigator.push(context, MaterialPageRoute(builder: (context) => SubsChatPage(
+            guide_id: state.mySubsList[index].guide_id,
+            guide_name: state.mySubsList[index].guide_name,
+            guide_photo: state.mySubsList[index].guide_photo,
+            sub_lang: state.mySubsList[index].sub_lang,
+            sub_title: state.mySubsList[index].sub_title,
+            sub_photo: state.mySubsList[index].sub_photo,
+            status: state.mySubsList[index].status,
+            date: state.mySubsList[index].date,
+            expiry: state.mySubsList[index].expiry,
+            booking_id: state.mySubsList[index].booking_id,
+           ),));
+        },
         iconType: IconType.continueAnimation,
         height: 40,
         width: 40,

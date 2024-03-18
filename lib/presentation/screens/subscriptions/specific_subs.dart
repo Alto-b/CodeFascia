@@ -31,158 +31,176 @@ class _SpecificSubsPageState extends State<SpecificSubsPage> {
     return BlocBuilder<SubscriptionBloc, SubscriptionState>(
       builder: (context, state) {
         if(state is SpecificSubsLoadedState){
-          return Scaffold(
-    
-            appBar: AppBar(
-            automaticallyImplyLeading: false,
-            flexibleSpace: Container(
-             decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(state.specSubsList[0].photo),
-                    fit: BoxFit.cover
-                 ),
-            ),
-                child: Stack(
-                  children: [
-                    Positioned(
-                      top: 15,
-                      left: 5,
-                      child: IconButton(
-                        style: ButtonStyle(
-                          iconSize: MaterialStatePropertyAll(30),
-                          iconColor:MaterialStatePropertyAll(Colors.white),
-
-                        ),
-                        onPressed: () {
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(builder: (context) => BnbPage()),
-                            (route) => false,
-                          );
-                        },
-                        icon: Icon(Icons.arrow_back_ios),
-                      ),
-                    ),
-                  ],
-                ),
+          return PopScope(
+            canPop: false,
+            onPopInvoked: (didPop) async{
+                 Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (context) => BnbPage()),
+                              (route) => false,
+                            );
+            },
+            // onWillPop: ()async{
+            //     Navigator.pushAndRemoveUntil(
+            //                   context,
+            //                   MaterialPageRoute(builder: (context) => BnbPage()),
+            //                   (route) => false,
+            //                 );
+            //               return false;
+            // },
+            child: Scaffold(
+                
+              appBar: AppBar(
+              automaticallyImplyLeading: false,
+              flexibleSpace: Container(
+               decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(state.specSubsList[0].photo),
+                      fit: BoxFit.cover
+                   ),
               ),
-              toolbarHeight: screenHeight / 5,
-              backgroundColor: Colors.grey,
-              
-            ),
-
-            
-            body: SingleChildScrollView(
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Stack(
                     children: [
-                      ListTile(
-                        title: Text(state.specSubsList[0].title,style: GoogleFonts.poppins(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w600
-                        ),),
-                        trailing: Text("₹ ${state.specSubsList[0].amount}/day"),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            backgroundImage: NetworkImage(state.specSubsList[0].LangImg),
+                      Positioned(
+                        top: 15,
+                        left: 5,
+                        child: IconButton(
+                          style: ButtonStyle(
+                            iconSize: MaterialStatePropertyAll(30),
+                            iconColor:MaterialStatePropertyAll(Colors.white),
+            
                           ),
-                          tileColor: Colors.black12,
-                          title: Text(state.specSubsList[0].language,style: GoogleFonts.poppins(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400
-                          ),),
-                          trailing: IconButton(onPressed: (){
-                            showDialog<void>(
-                                          context: context,
-                                          barrierDismissible: true, 
-                                          barrierColor: Colors.black87,
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              // backgroundColor: Colors.white,
-                                              icon:Image.network(state.specSubsList[0].LangImg,height: 35,) ,
-                                              title:  Text(state.specSubsList[0].language),
-                                              content:  SingleChildScrollView(
-                                                child: ListBody(
-                                                  children: <Widget>[
-                                                    Text(state.specSubsList[0].LangDesc,style: TextStyle(fontSize: 20),),
-                                                  ],
-                                                ),
-                                              ),
-                                              actions: <Widget>[
-                                                TextButton(
-                                                  child: const Icon(Icons.arrow_back_ios_new),
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                          }, icon: Icon(Icons.read_more)),
+                          onPressed: () {
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (context) => BnbPage()),
+                              (route) => false,
+                            );
+                          },
+                          icon: Icon(Icons.arrow_back_ios),
                         ),
                       ),
-              
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(state.specSubsList[0].description,style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w400,fontSize: 18
-                        ),),
-                      ),
-                      // Padding(
-                      //   padding: const EdgeInsets.all(8.0),
-                      //   child: Center(
-                      //     child: Container(
-                      //       color: Colors.green,
-                      //       child: Row(
-                      //         children: [
-                      //           Text("Duration : "),
-                      //           NumberPicker(
-                      //             haptics: true,
-                      //             itemWidth: 60,
-                      //             axis: Axis.horizontal,
-                      //             decoration: BoxDecoration(
-                      //               border: Border.all(),
-                      //               shape: BoxShape.circle,
-                      //               // borderRadius: BorderRadius.all(Radius.circular(50))
-                      //             ),
-                      //             minValue: 1, 
-                      //             maxValue: 10, 
-                      //             value: duration, 
-                      //             onChanged: (value) {
-                      //               setState(() {
-                      //                 duration = value;
-                      //               });
-                      //               print("duration : $duration");
-                      //             },),
-                      //         ],
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      Divider(),
-                      SizedBox(height: 60,),
                     ],
                   ),
                 ),
+                toolbarHeight: screenHeight / 5,
+                backgroundColor: Colors.grey,
+                
               ),
-            ),    
-            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-            floatingActionButton: Container(
-              width: screenWidth,
-              child: FloatingActionButton.extended(
-                elevation: 5,
-                backgroundColor: Colors.green,
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SubscriptionBookingPage(subId: state.specSubsList[0].subsId),));
-                }, label: Text("Subscribe Now",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700,fontSize: 15),))),
-         );
+            
+              
+              body: SingleChildScrollView(
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ListTile(
+                          title: Text(state.specSubsList[0].title,style: GoogleFonts.poppins(
+                            fontSize: 25,
+                            fontWeight: FontWeight.w600
+                          ),),
+                          trailing: Text("₹ ${state.specSubsList[0].amount}/day"),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: NetworkImage(state.specSubsList[0].LangImg),
+                            ),
+                            tileColor: Colors.black12,
+                            title: Text(state.specSubsList[0].language,style: GoogleFonts.poppins(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400
+                            ),),
+                            trailing: IconButton(onPressed: (){
+                              showDialog<void>(
+                                            context: context,
+                                            barrierDismissible: true, 
+                                            barrierColor: Colors.black87,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                // backgroundColor: Colors.white,
+                                                icon:Image.network(state.specSubsList[0].LangImg,height: 35,) ,
+                                                title:  Text(state.specSubsList[0].language),
+                                                content:  SingleChildScrollView(
+                                                  child: ListBody(
+                                                    children: <Widget>[
+                                                      Text(state.specSubsList[0].LangDesc,style: TextStyle(fontSize: 20),),
+                                                    ],
+                                                  ),
+                                                ),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: const Icon(Icons.arrow_back_ios_new),
+                                                    onPressed: () {
+                                                      Navigator.of(context).pop();
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                            }, icon: Icon(Icons.read_more)),
+                          ),
+                        ),
+                
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(state.specSubsList[0].description,style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w400,fontSize: 18
+                          ),),
+                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.all(8.0),
+                        //   child: Center(
+                        //     child: Container(
+                        //       color: Colors.green,
+                        //       child: Row(
+                        //         children: [
+                        //           Text("Duration : "),
+                        //           NumberPicker(
+                        //             haptics: true,
+                        //             itemWidth: 60,
+                        //             axis: Axis.horizontal,
+                        //             decoration: BoxDecoration(
+                        //               border: Border.all(),
+                        //               shape: BoxShape.circle,
+                        //               // borderRadius: BorderRadius.all(Radius.circular(50))
+                        //             ),
+                        //             minValue: 1, 
+                        //             maxValue: 10, 
+                        //             value: duration, 
+                        //             onChanged: (value) {
+                        //               setState(() {
+                        //                 duration = value;
+                        //               });
+                        //               print("duration : $duration");
+                        //             },),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        Divider(),
+                        SizedBox(height: 60,),
+                      ],
+                    ),
+                  ),
+                ),
+              ),    
+              floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+              floatingActionButton: Container(
+                width: screenWidth,
+                child: FloatingActionButton.extended(
+                  elevation: 5,
+                  backgroundColor: Colors.green,
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SubscriptionBookingPage(subId: state.specSubsList[0].subsId),));
+                  }, label: Text("Subscribe Now",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700,fontSize: 15),))),
+                     ),
+          );
         }
         //if error loading the page --> shimmer
         return Scaffold(

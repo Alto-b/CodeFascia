@@ -36,8 +36,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       print("data from bloc : ${data}");
       emit(UserLoadedState(userList:data ));
     }
-    catch(e){
-      emit(UserErroState(errorMessage: "error loading user"));
+    on FirebaseException catch(e){
+      // emit(UserErroState(errorMessage: "error loading user"));
+      emit(UserErroState(errorMessage: "error loading user data ${e.message}"));
     }
 
      });

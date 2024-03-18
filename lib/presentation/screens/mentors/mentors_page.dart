@@ -11,7 +11,11 @@ class MentorsPage extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
 
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: IconButton(onPressed: (){
+          Navigator.pop(context);
+        }, icon: Icon(Icons.arrow_back_ios)),
+      ),
 
       body: BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {

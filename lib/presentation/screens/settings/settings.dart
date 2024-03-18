@@ -1,7 +1,7 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:code_geeks/application/bnb_bloc/bnb_bloc.dart';
-import 'package:code_geeks/domain/login_check.dart';
+import 'package:code_geeks/login_check.dart';
 import 'package:code_geeks/presentation/screens/feedback/feedback.dart';
 import 'package:code_geeks/presentation/screens/join_mentor/mentor_join.dart';
 import 'package:code_geeks/presentation/screens/my_subscriptions/my_subs.dart';

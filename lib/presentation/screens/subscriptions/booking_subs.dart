@@ -79,6 +79,8 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
     Map<String,dynamic> details ={
       "booking_id" : bookingId, 
       "user_id" : data['user_id'],
+      "user_name" : data['user_name'],
+      "user_avatar" : data['user_avatar'] ?? "https://st4.depositphotos.com/4329009/19956/v/450/depositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg",
       "date" : data['booking_date'],
       "expiry" : data['expiry_date'],
       "sub_id" : data['sub_id'],
@@ -89,6 +91,7 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
       "status" : "pending",
       "guide_id" : "0",
       "guide_name" : "0",
+      "guide_photo" : "0",
       'subscriptionDetails': subscriptionData,
     };
     var options ={
@@ -179,6 +182,8 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
 // int year = now.year;
                                             var data = {
                                               "user_id" : '${FirebaseAuth.instance.currentUser!.uid}',
+                                              "user_name" : '${FirebaseAuth.instance.currentUser!.displayName}',
+                                              "user_avatar" : '${FirebaseAuth.instance.currentUser!.photoURL}',
                                               "sub_id" : '${state.specSubsList[0].subsId}',
                                               "sub_title" : '${state.specSubsList[0].title}',
                                               "sub_photo" : '${state.specSubsList[0].photo}',

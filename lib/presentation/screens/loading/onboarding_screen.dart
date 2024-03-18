@@ -1,5 +1,5 @@
 
-import 'package:code_geeks/domain/login_check.dart';
+import 'package:code_geeks/login_check.dart';
 import 'package:code_geeks/presentation/screens/loading/intro_page1.dart';
 import 'package:code_geeks/presentation/screens/loading/intro_page2.dart';
 import 'package:code_geeks/presentation/screens/loading/intro_page3.dart';
