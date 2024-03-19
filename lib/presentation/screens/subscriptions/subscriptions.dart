@@ -1,4 +1,5 @@
 import 'package:code_geeks/application/subscription_bloc/subscription_bloc.dart';
+import 'package:code_geeks/presentation/screens/my_subscriptions/my_subs.dart';
 import 'package:code_geeks/presentation/screens/subscriptions/specific_subs.dart';
 import 'package:code_geeks/presentation/screens/subscriptions/widget/subscription_card.dart';
 import 'package:flutter/material.dart';
@@ -55,12 +56,13 @@ class SubscriptionsPage extends StatelessWidget {
                           onTap: () {
                             //search button
                           },
-                          child: Icon(Icons.search)),
-                        suffixIcon: InkWell(
-                          onTap: () {
-                            //filter button
-                          },
-                          child: Icon(Icons.filter_list))
+                          child: Icon(Icons.search,color: Colors.grey,)),
+                        // suffixIcon: InkWell(
+                        //   onTap: () {
+                        //     //my downlaods button
+                        //     Navigator.push(context, MaterialPageRoute(builder: (context) => MySubscriptionsPage(),));
+                        //   },
+                        //   child: Icon(Icons.bookmark_outline_rounded))
                       ),
                     ),
           ),

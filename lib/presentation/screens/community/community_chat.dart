@@ -11,17 +11,59 @@ import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
-class CommunityPage extends StatelessWidget {
+class CommunityPage extends StatefulWidget {
    CommunityPage({super.key});
 
+  @override
+  State<CommunityPage> createState() => _CommunityPageState();
+}
+
+class _CommunityPageState extends State<CommunityPage> {
    XFile? newImge;
 
+   String? previousDate;
+
   final DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
+
   final DatabaseReference chatRef = FirebaseDatabase.instance.reference().child('community');
+
   TextEditingController _content = TextEditingController();
+
+  late ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    Future.delayed(Duration(milliseconds: 500), () {
+    _scrollToBottom();
+  });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollToBottom() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scrollController.hasClients) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: Duration(milliseconds: 600),
+          curve: Curves.easeOut,
+        );
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    
+    DateTime currentDate = DateTime.now();
+    String currentDateString = "${currentDate.year}-${currentDate.month.toString().padLeft(2, '0')}-${currentDate.day.toString().padLeft(2, '0')}";
+    print(currentDateString);
     final user = FirebaseAuth.instance.currentUser;
     final DatabaseReference chatRef = FirebaseDatabase.instance.reference().child('community');
     double screenHeight = MediaQuery.of(context).size.height;
@@ -29,7 +71,11 @@ class CommunityPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Community"),
-        actions: [IconButton(onPressed: (){
+        actions: [
+          IconButton(onPressed: (){
+            _scrollToBottom();
+          }, icon: Icon(Icons.arrow_drop_down)),
+          IconButton(onPressed: (){
           AdaptiveTheme.of(context).toggleThemeMode();
         }, icon: Icon(Icons.light_mode_outlined))],
       ),
@@ -56,90 +102,130 @@ class CommunityPage extends StatelessWidget {
                           list.sort((a, b) => b['dateTime'].compareTo(a['dateTime']));
                           list = list.reversed.toList();
                       return ListView.builder(
+                        controller: _scrollController,
                         itemCount: snapshot.data!.snapshot.children.length,
                         itemBuilder: (context, index) {
+                          String messageDate = list[index]['dateTime'].toString().substring(0, 10);
+                          bool displayDate = false;
+
+                          if (previousDate == null || messageDate != previousDate) {
+                            displayDate = true;
+                            previousDate = messageDate;
+                          }
                           return (list[index]['senderId']==user!.uid)?
                           //send bubble
-                            ChatBubble(
-                                clipper: ChatBubbleClipper1(type: BubbleType.sendBubble),
-                                alignment: Alignment.topRight,
-                                margin: EdgeInsets.only(top: 20),
-                                backGroundColor: Colors.blue,
-                                child: Container(
-                                  constraints: BoxConstraints(
-                                    maxWidth: MediaQuery.of(context).size.width * 0.7,
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Flexible(
-                                        child: (list[index]['content_type'] == "text")
-                                            ? Text(
-                                                list[index]['content'],
-                                                style: TextStyle(color: Colors.white, fontSize: 18),
-                                              )
-                                            : Container(
-                                                height: 100,
-                                                width: 150,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  image: DecorationImage(
-                                                    image: NetworkImage(list[index]['content']),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                if (displayDate)
+                                Center(child: Text(messageDate == currentDateString ? "Today" : messageDate.substring(0, 10),style: DateTextStyle(),)),
+                                // (list[index]['dateTime'].toString().substring(0,10) == currentDateString) ?
+                                // Center(child: Text("Today")) : Center(child: Text(list[index]['dateTime'].toString().substring(0,11))),
+                                // Text(DateTime.now().toString()),
+                                ChatBubble(
+                                    clipper: ChatBubbleClipper1(type: BubbleType.sendBubble),
+                                    alignment: Alignment.topRight,
+                                    margin: EdgeInsets.only(top: 20),
+                                    backGroundColor: Colors.blue,
+                                    child: Container(
+                                      constraints: BoxConstraints(
+                                        maxWidth: MediaQuery.of(context).size.width * 0.7,
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Flexible(
+                                            child: (list[index]['content_type'] == "text")
+                                                ? Text(
+                                                    list[index]['content'],
+                                                    style: TextStyle(color: Colors.white, fontSize: 18),
+                                                  )
+                                                : Container(
+                                                    height: 100,
+                                                    width: 150,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      image: DecorationImage(
+                                                        image: NetworkImage(list[index]['content']),
+                                                      ),
+                                                    ),
                                                   ),
-                                                ),
-                                              ),
+                                          ),
+                                          SizedBox(width: 10),
+                                          CircleAvatar(
+                                            backgroundImage: NetworkImage(list[index]['avatar']),
+                                            radius: 10,
+                                          ),
+                                        ],
                                       ),
-                                      SizedBox(width: 10),
-                                      CircleAvatar(
-                                        backgroundImage: NetworkImage(list[index]['avatar']),
-                                        radius: 10,
-                                      ),
+                                    ),
+                                  ),SizedBox(height: 5,),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text(list[index]['dateTime'].toString().substring(10,16),style: TimeTextStyle(),),
+                                      SizedBox(width: 20,)
                                     ],
                                   ),
-                                ),
-                              )
+                              ],
+                            )
                               :
                             //recieve bubble
-                            ChatBubble(
-                                clipper: ChatBubbleClipper1(type: BubbleType.receiverBubble),
-                                backGroundColor: Color(0xffE7E7ED),
-                                margin: EdgeInsets.only(top: 20),
-                                child: Container(
-                                  constraints: BoxConstraints(
-                                    maxWidth: MediaQuery.of(context).size.width * 0.7,
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      CircleAvatar(
-                                        backgroundImage: NetworkImage(list[index]['avatar']),
-                                        radius: 10,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if (displayDate)
+                                Center(child: Text(messageDate == currentDateString ? "Today" : messageDate.substring(0, 10),style: DateTextStyle(),)),
+                                ChatBubble(
+                                    clipper: ChatBubbleClipper1(type: BubbleType.receiverBubble),
+                                    backGroundColor: Color(0xffE7E7ED),
+                                    margin: EdgeInsets.only(top: 20),
+                                    child: Container(
+                                      constraints: BoxConstraints(
+                                        maxWidth: MediaQuery.of(context).size.width * 0.7,
                                       ),
-                                      SizedBox(width: 10),
-                                      Flexible(
-                                        child: (list[index]['content_type'] == "text")
-                                            ? Text(
-                                                list[index]['content'],
-                                                style: TextStyle(
-                                                  color: const Color.fromARGB(255, 3, 3, 3),
-                                                  fontSize: 18,
-                                                ),
-                                              )
-                                            : Container(
-                                                height: 100,
-                                                width: 150,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  image: DecorationImage(
-                                                    image: NetworkImage(list[index]['content']),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          CircleAvatar(
+                                            backgroundImage: NetworkImage(list[index]['avatar']),
+                                            radius: 10,
+                                          ),
+                                          SizedBox(width: 10),
+                                          Flexible(
+                                            child: (list[index]['content_type'] == "text")
+                                                ? Text(
+                                                    list[index]['content'],
+                                                    style: TextStyle(
+                                                      color: const Color.fromARGB(255, 3, 3, 3),
+                                                      fontSize: 18,
+                                                    ),
+                                                  )
+                                                : Container(
+                                                    height: 100,
+                                                    width: 150,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      image: DecorationImage(
+                                                        image: NetworkImage(list[index]['content']),
+                                                      ),
+                                                    ),
                                                   ),
-                                                ),
-                                              ),
+                                          ),
+                                        ],
                                       ),
+                                    ),
+                                  ),SizedBox(height: 5,),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      SizedBox(width: 20,),
+                                      Text(list[index]['dateTime'].toString().substring(10,16),style: TimeTextStyle(),),
+                                      
                                     ],
                                   ),
-                                ),
-                              )
+                              ],
+                            )
                               ;
 
                         },
@@ -194,6 +280,16 @@ class CommunityPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  TextStyle DateTextStyle() => GoogleFonts.poppins(
+    fontSize: 12,fontWeight: FontWeight.w600, color: Colors.grey
+  );
+
+  TextStyle TimeTextStyle() {
+    return GoogleFonts.poppins(
+          fontSize: 10,
+        );
   }
 
   Future<void> _imagePickerDialog(BuildContext context) async {
@@ -283,7 +379,7 @@ void sendImage(String newImg)async{
 
   }
 }
-  
+
   void sendMessage(BuildContext context,Map<String,dynamic> data) {
       databaseReference.child('community').push().set(data).whenComplete((){
       // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("done")));
