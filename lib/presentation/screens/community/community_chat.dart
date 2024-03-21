@@ -35,7 +35,7 @@ class _CommunityPageState extends State<CommunityPage> {
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    Future.delayed(Duration(milliseconds: 500), () {
+    Future.delayed(Duration(milliseconds: 600), () {
     _scrollToBottom();
   });
   }
@@ -225,8 +225,7 @@ class _CommunityPageState extends State<CommunityPage> {
                                     ],
                                   ),
                               ],
-                            )
-                              ;
+                            );
 
                         },
                         );

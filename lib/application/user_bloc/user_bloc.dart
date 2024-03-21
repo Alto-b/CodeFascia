@@ -20,24 +20,14 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc(this.userRepo) : super(UserInitialState()) {
 
     on<LoadUserEvent>((event, emit)async {
-    //   try{
-    //     emit(UserLoadingState());
-    //     final users = await FirebaseFirestore.instance.collection('users').where('uid',isEqualTo: user!.uid).snapshots();
-    //     print(users);
-    //   }catch(e){
-
-    //   }
-
     emit(UserLoadingState());
       await Future.delayed(Duration(seconds: 1));
     try{
-      // await Future.delayed(Duration(seconds: 1));
       final data = await userRepo.getUser();
       print("data from bloc : ${data}");
       emit(UserLoadedState(userList:data ));
     }
     on FirebaseException catch(e){
-      // emit(UserErroState(errorMessage: "error loading user"));
       emit(UserErroState(errorMessage: "error loading user data ${e.message}"));
     }
 
