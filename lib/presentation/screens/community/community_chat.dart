@@ -247,15 +247,18 @@ class _CommunityPageState extends State<CommunityPage> {
               child: TextFormField(
                 controller: _content,
                  decoration: InputDecoration(
+                  prefixIcon: IconButton(onPressed: (){
+                          _imagePickerDialog(context);
+                        }, icon: Icon(Icons.attach_file_outlined)),
                   suffixIcon: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        IconButton(onPressed: (){
-                          _imagePickerDialog(context);
-                        }, icon: Icon(Icons.photo_outlined)),
+                        // IconButton(onPressed: (){
+                        //   _imagePickerDialog(context);
+                        // }, icon: Icon(Icons.photo_outlined)),
                         IconButton(onPressed: (){
                           Map<String,dynamic> data = {
                           "senderId" : user?.uid,
@@ -265,7 +268,7 @@ class _CommunityPageState extends State<CommunityPage> {
                           "dateTime" : DateTime.now().toIso8601String()
                       };
                           sendMessage(context,data);
-                        }, icon: Icon(Icons.send)),
+                        }, icon: Icon(Icons.send_rounded)),
                       ],
                     ),
                   ),
