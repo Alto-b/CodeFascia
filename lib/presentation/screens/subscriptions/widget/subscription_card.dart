@@ -91,12 +91,13 @@ class SubscriptionCard extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Card(
+                      elevation: 2,
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       shape: ContinuousRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
-                        side: const BorderSide(
-                          width: 0.2,color: Colors.white
-                        )
+                        // side: const BorderSide(
+                          // width: 2,color: Colors.white
+                        // )
                       ),
                       child: Column(
                         children: [
@@ -106,13 +107,19 @@ class SubscriptionCard extends StatelessWidget {
                             child: Image.network(state.searchSubsList[index].photo,filterQuality: FilterQuality.high,fit: BoxFit.fill,),
                           ),
                           ListTile(
-                            title: Text(state.searchSubsList[index].title,style: const TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
+                            title: Text(state.searchSubsList[index].title,
+                              style: const TextStyle(fontSize: 17,fontWeight: FontWeight.w500),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,),
                             subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(state.searchSubsList[index].language,),
                                 const SizedBox(height: 10,),
-                                Text("${state.searchSubsList[index].description.substring(0,3) }....",),
+                                Text("${state.searchSubsList[index].description}",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,),
+                                
                               ],
                             ),
                             ),

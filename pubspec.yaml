@@ -30,6 +30,7 @@ dependencies:
   firebase_auth: null
   firebase_core: ^2.25.4
   firebase_database: null
+  firebase_messaging: 
   firebase_storage: ^11.6.6
   flutter:
     sdk: flutter

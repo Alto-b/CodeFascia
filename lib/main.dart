@@ -13,6 +13,7 @@ import 'package:code_geeks/application/post_bloc/post_bloc.dart';
 import 'package:code_geeks/application/sign%20up%20bloc/image_update_bloc/image_bloc.dart';
 import 'package:code_geeks/application/subscription_bloc/subscription_bloc.dart';
 import 'package:code_geeks/application/user_bloc/user_bloc.dart';
+import 'package:code_geeks/infrastructure/firebase_api.dart';
 import 'package:code_geeks/login_check.dart';
 import 'package:code_geeks/infrastructure/language_repo.dart';
 import 'package:code_geeks/infrastructure/mentor_repo.dart';
@@ -23,6 +24,7 @@ import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:code_geeks/presentation/screens/loading/onboarding_screen.dart';
 import 'package:code_geeks/presentation/screens/login/login.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -38,8 +40,16 @@ Future<void> main() async {
         ) 
   ):
  await Firebase.initializeApp();
+
+ await FirebaseApi().initNotifications();
+
+//  final fcmToken = await FirebaseMessaging.instance.getToken();
+//   await FirebaseMessaging.instance.setAutoInitEnabled(true);
+//   print("FCMToken $fcmToken");
+  
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
