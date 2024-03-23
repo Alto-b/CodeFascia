@@ -35,16 +35,11 @@ class _HomePageState extends State<HomePage> {
           print(state.runtimeType);
           switch (state.runtimeType) {
             case HomePageLoadingState:
-          //  return Shimmer.fromColors(
-          //   baseColor: Colors.transparent,
-          //   highlightColor: Colors.grey.shade500,
-          //   child: HomeScreen());
-          return HomeLoadingScreen();
-              
+          return const HomeLoadingScreen();
             case HomePageLoadedState:
-              return HomeScreen();
+              return const HomeScreen();
             case HomePageErrorState:
-              return Center(child: Text("Error Loading HomePage"));
+              return const Center(child: Text("Error Loading HomePage"));
             default:
           }
           return HomeScreen();

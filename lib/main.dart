@@ -20,16 +20,26 @@ import 'package:code_geeks/infrastructure/mentor_repo.dart';
 import 'package:code_geeks/infrastructure/post_repo.dart';
 import 'package:code_geeks/infrastructure/subscription_repo.dart';
 import 'package:code_geeks/infrastructure/user_repo.dart';
-import 'package:code_geeks/presentation/widgets/bnb.dart';
-import 'package:code_geeks/presentation/screens/loading/onboarding_screen.dart';
+import 'package:code_geeks/presentation/screens/error_pages/no_internet.dart';
 import 'package:code_geeks/presentation/screens/login/login.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-Future<void> main() async {
+// bool internetResult=false;
+Future<void> main() async { 
+
   WidgetsFlutterBinding.ensureInitialized();
+
+  bool internetResult = await InternetConnectionChecker().hasConnection;
+    if(internetResult == true) {
+      print('YAY! Free cute dog pics!');
+    } else {
+      print('No internet :( Reason:');
+      // print(InternetConnectionChecker().lastTryResults);
+    }
+
   Platform.isAndroid? await Firebase.initializeApp( 
       options: const FirebaseOptions( 
           apiKey: "AIzaSyDFLURsPEzl6KV3Aau3POzWV3JUJd9plz0", 
@@ -47,12 +57,13 @@ Future<void> main() async {
 //   await FirebaseMessaging.instance.setAutoInitEnabled(true);
 //   print("FCMToken $fcmToken");
   
-  runApp(const MyApp());
+  runApp( MyApp(internetResult: internetResult,));
 }
 
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool internetResult;
+  const MyApp({super.key,required this.internetResult});
 
   // This widget is the root of your application.
   @override
@@ -106,7 +117,7 @@ class MyApp extends StatelessWidget {
                     darkTheme: darkTheme,
                     
             
-                    home: LoginCheckPage(),
+                    home: internetResult ? LoginCheckPage() : NoInternetPage(),
                   ),
       ),)
     );
