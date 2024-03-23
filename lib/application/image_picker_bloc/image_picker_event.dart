@@ -7,6 +7,8 @@ sealed class ImagePickerEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class PickerInitial extends ImagePickerEvent{}
+
 class GalleryPicker extends ImagePickerEvent{}
 
 class CameraCapture extends ImagePickerEvent{}

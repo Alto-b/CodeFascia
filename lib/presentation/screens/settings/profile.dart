@@ -46,8 +46,8 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
 
       appBar: AppBar(
-        title: Text("My profile",style: GoogleFonts.orbitron(fontSize: 15),),
-        centerTitle: true,
+        title: Text("My profile",style: GoogleFonts.orbitron(fontSize: 15,fontWeight: FontWeight.w600,letterSpacing: 4,color: Colors.grey),),
+        // centerTitle: true,
       ),
 
       body: SingleChildScrollView(

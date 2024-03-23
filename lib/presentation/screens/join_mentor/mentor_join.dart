@@ -26,22 +26,18 @@ class MentorJoinPage extends StatelessWidget {
     _name.text = FirebaseAuth.instance.currentUser!.displayName!;
     _email.text = FirebaseAuth.instance.currentUser!.email!;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text("Join Us"),
+        titleTextStyle:GoogleFonts.orbitron(fontSize: 15,fontWeight: FontWeight.w600,letterSpacing: 3,color: Colors.grey),
+      ),
 
       body: SingleChildScrollView(
         child: Center(
           child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 20,),
-              Text("Join Us",style: GoogleFonts.orbitron(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.grey
-              ),),
-              const SizedBox(height: 20,),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(0.0),
                 child: Card(
                   child: Form(
                     key: _key,

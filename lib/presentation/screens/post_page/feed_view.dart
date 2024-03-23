@@ -3,6 +3,7 @@ import 'package:code_geeks/presentation/screens/post_page/post_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shimmer/shimmer.dart';
 
 class PostViewPage extends StatelessWidget {
@@ -32,34 +33,24 @@ class PostViewPage extends StatelessWidget {
                   builder: (context, state) {
                     print(state.runtimeType);
                     if(state is FeedLoadedState){
+                      if(state.postList.isEmpty){
+                        return Center(child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Lottie.asset('lib/assets/no_posts.json'),
+                              Text("No posts are available at the moment",style: GoogleFonts.orbitron(
+                                fontSize: 20,fontWeight: FontWeight.w600,color: Colors.grey,
+                              ),textAlign: TextAlign.center,),
+                            ],
+                          ),
+                        ));
+                      }
                       return ListView.builder(
                                   itemCount: state.postList.length,
                                   itemBuilder: (context, index) {
                                     return Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      // child: Container(
-                                      //   height: screenHeight/7,
-                                      //   child: InkWell(
-                                      //     onTap: () {
-                                            
-                                      //     },
-                                      //     child: Card(
-                                      //       elevation: 5,
-                                      //       child: ListTile(
-                                      //         title: Text(state.postList[index].title,style: GoogleFonts.poppins(
-                                      //           fontWeight: FontWeight.w600,
-                                      //           fontSize: 20,
-                                      //         ),maxLines: 2,overflow: TextOverflow.ellipsis,),
-                                      //         subtitle:Text("${state.postList[index].description} \n ${state.postList[index].content}",maxLines: 2,style: GoogleFonts.poppins(
-                                      //               fontSize: 17,fontWeight: FontWeight.w300
-                                      //             ),overflow: TextOverflow.ellipsis,),
-                                      //           trailing: CircleAvatar(radius: 20,
-                                      //             backgroundImage: NetworkImage(state.postList[index].author_avatar),
-                                      //           ),
-                                      //       ),
-                                      //     ),
-                                      //   ),
-                                      // ),
                                       child: InkWell(
                                         onTap: () {
                                           Navigator.push(context, MaterialPageRoute(builder: (context) => SpecificPostView(

@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:code_geeks/application/home_page_bloc/home_bloc.dart';
 import 'package:code_geeks/login_check.dart';
+import 'package:code_geeks/presentation/screens/homepage/widgets/home_loading.dart';
 import 'package:code_geeks/presentation/screens/homepage/widgets/homescreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -34,10 +35,11 @@ class _HomePageState extends State<HomePage> {
           print(state.runtimeType);
           switch (state.runtimeType) {
             case HomePageLoadingState:
-           return Shimmer.fromColors(
-            baseColor: Colors.transparent,
-            highlightColor: Colors.grey.shade500,
-            child: HomeScreen());
+          //  return Shimmer.fromColors(
+          //   baseColor: Colors.transparent,
+          //   highlightColor: Colors.grey.shade500,
+          //   child: HomeScreen());
+          return HomeLoadingScreen();
               
             case HomePageLoadedState:
               return HomeScreen();

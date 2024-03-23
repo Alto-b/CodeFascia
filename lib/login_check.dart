@@ -27,17 +27,16 @@ class LoginCheckPage extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context,snapshot){
           if(snapshot.connectionState == ConnectionState.waiting){
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           else if(snapshot.hasError){
-            return Center(child: Text("something not right"));
+            return const Center(child: Text("Something not right"));
           }
           else if(snapshot.hasData){
-            // return Center(child: Text("something  right"));
             return BnbPage();
           }
           else{
-            return OnBoardingPage();
+            return const OnBoardingPage();
           } 
         },
       ),

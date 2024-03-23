@@ -24,9 +24,7 @@ class MySubscriptionsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("My Subscriptions"),
-        titleTextStyle: GoogleFonts.orbitron(
-          fontSize: 15,fontWeight: FontWeight.w600,color: Colors.grey
-        ),
+        titleTextStyle:GoogleFonts.orbitron(fontSize: 15,fontWeight: FontWeight.w600,letterSpacing: 3,color: Colors.grey),
         actions: [
           IconButton(onPressed: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => SubsHistoryPage(),));

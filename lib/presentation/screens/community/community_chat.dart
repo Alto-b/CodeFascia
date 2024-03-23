@@ -314,7 +314,7 @@ class _CommunityPageState extends State<CommunityPage> {
                             newImge = state.file;
                             
                           },
-                          child: const CircleAvatar(child:  Icon(Icons.add_a_photo),),
+                          child: const CircleAvatar(child:  Icon(Icons.photo_size_select_actual_outlined),),
                         );
                       }
                       else{
@@ -374,7 +374,9 @@ void sendImage(String newImg)async{
                       };
        databaseReference.child('community').push().set(data).whenComplete((){
       print("snd success");
+      Navigator.pop(context);
       _content.clear();
+      // context.read<ImagePickerBloc>().add(PickerInitial());
 }) ;
   }
   on FirebaseException catch(e){

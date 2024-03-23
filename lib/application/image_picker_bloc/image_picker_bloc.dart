@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:code_geeks/application/image_picker_utils.dart';
 import 'package:equatable/equatable.dart';
@@ -10,6 +12,7 @@ class ImagePickerBloc extends Bloc<ImagePickerEvent, ImagePickerState> {
 
   final ImagePickerUtils imagePickerUtils;
   ImagePickerBloc(this.imagePickerUtils) : super(ImagePickerInitial()) {
+    on<PickerInitial>(initial);
    on<GalleryPicker>(galleryPick);
 
  
@@ -17,10 +20,15 @@ class ImagePickerBloc extends Bloc<ImagePickerEvent, ImagePickerState> {
      void galleryPick(GalleryPicker event,Emitter<ImagePickerState> states)async{
       XFile? file = await imagePickerUtils.galleryPick();
       emit(state.copyWith(file: file));
+      // emit(ImagePickerInitial());
     }
 
     void cameraCapture(CameraCapture event,Emitter<ImagePickerState> states)async{
       XFile? file = await imagePickerUtils.cameraCapture();
       emit(state.copyWith(file: file));
     }
+
+  FutureOr<void> initial(PickerInitial event, Emitter<ImagePickerState> emit) {
+    emit(ImagePickerInitial());
+  }
 }
