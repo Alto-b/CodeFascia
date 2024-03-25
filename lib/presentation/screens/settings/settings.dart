@@ -1,4 +1,3 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:code_geeks/application/bnb_bloc/bnb_bloc.dart';
 import 'package:code_geeks/login_check.dart';
@@ -8,7 +7,7 @@ import 'package:code_geeks/presentation/screens/my_subscriptions/my_subs.dart';
 import 'package:code_geeks/presentation/screens/settings/profile.dart';
 import 'package:code_geeks/presentation/screens/settings/widgets/button.dart';
 import 'package:code_geeks/presentation/screens/settings/widgets/profile_card.dart';
-import 'package:code_geeks/presentation/screens/signup/profile_setup.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,21 +31,23 @@ class SettingsPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [ 
               // SizedBox(height: 30,),
               // Text("Settings",style: GoogleFonts.orbitron(fontSize: 30,fontWeight: FontWeight.w800,color: Colors.grey)),
               // const SizedBox(height: 30,),
-              const Center(
-                child: ProfileCard(),
+               Center(
+                child: GestureDetector(
+                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfilePage(),)),
+                  child: ProfileCard()),
               ),const SizedBox(height: 20,),
-               ListTile(
-                leading: const Icon(Icons.person_outline),
-                title: const Text("Profile"),
-                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfilePage(),)),
-              ),
+              //  ListTile(
+              //   leading: const Icon(Icons.person_outline),
+              //   title: const Text("Profile"),
+              //   onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfilePage(),)),
+              // ),
               ListTile(
                 leading: const Icon(Icons.subscriptions_outlined),
                 title: const Text("My Subscriptions"),
@@ -69,15 +70,15 @@ class SettingsPage extends StatelessWidget {
                 title: const Text("Feedback"),
                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FeedBackPage(),)),
               ),
-              const ListTile(
+               ListTile(
                 leading: Icon(Icons.description_outlined),
                 title: Text("Terms & Conditions"),
-                // onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FeedBackPage(),)),
+                onTap: () => _launchTCURL('https://www.freeprivacypolicy.com/live/c8a821ed-f744-4cfa-9ac4-ae3ff1359c08'),
               ),
-              const ListTile(
+               ListTile(
                 leading: Icon(Icons.security_outlined),
                 title: Text("Privacy Policy"),
-                // onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FeedBackPage(),)),
+                onTap: () => _launchPPURL('https://www.freeprivacypolicy.com/live/a5b1f3bb-5e9e-413f-8a11-cdc2e099c214'),
               ),
               const ListTile(
                 leading: Icon(Icons.info_outline),
@@ -87,7 +88,6 @@ class SettingsPage extends StatelessWidget {
               ListTile(
                 leading: const Icon(Icons.logout),
                 title: const Text("Logout"),
-                trailing: const Icon(Icons.keyboard_arrow_right_outlined),
                 onTap: () {
                  showLogOutDialog(context);
                 } 
@@ -98,6 +98,29 @@ class SettingsPage extends StatelessWidget {
       ),
     );
   }
+
+  //to launch url
+void _launchPPURL(String url) async{
+
+           Uri url = Uri.parse('https://www.freeprivacypolicy.com/live/a5b1f3bb-5e9e-413f-8a11-cdc2e099c214');
+       if (await launchUrl(url)) {
+              //dialer opened
+          }else{
+          SnackBar(content: Text("couldn't launch the page"));
+      }
+    } 
+
+void _launchTCURL(String url) async{
+
+           Uri url = Uri.parse('https://www.freeprivacypolicy.com/live/c8a821ed-f744-4cfa-9ac4-ae3ff1359c08');
+       if (await launchUrl(url)) {
+              //dialer opened
+          }else{
+          SnackBar(content: Text("couldn't launch the page"));
+      }
+    } 
+
+
   showLogOutDialog(BuildContext context) {
   //cancel/continue button
   Widget cancelButton = TextButton(
@@ -108,11 +131,11 @@ class SettingsPage extends StatelessWidget {
   );
   Widget continueButton = TextButton(
     child: const Text("Continue"),
-    onPressed:  () {
-      FirebaseAuth.instance.signOut();
+    onPressed:  () async{
+     await FirebaseAuth.instance.signOut();
       // FirebaseAuth.instance.s/
-      // FirebaseFirestore.instance.clearPersistence();
-      context.read<BnbBloc>().add(TabChangeEvent(tabIndex: 0));
+     //  FirebaseFirestore.instance.clearPersistence();
+      // context.read<BnbBloc>().add(TabChangeEvent(tabIndex: 0));
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const EntryPage(),), (route) => false);
     },
   );

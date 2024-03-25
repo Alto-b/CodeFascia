@@ -36,7 +36,7 @@ class ProfileCard extends StatelessWidget {
               height: screenHeight/7,
               width: screenWidth-50,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50)
+                borderRadius: BorderRadius.circular(20)
               ),
               child: GlassContainer(
                 color: Colors.transparent,
@@ -53,16 +53,21 @@ class ProfileCard extends StatelessWidget {
                         SizedBox(width: 10,),
                          CircleAvatar(
                           radius: 40,
-                          backgroundImage:NetworkImage(currUser?.photoURL ?? data.profile),
+                          // backgroundImage:NetworkImage(data.profile),
+                          backgroundImage: NetworkImage(currUser!.photoURL ?? data.profile),
                         ),
                         const SizedBox(width: 20,),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(currUser?.displayName ?? data.name,style: GoogleFonts.taiHeritagePro(fontWeight: FontWeight.w600,fontSize: 18),),
+                            // Text(currUser?.displayName ?? data.name,style: GoogleFonts.taiHeritagePro(fontWeight: FontWeight.w600,fontSize: 18),),
+                            // // Text(widget.user?.displayName??data.name,style: GoogleFonts.taiHeritagePro(fontWeight: FontWeight.w600,fontSize: 18),),
+                            // Text(currUser?.email ?? data.email,style: GoogleFonts.taiHeritagePro(fontWeight: FontWeight.w600,fontSize: 18),),
+
+                            Text(currUser.displayName!,style: GoogleFonts.taiHeritagePro(fontWeight: FontWeight.w600,fontSize: 18),),
                             // Text(widget.user?.displayName??data.name,style: GoogleFonts.taiHeritagePro(fontWeight: FontWeight.w600,fontSize: 18),),
-                            Text(currUser?.email ?? data.email,style: GoogleFonts.taiHeritagePro(fontWeight: FontWeight.w600,fontSize: 18),),
+                            Text(currUser.email ?? data.email,style: GoogleFonts.taiHeritagePro(fontWeight: FontWeight.w600,fontSize: 18),),
                           ],
                         ),                       
                       ],

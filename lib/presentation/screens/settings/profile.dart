@@ -58,8 +58,10 @@ class _ProfilePageState extends State<ProfilePage> {
               builder: (context, state) {
                 if(state is UserLoadedState){
                   UserModel data = state.userList;
-                  _nameController.text = data.name;
-                  _emailController.text = data.email;
+                  // _nameController.text = data.name;
+                  // _emailController.text = data.email;
+                   _nameController.text = user!.displayName!;
+                  _emailController.text = user.email!;
                   selectedSkill = data.profession;
                   return Card(
                   elevation: 5,
