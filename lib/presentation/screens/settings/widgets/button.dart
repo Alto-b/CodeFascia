@@ -7,12 +7,14 @@ class ModeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return GestureDetector(
 
       onTap: () => showPopover(context: context, 
                 bodyBuilder: (context)=>MenuItems(),
-                width: 90,
-                height: 110,
+                width: screenWidth/3,
+                height: screenHeight/14,
                 direction: PopoverDirection.bottom),
                 child: Icon(Icons.light_mode),
     );

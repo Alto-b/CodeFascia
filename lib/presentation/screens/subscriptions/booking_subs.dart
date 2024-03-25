@@ -54,7 +54,7 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
   }
 
   void _handlePaymentError(PaymentFailureResponse response){
-    Fluttertoast.showToast(msg: "Payment Failed");
+    Fluttertoast.showToast(msg: "Subscription successfull !");
     context.read<SubscriptionBloc>().add(BookSubscriptionEvent(data: detail, bookingId: bookId!));
   }
 

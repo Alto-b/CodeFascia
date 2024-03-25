@@ -1,9 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:code_geeks/application/subscription_bloc/subscription_bloc.dart';
 import 'package:code_geeks/presentation/screens/community/community_chat.dart';
 import 'package:code_geeks/presentation/screens/homepage/widgets/carousal.dart';
 import 'package:code_geeks/presentation/screens/homepage/widgets/language_avatar.dart';
 import 'package:code_geeks/presentation/screens/homepage/widgets/mentor_card_list.dart';
+import 'package:code_geeks/presentation/screens/homepage/widgets/subs_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
@@ -62,39 +66,25 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                        
-                    // const SizedBox(height: 50,),
-                    
-                    // Column(
-                    //   children: [
-                    //     Text("data"),
-                    //     Container(
-                    //       height: screenHeight/7,
-                    //       width: screenWidth,
-                    //       child: Column(
-                    //         children: [
-                    //           ListView.builder(
-                    //             scrollDirection: Axis.horizontal,
-                    //             itemCount: 3,
-                    //             itemBuilder: (context, index) {
-                    //             return Column(
-                    //               children: [
-                    //                 Padding(
-                    //                   padding: const EdgeInsets.all(10.0),
-                    //                   child: Container(
-                    //                     height: screenHeight/9,
-                    //                     width: screenWidth/3,
-                    //                     color: Colors.black,
-                    //                   ),
-                    //                 ),
-                    //               ],
-                    //             );
-                    //           },),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    const SizedBox(height: 50,),
+                    const SizedBox(height: 40,),
+                    //ongoing subs
+                    Card(
+                      color: Colors.grey[200],
+                      child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          SizedBox(height: 10,),
+                          Text("Active Subscriptions",style: GoogleFonts.poppins(
+                            fontSize: 15,fontWeight: FontWeight.w600,color: Colors.black54
+                          ),),
+                          SizedBox(height: 10,),
+                          OngoingSubsSlider(),
+                        ],
+                      ),
+                    )),
+
+                    const SizedBox(height: 30,),
                        
                     //mentors
                     MentorCardHPWidget(runtimeType: runtimeType, screenHeight: screenHeight, screenWidth: screenWidth),
