@@ -8,9 +8,7 @@ class BnbBloc extends Bloc<BnbEvent, BnbState> {
   BnbBloc() : super(BnbInitial(tabIndex: 0)) {
     on<BnbEvent>((event, emit) {
       if(event is TabChangeEvent){
-        print(event.tabIndex);
         emit(BnbInitial(tabIndex: event.tabIndex));
-        print(event.tabIndex);
       }
     });
   }

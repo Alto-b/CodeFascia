@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:any_link_preview/any_link_preview.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -9,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animated_icon/animated_icon.dart';
 
+// ignore: must_be_immutable
 class MySpecificSubsPage extends StatelessWidget {
    MySpecificSubsPage({super.key,required this.state,required this.index});
 
@@ -26,7 +26,7 @@ class MySpecificSubsPage extends StatelessWidget {
             CircleAvatar(
               backgroundImage: NetworkImage(state.mySubsList[index].sub_photo),
             ),
-            SizedBox(width: 8), // Add some space between CircleAvatar and Text
+            const SizedBox(width: 8), // Add some space between CircleAvatar and Text
             Expanded(
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -49,9 +49,9 @@ class MySpecificSubsPage extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
              (state.mySubsList[index].subscriptionDetails['videos']?.length > 0)?
-              Container(
+              SizedBox(
                 height: screenHeight-(screenHeight/7),
                 width: screenWidth-20,
                 // color: Colors.amber,
@@ -63,13 +63,13 @@ class MySpecificSubsPage extends StatelessWidget {
                       child: AnyLinkPreview(
                                       link: state.mySubsList[index].subscriptionDetails['videos'][i],
                                       displayDirection: UIDirection.uiDirectionHorizontal, 
-                                      cache: Duration(hours: 1),
-                                      boxShadow: [],
+                                      cache: const Duration(hours: 1),
+                                      boxShadow: const [],
                                       removeElevation: false,
                                       backgroundColor: Colors.grey[100], 
                                       errorWidget: Container(
                                       color: Colors.grey[300], 
-                                      child: Text('404! Not Found'), 
+                                      child: const Text('404! Not Found'), 
                                       ),
                                       ),
                     );
@@ -81,10 +81,10 @@ class MySpecificSubsPage extends StatelessWidget {
                   // Text("Error loading playlist."),
                   CachedNetworkImage(imageUrl: "https://miro.medium.com/v2/resize:fit:1358/0*QOZm9X5er1Y0r5-t",
                   colorBlendMode: BlendMode.difference),
-                  SizedBox(height: 30,),
+                  const SizedBox(height: 30,),
                   TextButton(onPressed: (){
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FeedBackPage(),));
-                  }, child: Text("Report issue !",style: TextStyle(fontSize: 15),))
+                  }, child: const Text("Report issue !",style: TextStyle(fontSize: 15),))
                 ],
               ))
             ],
@@ -117,7 +117,7 @@ class MySpecificSubsPage extends StatelessWidget {
         iconType: IconType.continueAnimation,
         height: 40,
         width: 40,
-        color: Color.fromARGB(255, 241, 241, 241),
+        color: const Color.fromARGB(255, 241, 241, 241),
         animateIcon: AnimateIcons.chatMessage,
     ))
     : FloatingActionButton.extended(
@@ -131,14 +131,14 @@ class MySpecificSubsPage extends StatelessWidget {
           );
         },);
       }, 
-      label: Text("Exploring mentors tailored for you !",style: TextStyle(color: Colors.white),),
+      label: const Text("Exploring mentors tailored for you !",style: TextStyle(color: Colors.white),),
       icon: AnimateIcon(
         key: UniqueKey(),
         onTap: () {},
         iconType: IconType.continueAnimation,
         height: 70,
         width: 70,
-        color: Color.fromARGB(255, 110, 138, 185),
+        color: const Color.fromARGB(255, 110, 138, 185),
         animateIcon: AnimateIcons.clock,
     )
       ),

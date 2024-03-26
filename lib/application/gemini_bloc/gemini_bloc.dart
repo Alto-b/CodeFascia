@@ -10,7 +10,7 @@ part 'gemini_event.dart';
 part 'gemini_state.dart';
 
 class GeminiBloc extends Bloc<GeminiEvent, GeminiState> {
-  GeminiBloc() : super(GeminiSuccessState(messages: [])) {
+  GeminiBloc() : super(GeminiSuccessState(messages: const [])) {
     on<ChatGenerateNewTextMessageEvent>(chatGenerateNewTextMessageEvent);
 
 

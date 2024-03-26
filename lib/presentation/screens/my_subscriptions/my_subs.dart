@@ -1,14 +1,11 @@
 import 'package:animated_icon/animated_icon.dart';
 import 'package:code_geeks/application/subscription_bloc/subscription_bloc.dart';
-import 'package:code_geeks/domain/user_model.dart';
-import 'package:code_geeks/infrastructure/subscription_repo.dart';
 import 'package:code_geeks/presentation/screens/my_subscriptions/my_subs_specific.dart';
 import 'package:code_geeks/presentation/screens/my_subscriptions/subs_history.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
 class MySubscriptionsPage extends StatelessWidget {
@@ -23,12 +20,12 @@ class MySubscriptionsPage extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Subscriptions"),
+        title: const Text("My Subscriptions"),
         titleTextStyle:GoogleFonts.orbitron(fontSize: 15,fontWeight: FontWeight.w600,letterSpacing: 3,color: Colors.grey),
         actions: [
           IconButton(onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => SubsHistoryPage(),));
-          }, icon: Icon(Icons.history))
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const SubsHistoryPage(),));
+          }, icon: const Icon(Icons.history))
         ],
       ),
 
@@ -41,7 +38,7 @@ class MySubscriptionsPage extends StatelessWidget {
                 BlocBuilder<SubscriptionBloc, SubscriptionState>(
                   builder: (context, state) {
                     if(state is MySubscritpionsLoadedState){
-                      return Container(
+                      return SizedBox(
                                   height: screenHeight-screenHeight/7,
                                   width: screenWidth-40,
                                   child: ListView.builder(
@@ -83,7 +80,7 @@ class MySubscriptionsPage extends StatelessWidget {
                                                                   text: "",
                                                                   style: DefaultTextStyle.of(context).style,
                                                                   children:  <TextSpan>[
-                                                                    TextSpan(text: "${state.mySubsList[index].sub_title}", style:GoogleFonts.poppins(
+                                                                    TextSpan(text: state.mySubsList[index].sub_title, style:GoogleFonts.poppins(
                                                                     fontSize: 20,fontWeight: FontWeight.w700,color: Colors.white
                                                                   ),),
                                                                     TextSpan(text: " / ${state.mySubsList[index].sub_lang}", style:GoogleFonts.poppins(
@@ -93,10 +90,10 @@ class MySubscriptionsPage extends StatelessWidget {
                                                                 ),
                                                               ),
                                                         subtitle: Text("expires on ${state.mySubsList[index].expiry}",
-                                                        style: TextStyle(color: Colors.white),),
+                                                        style: const TextStyle(color: Colors.white),),
                                                         trailing: IconButton(onPressed: (){
                                                             _subsInfoDialog(context,state,index);
-                                                        }, icon: Icon(Icons.info_outline,color: Colors.white,size: 25,))
+                                                        }, icon: const Icon(Icons.info_outline,color: Colors.white,size: 25,))
                                                       ),
                                                     ),
                                                   ),
@@ -168,7 +165,7 @@ class MySubscriptionsPage extends StatelessWidget {
                       Text("Guide : ${state.mySubsList[index].guide_id}",style: cardTextStyle(),),
                       Text("Duration : ${state.mySubsList[index].date} -> ${state.mySubsList[index].expiry}",style: cardTextStyle(),),
                       Text("Amount : ${state.mySubsList[index].booking_amount}",style: cardTextStyle(),),
-                      SizedBox(height: 20,)
+                      const SizedBox(height: 20,)
                   ],
                 ),
               ),

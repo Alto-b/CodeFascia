@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:code_geeks/application/image_picker_bloc/image_picker_bloc.dart';
 import 'package:code_geeks/application/user_bloc/user_bloc.dart';
 import 'package:code_geeks/domain/user_model.dart';
-import 'package:code_geeks/presentation/screens/settings/settings.dart';
 import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,6 +23,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
 
+    // ignore: unused_field
     final _formKey = GlobalKey<FormState>();
 
   final _nameController = TextEditingController();
@@ -47,7 +47,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
       appBar: AppBar(
         title: Text("My profile",style: GoogleFonts.orbitron(fontSize: 15,fontWeight: FontWeight.w600,letterSpacing: 4,color: Colors.grey),),
-        // centerTitle: true,
       ),
 
       body: SingleChildScrollView(
@@ -58,8 +57,6 @@ class _ProfilePageState extends State<ProfilePage> {
               builder: (context, state) {
                 if(state is UserLoadedState){
                   UserModel data = state.userList;
-                  // _nameController.text = data.name;
-                  // _emailController.text = data.email;
                    _nameController.text = user!.displayName!;
                   _emailController.text = user.email!;
                   selectedSkill = data.profession;
@@ -69,16 +66,14 @@ class _ProfilePageState extends State<ProfilePage> {
         
                   //back box
                   child: SingleChildScrollView(
-                    child: Container(
+                    child: SizedBox(
                             // color: Colors.blue,
                             height: screenHeight-150,
                             width: screenWidth-20,
                             child: SingleChildScrollView(
                               child: Column(
                                 children: [
-                                  // Text(data.email),
-                                  SizedBox(height: 30,),
-                                  // ProfileCard(user: user),
+                                  const SizedBox(height: 30,),
                        //image picker
                        BlocBuilder<ImagePickerBloc,ImagePickerState>(
                         builder: (context,state){
@@ -98,7 +93,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         
                                         ),
                                     ),
-                                      Positioned(
+                                      const Positioned(
                                         bottom: 15,right: 15,
                                         child: Icon(Icons.mode_edit_outline_outlined,color: Colors.white,)),
                                   ],
@@ -113,13 +108,12 @@ class _ProfilePageState extends State<ProfilePage> {
                                 },
                                 child: CircleAvatar(
                                      radius: 60,
-                                 // child: Image.file(File(state.file!.path.toString()))
                                   backgroundImage: FileImage(File(state.file!.path.toString()))
                                 ),
                               );
                                      }
                                    }),
-                                  SizedBox(height: 20,),
+                                  const SizedBox(height: 20,),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Form(child: Column(
@@ -131,7 +125,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           label: Text("Name")
                                         ),
                                      ),
-                                     SizedBox(height: 20,),
+                                     const SizedBox(height: 20,),
                                       TextFormField(
                                            controller: _emailController,
                                            readOnly: true,
@@ -140,7 +134,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           label: Text("email")
                                         ),
                                      ),
-                                     SizedBox(height: 20,),
+                                     const SizedBox(height: 20,),
                                      DropdownButtonFormField2<String>(
                                         validator: (value) {
                                           if(value == null){
@@ -175,7 +169,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         builder: (context, state) {
                                           return ElevatedButton(onPressed: (){
                                               updateProfile(context,state.file!.path.toString());
-                                           }, child: Text("Update"));
+                                           }, child: const Text("Update"));
                                         },
                                       )
                                       ],
@@ -201,16 +195,11 @@ class _ProfilePageState extends State<ProfilePage> {
   }
  Future<void> updateProfile(BuildContext context,String newImg)async{
   File file = File(newImg);
-
-    // String fileName = basename(newImg);
     firebasestorage.Reference ref = firebasestorage.FirebaseStorage.instance.ref("profilepic${FirebaseAuth.instance.currentUser!.uid}");
     firebasestorage.UploadTask uploadTask = ref.putFile(file);
-
     try {
     await uploadTask;
     var downloadUrl = await ref.getDownloadURL();
-    print("image link $downloadUrl");
-
      Map<String, String> data = {
     "id": FirebaseAuth.instance.currentUser!.uid,
     "Name": _nameController.text,
@@ -230,14 +219,10 @@ class _ProfilePageState extends State<ProfilePage> {
       MaterialPageRoute(builder: (context) => BnbPage()),
       (route) => false,
     );
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Profile updated"),backgroundColor: Colors.green,duration: Duration(seconds: 2),));
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Profile updated"),backgroundColor: Colors.green,duration: Duration(seconds: 2),));
       });
-
-    // Rest of your code to save the downloadUrl to Firestore...
-
   } catch (error) {
-    print("Error uploading file: $error");
-    // Handle the error gracefully, e.g., show an error message to the user
+    debugPrint("Error uploading file: $error");
   }
 
  }

@@ -12,7 +12,7 @@ final class JoinMentorInitial extends JoinMentorState {}
 class FilePickedState extends JoinMentorState{
   final File filePath;
 
-  FilePickedState({
+  const FilePickedState({
     required this.filePath
   });
 

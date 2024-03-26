@@ -8,6 +8,7 @@ import 'package:code_geeks/domain/user_model.dart';
 import 'package:code_geeks/infrastructure/subscription_repo.dart';
 import 'package:code_geeks/infrastructure/user_repo.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 part 'subscription_event.dart';
 part 'subscription_state.dart';
@@ -25,7 +26,6 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
   }
 
   FutureOr<void> getSubsriptions(SubscriptionLoadEvent event, Emitter<SubscriptionState> emit)async{
-    // emit(SubscriptionInitial());
     final subs = await subscriptionRepo.getSubscriptions();
     emit(SubscriptionLoadedState(subscritpionList: subs));
   }
@@ -37,27 +37,19 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
   }
 
   FutureOr<void> searchSubscriptions(SearchSubscriptionsEvent event, Emitter<SubscriptionState> emit)async{
-    // final searchSubs = await subscriptionRepo.searchSubscriptions(event.searchWord);
-    // emit(SearchLoadedState(searchSubsList: searchSubs));
     try{
       if(event.searchWord.isNotEmpty){
-        print("bloc spec subs evnt start");
-        print(event.searchWord);
         final searchSubs = await subscriptionRepo.searchSubscriptions(event.searchWord);
-        print(searchSubs);
-        // emit(SubscriptionLoadedState(subscritpionList: searchSubs));
-        print("emitted");
         emit(SearchLoadedState(searchSubsList: searchSubs));
         
       }
       else{
-        print("bloc all subs evnt start");
         final subs = await subscriptionRepo.getSubscriptions();
         emit(SubscriptionLoadedState(subscritpionList: subs));
       }
     }
     catch(e){
-      print("searchSubs${e.toString()}");
+     debugPrint("searchSubs${e.toString()}");
     }
   }
 
@@ -66,11 +58,11 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
       await FirebaseFirestore.instance.collection("bookings")
       .doc(event.bookingId)
       .set(event.data).then((value){
-        print("booking successful");
+        debugPrint("booking successful");
       });
     }
     on FirebaseException catch(e){
-      print("bookingSubs ${e.message}");
+      debugPrint("bookingSubs ${e.message}");
     }
   }
 
@@ -79,11 +71,8 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
   FutureOr<void> mySubscriptions(MySubscritpionLoadEvent event, Emitter<SubscriptionState> emit)async{
     subscriptionRepo.updateSubsStats();
     final mySubs = await subscriptionRepo.mySubscriptions(event.uid);
-    // final subs = await subscriptionRepo.getSpecificSubs(mySubs);
     final user = await userRepo.getUser();
-    print("mysubs ${mySubs.length}");
-    print("mysubsUsers ${user.id}");
-    if(mySubs.length<=0){
+    if(mySubs.isEmpty){
       emit(MySubscriptionErrorState());
     }
    else{

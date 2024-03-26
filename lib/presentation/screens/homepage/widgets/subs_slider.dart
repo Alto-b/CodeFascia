@@ -19,47 +19,38 @@ class OngoingSubsSlider extends StatelessWidget {
     context.read<SubscriptionBloc>().add(MySubscritpionLoadEvent(uid: FirebaseAuth.instance.currentUser!.uid));
     return BlocBuilder<SubscriptionBloc, SubscriptionState>(
       builder: (context, state) {
-        print(state.runtimeType);
         if(state is MySubscritpionsLoadedState){
-          return CarouselSlider(
-                          options: CarouselOptions(
-                            height: 150, 
-                            enlargeCenterPage: true, 
-                            aspectRatio: 3/3, 
-                            //aspectRatio: 4/3,
-                            enableInfiniteScroll: false,
-                            autoPlay: true, 
-                            autoPlayInterval: Duration(seconds: 2), 
-                            autoPlayAnimationDuration: Duration(milliseconds: 1000), 
-                            autoPlayCurve: Curves.fastOutSlowIn, 
-                            //autoPlayCurve: Curves.easeIn,
-                            enlargeStrategy: CenterPageEnlargeStrategy.height, 
-                          ),
-                          items: [
-                            // // Add your carousel items here, e.g., Container, Image, or any widget
-                            ListView.builder(
-                              // scrollDirection: Axis.horizontal,
-                              itemCount: state.mySubsList.length,
-                              itemBuilder: (context, index) {
-                               return Container(
-                                child: Card(
-                                  elevation: 5,
-                                  child: ListTile(
-                                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MySubscriptionsPage(),)),
-                                    leading: CachedNetworkImage(imageUrl: state.mySubsList[index].sub_photo,fit: BoxFit.cover,width: screenWidth/6,),
-                                    title: Text(state.mySubsList[index].sub_title),
-                                    subtitle: Text(state.mySubsList[index].sub_lang) ,
-                                    trailing: Icon(Icons.circle_outlined),
-                                    
+         return SizedBox(
+                            height: screenHeight/8,
+                            width: screenWidth,
+                            child: CarouselSlider.builder(
+                                    itemCount: state.mySubsList.length,
+                                    options: CarouselOptions(
+                                      autoPlay: true,
+                                      autoPlayInterval: const Duration(seconds: 2),
+                                      enlargeCenterPage: true,
+                                      pauseAutoPlayOnTouch: true,
+                                      animateToClosest: true,
+                                    ),
+                                    itemBuilder: (context, index, realIndex) {
+                                      return ListTile(
+                                        shape: ContinuousRectangleBorder(
+                                          borderRadius: BorderRadius.circular(20)
+                                        ),
+                                        tileColor: Colors.white,
+                                      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const MySubscriptionsPage(),)),
+                                      textColor: Colors.black,
+                                      leading: CachedNetworkImage(imageUrl: state.mySubsList[index].sub_photo,fit: BoxFit.cover,width: screenWidth/6,),
+                                      title: Text(state.mySubsList[index].sub_title),
+                                      subtitle: Text(state.mySubsList[index].sub_lang) ,
+                                      trailing: ((state.mySubsList[index].status) == "ongoing") ?
+                                      const Icon(Icons.circle,size: 15,color: Colors.green,) :  const Icon(Icons.circle,size: 15,color: Colors.amber,)                
+                                  );
+                                    },
                                   ),
-                                ),
-                              );
-                              },
-                            ),
-                          ],
-                        );
+                          );
         }
-        return Text("No subscriptions");
+        return const Text("No subscriptions");
       },
     );
   }

@@ -1,6 +1,4 @@
 import 'package:code_geeks/application/subscription_bloc/subscription_bloc.dart';
-import 'package:code_geeks/presentation/screens/my_subscriptions/my_subs.dart';
-import 'package:code_geeks/presentation/screens/subscriptions/specific_subs.dart';
 import 'package:code_geeks/presentation/screens/subscriptions/widget/subscription_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,17 +13,13 @@ class SubscriptionsPage extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    final _searchController = TextEditingController();
-
-    String searchWord;
-
-
+    final searchController = TextEditingController();
     
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:  Color.fromARGB(255, 110, 132, 214),
+        backgroundColor:  const Color.fromARGB(255, 110, 132, 214),
         elevation: 5,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(22),bottomRight: Radius.circular(22))
         ),
         toolbarHeight: (screenHeight/10)+10,
@@ -38,13 +32,8 @@ class SubscriptionsPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(35)
             ),
             child: TextFormField(
-              controller: _searchController,
+              controller: searchController,
               onChanged: (value) {
-                // searchWord = value;
-                // print(searchWord);
-                // if(value.isEmpty || value.length<=0){
-                //   context.read<SubscriptionBloc>().add(SubscriptionLoadEvent());
-                // }
                 context.read<SubscriptionBloc>().add(SearchSubscriptionsEvent(searchWord: value));
               },
                       decoration: InputDecoration(
@@ -56,13 +45,7 @@ class SubscriptionsPage extends StatelessWidget {
                           onTap: () {
                             //search button
                           },
-                          child: Icon(Icons.search,color: Colors.grey,)),
-                        // suffixIcon: InkWell(
-                        //   onTap: () {
-                        //     //my downlaods button
-                        //     Navigator.push(context, MaterialPageRoute(builder: (context) => MySubscriptionsPage(),));
-                        //   },
-                        //   child: Icon(Icons.bookmark_outline_rounded))
+                          child: const Icon(Icons.search,color: Colors.grey,)),
                       ),
                     ),
           ),
@@ -74,11 +57,11 @@ class SubscriptionsPage extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
+              const Padding(
+                padding: EdgeInsets.all(10.0),
               ),
         
-              Container
+              SizedBox
               ( 
                 // color: Colors.amber,
                 height: screenHeight-200,
@@ -86,7 +69,7 @@ class SubscriptionsPage extends StatelessWidget {
                 child: SubscriptionCard(runtimeType: runtimeType, screenHeight: screenHeight, screenWidth: screenWidth),
 
               ),
-              SizedBox(height: 450,)
+              const SizedBox(height: 450,)
             ],
           ),
         ),

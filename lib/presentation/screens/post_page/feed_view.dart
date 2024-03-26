@@ -25,13 +25,12 @@ class PostViewPage extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              Container(
+              SizedBox(
                 width: screenWidth-20,
                 height: screenHeight-(screenHeight/4.8),
                 // color: Colors.amber,
                 child: BlocBuilder<PostBloc, PostState>(
                   builder: (context, state) {
-                    print(state.runtimeType);
                     if(state is FeedLoadedState){
                       if(state.postList.isEmpty){
                         return Center(child: Padding(
@@ -77,15 +76,15 @@ class PostViewPage extends StatelessWidget {
                                                   Row(
                                                     children: [
                                                       CircleAvatar(radius: 10,backgroundImage: NetworkImage(state.postList[index].author_avatar),),
-                                                      SizedBox(width: 10,),
+                                                      const SizedBox(width: 10,),
                                                       Text(state.postList[index].author),
                                                     ],
                                                   ),
-                                                  SizedBox(height: 10,),
+                                                  const SizedBox(height: 10,),
                                                   Text(state.postList[index].title,style: GoogleFonts.poppins(
                                                     fontSize: 17,fontWeight: FontWeight.w700
                                                   ),),
-                                                  SizedBox(height: 10,),
+                                                  const SizedBox(height: 10,),
                                                   Text(state.postList[index].content,overflow: TextOverflow.ellipsis,maxLines: 2,style: GoogleFonts.poppins(
                                                     fontSize: 12,fontWeight: FontWeight.w400
                                                   ),)

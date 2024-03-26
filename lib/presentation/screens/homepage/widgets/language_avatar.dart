@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:code_geeks/application/home_page_bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,7 @@ class language_avatars extends StatelessWidget {
     required this.screenWidth,
   });
 
+  @override
   final Type runtimeType;
   final double screenHeight;
   final double screenWidth;
@@ -20,9 +23,8 @@ class language_avatars extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
-        print(state.runtimeType);
         if(state is HomeContentLoadedState){
-          return Container(
+          return SizedBox(
                         // color: Colors.grey[300],
                         height: screenHeight/6,width: screenWidth,
                         
@@ -31,10 +33,9 @@ class language_avatars extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                           return  Padding(
-                            padding: EdgeInsets.all(12),
+                            padding: const EdgeInsets.all(12),
                             child:GestureDetector(
                               onTap: () {
-                                print("tapped");
                               },
                               child:InkWell(
                                 onTap: () {
@@ -49,7 +50,7 @@ class language_avatars extends StatelessWidget {
                                               clipBehavior: Clip.antiAlias,
                                               child: Padding(
                                                 padding: const EdgeInsets.all(8.0),
-                                                child: Container(
+                                                child: SizedBox(
                                                   height: screenHeight,
                                                   // color: Colors.amber,
                                                   child: Center(
@@ -64,12 +65,8 @@ class language_avatars extends StatelessWidget {
                                                             CircleAvatar(
                                                               backgroundImage: NetworkImage(state.languageList[index].photo),
                                                             ),
-                                                            SizedBox(height: 20,),
-                                                             Text(state.languageList[index].description,style: TextStyle(fontSize: 20),),
-                                                            // ElevatedButton(
-                                                            //   child: const Text('Close BottomSheet'),
-                                                            //   onPressed: () => Navigator.pop(context),
-                                                            // ),
+                                                            const SizedBox(height: 20,),
+                                                             Text(state.languageList[index].description,style: const TextStyle(fontSize: 20),),
                                                           ],
                                                         ),
                                                       ),
@@ -95,7 +92,7 @@ class language_avatars extends StatelessWidget {
                                       ),
                                       child:CachedNetworkImage(
                                         filterQuality: FilterQuality.high,
-                                        fadeOutDuration: Duration(seconds: 1),
+                                        fadeOutDuration: const Duration(seconds: 1),
                                         imageUrl: state.languageList[index].photo),
                                     ),
                                   ),
@@ -108,7 +105,7 @@ class language_avatars extends StatelessWidget {
         }
         //circle avatar is loading
         else if (state is LanguageLoadingState){
-          return Container(
+          return SizedBox(
                         // color: Colors.grey[300],
                         height: screenHeight/6,width: screenWidth,
                         child: ListView.builder(
@@ -116,25 +113,23 @@ class language_avatars extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                           return  Padding(
-                            padding: EdgeInsets.all(12),
+                            padding: const EdgeInsets.all(12),
                             //shimmer
                             child:Shimmer.fromColors(
                               baseColor: Colors.transparent,
                               highlightColor: Colors.grey,
                               direction: ShimmerDirection.ltr,
-                              period: Duration(seconds: 2),
+                              period: const Duration(seconds: 2),
                               child: CircleAvatar(
                                 backgroundColor: Colors.blueGrey.withOpacity(0.5),
                                 radius: 40,
-                                // child: Image.network(state.languageList[index].photo),
-                                // backgroundImage: NetworkImage(state.languageList[index].photo),
                               ),
                             )
                           );
                         },),
                       ); 
         }
-        return SizedBox();
+        return const SizedBox();
       },
     );
   }

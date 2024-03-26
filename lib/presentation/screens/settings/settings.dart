@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:code_geeks/application/bnb_bloc/bnb_bloc.dart';
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:code_geeks/login_check.dart';
 import 'package:code_geeks/presentation/screens/feedback/feedback.dart';
 import 'package:code_geeks/presentation/screens/join_mentor/mentor_join.dart';
@@ -10,7 +10,6 @@ import 'package:code_geeks/presentation/screens/settings/widgets/profile_card.da
 import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
@@ -20,12 +19,9 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;    
-    final user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: screenHeight/8,
-        // backgroundColor:  Color.fromARGB(69, 110, 132, 214),
          title:  Text("Settings",style: GoogleFonts.orbitron(fontSize: 30,fontWeight: FontWeight.w800,color: Colors.grey)),
         actions: [const ModeButton(),const SizedBox(width: 5,), IconButton(onPressed: (){showLogOutDialog(context);}, icon: const Icon(Icons.logout))],
       ),
@@ -35,31 +31,16 @@ class SettingsPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [ 
-              // SizedBox(height: 30,),
-              // Text("Settings",style: GoogleFonts.orbitron(fontSize: 30,fontWeight: FontWeight.w800,color: Colors.grey)),
-              // const SizedBox(height: 30,),
                Center(
                 child: GestureDetector(
                   onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfilePage(),)),
-                  child: ProfileCard()),
+                  child: const ProfileCard()),
               ),const SizedBox(height: 20,),
-              //  ListTile(
-              //   leading: const Icon(Icons.person_outline),
-              //   title: const Text("Profile"),
-              //   onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfilePage(),)),
-              // ),
               ListTile(
                 leading: const Icon(Icons.subscriptions_outlined),
                 title: const Text("My Subscriptions"),
                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const MySubscriptionsPage(),)),
               ),
-              //  ListTile(
-              //   leading: const Icon(Icons.light_mode_outlined),
-              //   title: const Text("Light/Dark Mode"),
-              //   onTap: () {
-              //     AdaptiveTheme.of(context).toggleThemeMode();
-              //   },
-              // ),
               ListTile(
                 leading: const Icon(Icons.person_2_outlined),
                 title: const Text("Become a mentor"),
@@ -71,13 +52,13 @@ class SettingsPage extends StatelessWidget {
                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FeedBackPage(),)),
               ),
                ListTile(
-                leading: Icon(Icons.description_outlined),
-                title: Text("Terms & Conditions"),
+                leading: const Icon(Icons.description_outlined),
+                title: const Text("Terms & Conditions"),
                 onTap: () => _launchTCURL('https://www.freeprivacypolicy.com/live/c8a821ed-f744-4cfa-9ac4-ae3ff1359c08'),
               ),
                ListTile(
-                leading: Icon(Icons.security_outlined),
-                title: Text("Privacy Policy"),
+                leading: const Icon(Icons.security_outlined),
+                title: const Text("Privacy Policy"),
                 onTap: () => _launchPPURL('https://www.freeprivacypolicy.com/live/a5b1f3bb-5e9e-413f-8a11-cdc2e099c214'),
               ),
               const ListTile(
@@ -106,7 +87,7 @@ void _launchPPURL(String url) async{
        if (await launchUrl(url)) {
               //dialer opened
           }else{
-          SnackBar(content: Text("couldn't launch the page"));
+          const SnackBar(content: Text("couldn't launch the page"));
       }
     } 
 
@@ -116,7 +97,7 @@ void _launchTCURL(String url) async{
        if (await launchUrl(url)) {
               //dialer opened
           }else{
-          SnackBar(content: Text("couldn't launch the page"));
+          const SnackBar(content: Text("couldn't launch the page"));
       }
     } 
 
@@ -133,9 +114,6 @@ void _launchTCURL(String url) async{
     child: const Text("Continue"),
     onPressed:  () async{
      await FirebaseAuth.instance.signOut();
-      // FirebaseAuth.instance.s/
-     //  FirebaseFirestore.instance.clearPersistence();
-      // context.read<BnbBloc>().add(TabChangeEvent(tabIndex: 0));
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const EntryPage(),), (route) => false);
     },
   );

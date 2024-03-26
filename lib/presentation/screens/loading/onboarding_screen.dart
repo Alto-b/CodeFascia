@@ -62,7 +62,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
             onLastPage?
              GestureDetector(
               onTap: (){
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => EntryPage(),),(route) => false,);
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const EntryPage(),),(route) => false,);
               },
               child: const Text("Proceed",style: TextStyle(color:Colors.white,fontSize: 15,fontWeight: FontWeight.w700),)
               )

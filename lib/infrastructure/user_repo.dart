@@ -9,7 +9,7 @@ class UserRepo{
 
   Future<UserModel> getUser()async{
   try{
-    User? user = await FirebaseAuth.instance.currentUser;
+    User? user = FirebaseAuth.instance.currentUser;
     final data = await FirebaseFirestore.instance.collection("users").doc(user!.uid).get();
     final usera = data.data();
     final users = UserModel(id: usera!['id'], name: usera['Name'], email: usera['Email'], profile: usera['profile'], profession: usera['Profession']);

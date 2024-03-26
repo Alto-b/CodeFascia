@@ -14,13 +14,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   LanguageRepo langrep = LanguageRepo();
   MentorRepo mentorRepo = MentorRepo();
   HomeBloc(this.langrep,this.mentorRepo) : super(HomePageLoadingState()) {
-    // on<HomeEvent>((event, emit) {
-    //   // TODO: implement event handler
-    // });
     on<HomeLoadingEvent>(loadingHome);
-    // on<LanguageLoadEvent>(loadingLanguage);
-    // on<MentorLoadEvent>(loadingMentor);
-    
   }
 
   
@@ -32,21 +26,5 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final mentor = await mentorRepo.getMentor();
     emit(MentorLoadedState(mentorList: mentor));
      emit(HomeContentLoadedState(lang, mentor));
-    
   }
-
-  // FutureOr<void> loadingLanguage(LanguageLoadEvent event, Emitter<HomeState> emit)async {
-  //   // print("asd");
-  //   emit(LanguageLoadingState());
-  //  final lang =await langrep.getlanguage();
-  //  print(lang);
-  //   emit(LanguageLoadedState(languageList: lang));
-  // }
-
-  // FutureOr<void> loadingMentor(MentorLoadEvent event, Emitter<HomeState> emit) async{
-  //   emit(MentorLoadingState());
-  //   final mentor = await mentorRepo.getMentor();
-  //   print(mentor);
-  //   emit(MentorLoadedState(mentorList: mentor));
-  // }
 }

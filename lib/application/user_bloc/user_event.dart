@@ -12,16 +12,16 @@ class LoadUserEvent extends UserEvent{
 
 class AddUserEvent extends UserEvent{
   final UserModel usermodel;
-  AddUserEvent({required this.usermodel});
+  const AddUserEvent({required this.usermodel});
 }
 
 class UpdateUserEvent extends UserEvent{
   final UserModel usermodel;
-  UpdateUserEvent({required this.usermodel});
+  const UpdateUserEvent({required this.usermodel});
 }
 
 class DeleteUserEvent extends UserEvent{
   final String userId;
-  DeleteUserEvent({required this.userId});
+  const DeleteUserEvent({required this.userId});
 }
 

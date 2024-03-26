@@ -14,14 +14,14 @@ class SubscriptionLoadingState extends SubscriptionState{}
 class SubscriptionLoadedState extends SubscriptionState{
   final List<SubscriptionModel> subscritpionList;
 
-  SubscriptionLoadedState({
+  const SubscriptionLoadedState({
     required this.subscritpionList
   });
 }
 
 class SpecificSubsLoadedState extends SubscriptionState{
   final List<SubscriptionModel> specSubsList;
-  SpecificSubsLoadedState({
+  const SpecificSubsLoadedState({
     required this.specSubsList
   });
   @override
@@ -30,7 +30,7 @@ class SpecificSubsLoadedState extends SubscriptionState{
 
 class SearchLoadedState extends SubscriptionState{
   final List<SubscriptionModel> searchSubsList;
-  SearchLoadedState({
+  const SearchLoadedState({
     required this.searchSubsList
   });
   @override
@@ -44,7 +44,7 @@ class MySubscritpionsLoadedState  extends SubscriptionState{
   // final List<SubscriptionModel> subsList;
   final UserModel userList;
 
-  MySubscritpionsLoadedState({
+  const MySubscritpionsLoadedState({
     required this.mySubsList,
     // required this.subsList,
     required this.userList

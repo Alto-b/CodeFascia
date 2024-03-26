@@ -1,16 +1,15 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:code_geeks/application/subscription_bloc/subscription_bloc.dart';
 import 'package:code_geeks/presentation/screens/subscriptions/booking_subs.dart';
-import 'package:numberpicker/numberpicker.dart';
 import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:razorpay_flutter/razorpay_flutter.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class SpecificSubsPage extends StatefulWidget {
-   SpecificSubsPage({super.key,required this.subsId});
+   const SpecificSubsPage({super.key,required this.subsId});
 
   final subsId;
 
@@ -40,16 +39,7 @@ class _SpecificSubsPageState extends State<SpecificSubsPage> {
                               (route) => false,
                             );
             },
-            // onWillPop: ()async{
-            //     Navigator.pushAndRemoveUntil(
-            //                   context,
-            //                   MaterialPageRoute(builder: (context) => BnbPage()),
-            //                   (route) => false,
-            //                 );
-            //               return false;
-            // },
-            child: Scaffold(
-                
+            child: Scaffold(    
               appBar: AppBar(
               automaticallyImplyLeading: false,
               flexibleSpace: Container(
@@ -65,7 +55,7 @@ class _SpecificSubsPageState extends State<SpecificSubsPage> {
                         top: 15,
                         left: 5,
                         child: IconButton(
-                          style: ButtonStyle(
+                          style: const ButtonStyle(
                             iconSize: MaterialStatePropertyAll(30),
                             iconColor:MaterialStatePropertyAll(Colors.white),
             
@@ -77,7 +67,7 @@ class _SpecificSubsPageState extends State<SpecificSubsPage> {
                               (route) => false,
                             );
                           },
-                          icon: Icon(Icons.arrow_back_ios),
+                          icon: const Icon(Icons.arrow_back_ios),
                         ),
                       ),
                     ],
@@ -127,7 +117,7 @@ class _SpecificSubsPageState extends State<SpecificSubsPage> {
                                                 content:  SingleChildScrollView(
                                                   child: ListBody(
                                                     children: <Widget>[
-                                                      Text(state.specSubsList[0].LangDesc,style: TextStyle(fontSize: 20),),
+                                                      Text(state.specSubsList[0].LangDesc,style: const TextStyle(fontSize: 20),),
                                                     ],
                                                   ),
                                                 ),
@@ -142,7 +132,7 @@ class _SpecificSubsPageState extends State<SpecificSubsPage> {
                                               );
                                             },
                                           );
-                            }, icon: Icon(Icons.read_more)),
+                            }, icon: const Icon(Icons.read_more)),
                           ),
                         ),
                 
@@ -152,53 +142,22 @@ class _SpecificSubsPageState extends State<SpecificSubsPage> {
                             fontWeight: FontWeight.w400,fontSize: 18
                           ),),
                         ),
-                        // Padding(
-                        //   padding: const EdgeInsets.all(8.0),
-                        //   child: Center(
-                        //     child: Container(
-                        //       color: Colors.green,
-                        //       child: Row(
-                        //         children: [
-                        //           Text("Duration : "),
-                        //           NumberPicker(
-                        //             haptics: true,
-                        //             itemWidth: 60,
-                        //             axis: Axis.horizontal,
-                        //             decoration: BoxDecoration(
-                        //               border: Border.all(),
-                        //               shape: BoxShape.circle,
-                        //               // borderRadius: BorderRadius.all(Radius.circular(50))
-                        //             ),
-                        //             minValue: 1, 
-                        //             maxValue: 10, 
-                        //             value: duration, 
-                        //             onChanged: (value) {
-                        //               setState(() {
-                        //                 duration = value;
-                        //               });
-                        //               print("duration : $duration");
-                        //             },),
-                        //         ],
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-                        Divider(),
-                        SizedBox(height: 60,),
+                        const Divider(),
+                        const SizedBox(height: 60,),
                       ],
                     ),
                   ),
                 ),
               ),    
               floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-              floatingActionButton: Container(
+              floatingActionButton: SizedBox(
                 width: screenWidth,
                 child: FloatingActionButton.extended(
                   elevation: 5,
                   backgroundColor: Colors.green,
                   onPressed: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context) => SubscriptionBookingPage(subId: state.specSubsList[0].subsId),));
-                  }, label: Text("Subscribe Now",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700,fontSize: 15),))),
+                  }, label: const Text("Subscribe Now",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700,fontSize: 15),))),
                      ),
           );
         }
@@ -207,9 +166,9 @@ class _SpecificSubsPageState extends State<SpecificSubsPage> {
           appBar: AppBar(
             leading: IconButton(onPressed: (){
               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => BnbPage(),), (route) => false);
-            }, icon: Icon(Icons.arrow_back_ios)),
+            }, icon: const Icon(Icons.arrow_back_ios)),
             titleSpacing: 2,
-            title: Text("back",style: TextStyle(
+            title: const Text("back",style: TextStyle(
               fontSize: 15
             ),),
           ),
@@ -226,7 +185,7 @@ class _SpecificSubsPageState extends State<SpecificSubsPage> {
                       borderRadius: BorderRadius.circular(30),
                       color: Colors.black
                     ),
-                  ),SizedBox(height: 20,),
+                  ),const SizedBox(height: 20,),
                   Container(
                     height: 400,
                     width: 300,
@@ -242,6 +201,5 @@ class _SpecificSubsPageState extends State<SpecificSubsPage> {
         );
       },
     );
-        }
-
+  }
 }

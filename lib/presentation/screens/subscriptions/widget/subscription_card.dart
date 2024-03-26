@@ -12,6 +12,7 @@ class SubscriptionCard extends StatelessWidget {
     required this.screenWidth,
   });
 
+  @override
   final Type runtimeType;
   final double screenHeight;
   final double screenWidth;
@@ -21,7 +22,6 @@ class SubscriptionCard extends StatelessWidget {
     context.read<SubscriptionBloc>().add(SubscriptionLoadEvent());
     return BlocBuilder<SubscriptionBloc, SubscriptionState>(
       builder: (context, state) {
-        print(state.runtimeType);
         if(state is SubscriptionLoadedState){
             return GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisExtent: (screenHeight/3)+40),
@@ -34,13 +34,10 @@ class SubscriptionCard extends StatelessWidget {
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       shape: ContinuousRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
-                        // side: const BorderSide(
-                          // width: 2,color: Colors.white
-                        // )
                       ),
                       child: Column(
                         children: [
-                          Container(
+                          SizedBox(
                             height: screenHeight/8,
                             width: screenWidth/2,
                             child: Image.network(state.subscritpionList[index].photo,filterQuality: FilterQuality.high,fit: BoxFit.fill,),
@@ -55,7 +52,7 @@ class SubscriptionCard extends StatelessWidget {
                               children: [
                                 Text(state.subscritpionList[index].language,),
                                 const SizedBox(height: 10,),
-                                Text("${state.subscritpionList[index].description}",
+                                Text(state.subscritpionList[index].description,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,),
                                 
@@ -95,13 +92,10 @@ class SubscriptionCard extends StatelessWidget {
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       shape: ContinuousRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
-                        // side: const BorderSide(
-                          // width: 2,color: Colors.white
-                        // )
                       ),
                       child: Column(
                         children: [
-                          Container(
+                          SizedBox(
                             height: screenHeight/8,
                             width: screenWidth/2,
                             child: Image.network(state.searchSubsList[index].photo,filterQuality: FilterQuality.high,fit: BoxFit.fill,),
@@ -116,7 +110,7 @@ class SubscriptionCard extends StatelessWidget {
                               children: [
                                 Text(state.searchSubsList[index].language,),
                                 const SizedBox(height: 10,),
-                                Text("${state.searchSubsList[index].description}",
+                                Text(state.searchSubsList[index].description,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,),
                                 
@@ -160,7 +154,7 @@ class SubscriptionCard extends StatelessWidget {
                         ),
                         child: Column(
                           children: [
-                            Container( 
+                            SizedBox( 
                               height: screenHeight/8,
                               width: screenWidth/2,
                             ),

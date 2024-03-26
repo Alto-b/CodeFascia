@@ -7,7 +7,7 @@ class MentorRepo{
     List<MentorModel> mentorList = [];
     try{
       final datas = await FirebaseFirestore.instance.collection('mentors').get();
-      datas.docs.forEach((element) {
+      for (var element in datas.docs) {
         final data = element.data();
         final mentor = MentorModel(
           photo: data['photo'], 
@@ -19,7 +19,7 @@ class MentorRepo{
           dob: data['dob']);
 
           mentorList.add(mentor);
-      });
+      }
       return mentorList;
     }
     on FirebaseException catch(e){

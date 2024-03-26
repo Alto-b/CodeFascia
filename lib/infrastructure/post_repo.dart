@@ -12,7 +12,7 @@ class PostRepo{
         .orderBy('date')
         .get();
 
-        datas.docs.forEach((element) {
+        for (var element in datas.docs) {
           final data = element.data();
           final feed = PostModel(
             author: data['author'], 
@@ -24,7 +24,7 @@ class PostRepo{
             date: data['date']);
 
             postList.add(feed);
-        });
+        }
         return postList;
     }
     on FirebaseException catch(e){

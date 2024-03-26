@@ -1,7 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:code_geeks/application/subscription_bloc/subscription_bloc.dart';
-import 'package:code_geeks/presentation/screens/subscriptions/subscriptions.dart';
 import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +10,9 @@ import 'package:intl/intl.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class SubscriptionBookingPage extends StatefulWidget {
-   SubscriptionBookingPage({super.key,required this.subId});
+   const SubscriptionBookingPage({super.key,required this.subId});
 
+  // ignore: prefer_typing_uninitialized_variables
   final subId;
 
   @override
@@ -25,9 +24,9 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
   List<String> plans = ["Basic","Standard","Premium"];
 
   List<Color> tilebg = [
-    Color.fromARGB(195, 76, 175, 79),
-    Color.fromARGB(182, 255, 235, 59),
-    Color.fromARGB(177, 33, 149, 243)
+    const Color.fromARGB(195, 76, 175, 79),
+    const Color.fromARGB(182, 255, 235, 59),
+    const Color.fromARGB(177, 33, 149, 243)
   ];
 
   List<int> duration = [3,7,30];
@@ -49,7 +48,6 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
 
   void _handlePaymentSuccess(PaymentSuccessResponse response){
     Fluttertoast.showToast(msg: "Payment successful");    
-    print("detail ${detail}");
      context.read<SubscriptionBloc>().add(BookSubscriptionEvent(data: detail, bookingId: bookId!));
   }
 
@@ -104,12 +102,10 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
 
     bookId = bookingId;
     detail = details;
-    // print(detail);
     _razorpay?.open(options); 
-    // context.read<SubscriptionBloc>().add(BookSubscriptionEvent(data: details, bookingId: bookingId));
     }
     catch(e){
-
+      debugPrint(e.toString());
     }
   }
 
@@ -120,7 +116,6 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     return BlocBuilder<SubscriptionBloc, SubscriptionState>(
       builder: (context, state) {
-        print(state.runtimeType);
         if(state is SpecificSubsLoadedState){
           return Scaffold(
             appBar: AppBar(),
@@ -134,14 +129,14 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
                         alignment: Alignment.center,
                         child: Column(
                           children: [
-                            Text(state.specSubsList[0].title,style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
+                            Text(state.specSubsList[0].title,style: const TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
                             Text(state.specSubsList[0].language)
                           ],
                         ),
                       ),
-                      SizedBox(height: 20,),
+                      const SizedBox(height: 20,),
                       Text("Select a plan to proceed",style: GoogleFonts.poppins(fontSize: 20,fontWeight: FontWeight.w600),),
-                      Container(
+                      SizedBox(
                         height: screenHeight-30,
                         width: screenWidth,
                         child: ListView.builder(
@@ -170,39 +165,29 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
                                               'key' : 'rzp_test_om7emjnNEbQYMJ',
                                               'amount' : '${(int.parse(state.specSubsList[0].amount) * duration[index]*100)}',
                                               'name' : 'Code Geeks',
-                                              'description' : '${state.specSubsList[0].title}',
+                                              'description' : state.specSubsList[0].title,
                                               'prefill' : '${FirebaseAuth.instance.currentUser?.email}'
                                             };
-                                            // Get current date and time
-// DateTime now = DateTime.now();
-
-// // Extract day, month, and year
-// int day = now.day;
-// int month = now.month;
-// int year = now.year;
                                             var data = {
-                                              "user_id" : '${FirebaseAuth.instance.currentUser!.uid}',
+                                              "user_id" : FirebaseAuth.instance.currentUser!.uid,
                                               "user_name" : '${FirebaseAuth.instance.currentUser!.displayName}',
                                               "user_avatar" : '${FirebaseAuth.instance.currentUser!.photoURL}',
-                                              "sub_id" : '${state.specSubsList[0].subsId}',
-                                              "sub_title" : '${state.specSubsList[0].title}',
-                                              "sub_photo" : '${state.specSubsList[0].photo}',
-                                              "sub_lang" : '${state.specSubsList[0].language}',
+                                              "sub_id" : state.specSubsList[0].subsId,
+                                              "sub_title" : state.specSubsList[0].title,
+                                              "sub_photo" : state.specSubsList[0].photo,
+                                              "sub_lang" : state.specSubsList[0].language,
                                               "booking_date" : DateFormat('dd-MM-yyyy').format(DateTime.now()),
                                               "expiry_date" :DateFormat('dd-MM-yyyy').format(DateTime.now().add(Duration(days: duration[index]))) ,
                                               "booking_amount" : '${(int.parse(state.specSubsList[0].amount) * duration[index])}',
                                               };
-                                              // print(data);
-                                    // makePayments(state,options);
                                     bookSubscription(state,data,options);
                                   },
                                   splashColor: Colors.white54,
-                                  // tileColor:tilebg[index],
-                                  title: Text(plans[index],style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500),),
-                                  subtitle: Text("Duration : ${duration[index]} days",style: TextStyle(
+                                  title: Text(plans[index],style: const TextStyle(fontSize: 25,fontWeight: FontWeight.w500),),
+                                  subtitle: Text("Duration : ${duration[index]} days",style: const TextStyle(
                                         fontSize: 20
                                       ),),
-                                  trailing: Text("₹ ${int.parse(state.specSubsList[0].amount) * duration[index]}",style: TextStyle(
+                                  trailing: Text("₹ ${int.parse(state.specSubsList[0].amount) * duration[index]}",style: const TextStyle(
                                     fontSize: 20,fontWeight: FontWeight.w500
                                   ),),
                                 ),

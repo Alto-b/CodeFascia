@@ -16,9 +16,9 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
 
   FutureOr<void> loadHistory(HistoryLoadEvent event, Emitter<HistoryState> emit)async{
     emit(HistoryInitial());
-    Future.delayed(Duration(seconds: 3));
+    Future.delayed(const Duration(seconds: 3));
     final history =await subscriptionRepo.mySubsHistory(event.uid);
-    if(history.length == 0){
+    if(history.isEmpty){
       emit(HistoryEmptyState());
     }
     else{

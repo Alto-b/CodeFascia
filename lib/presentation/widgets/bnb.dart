@@ -1,25 +1,24 @@
 
 import 'package:code_geeks/application/bnb_bloc/bnb_bloc.dart';
-import 'package:code_geeks/presentation/screens/community/community_chat.dart';
 import 'package:code_geeks/presentation/screens/gemini/gemini.dart';
 import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
 import 'package:code_geeks/presentation/screens/post_page/feed_view.dart';
 import 'package:code_geeks/presentation/screens/settings/settings.dart';
-import 'package:code_geeks/presentation/screens/signup/signup.dart';
 import 'package:code_geeks/presentation/screens/subscriptions/subscriptions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// ignore: must_be_immutable
 class BnbPage extends StatelessWidget {
    BnbPage({super.key});
 
   int indexNum = 0;
 
   final screens = [
-    HomePage(),
-    PostViewPage(),
-    SubscriptionsPage(),
-    SettingsPage()
+    const HomePage(),
+    const PostViewPage(),
+    const SubscriptionsPage(),
+    const SettingsPage()
   ];
 
   @override
@@ -27,15 +26,11 @@ class BnbPage extends StatelessWidget {
     return BlocConsumer<BnbBloc, BnbState>(
       
       listener: (context, state) {
-        // TODO: implement listener
       },
       builder: (context, state) {
-        // print("builder tab ${state.tabIndex}");
         if(state is BnbInitial){
           return Scaffold(
-          
-          body: screens.elementAt(state.tabIndex),
-              
+          body: screens.elementAt(state.tabIndex),   
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
@@ -57,8 +52,8 @@ class BnbPage extends StatelessWidget {
               showUnselectedLabels: false,
               showSelectedLabels: false,
               
-              backgroundColor:  Color.fromARGB(255, 110, 132, 214),
-              selectedIconTheme: IconThemeData(
+              backgroundColor:  const Color.fromARGB(255, 110, 132, 214),
+              selectedIconTheme: const IconThemeData(
                 size: 30,
 
               ),
@@ -79,18 +74,18 @@ class BnbPage extends StatelessWidget {
         onPressed: (){
           Navigator.push(context, MaterialPageRoute(builder: (context) => GeminiPage(),));
         },
-        child: Image.asset('lib/assets/logo.png',
-        fit: BoxFit.cover,
-        ),
         tooltip: "AI Chat",
         splashColor: Colors.grey,
-        shape: CircleBorder(),
-        backgroundColor: Color.fromARGB(255, 110, 132, 214),)
+        shape: const CircleBorder(),
+        backgroundColor: const Color.fromARGB(255, 110, 132, 214),
+        child: Image.asset('lib/assets/logo.png',
+        fit: BoxFit.cover,
+        ),)
     
         );
         }
         else{
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         }
       },
     );

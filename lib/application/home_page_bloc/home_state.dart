@@ -21,7 +21,7 @@ class LanguageLoadingState extends HomeState{
 }
 class LanguageLoadedState extends HomeState{
   final List<LanguageModel> languageList;
-  LanguageLoadedState({required this.languageList});
+  const LanguageLoadedState({required this.languageList});
 }
 
 class LanguageErrorState extends HomeState{}
@@ -31,7 +31,7 @@ class MentorLoadingState extends HomeState{}
 
 class MentorLoadedState extends HomeState{
   final List<MentorModel> mentorList;
-  MentorLoadedState({required this.mentorList});
+  const MentorLoadedState({required this.mentorList});
 }
 
 class MentorErrorState extends HomeState{}
@@ -42,5 +42,5 @@ class HomeContentLoadedState extends HomeState {
   final List<LanguageModel> languageList;
   final List<MentorModel> mentorList;
 
-  HomeContentLoadedState(this.languageList, this.mentorList);
+  const HomeContentLoadedState(this.languageList, this.mentorList);
 }

@@ -10,5 +10,5 @@ sealed class BnbEvent extends Equatable {
 class TabChangeEvent extends BnbEvent{
   final int tabIndex;
 
-  TabChangeEvent({required this.tabIndex});
+  const TabChangeEvent({required this.tabIndex});
 }

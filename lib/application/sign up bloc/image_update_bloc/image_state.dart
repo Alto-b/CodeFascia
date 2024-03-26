@@ -9,6 +9,7 @@ sealed class ImageState extends Equatable {
 
 final class ImageInitial extends ImageState {}
 
+// ignore: must_be_immutable
 class ImageSuccess extends ImageState{
     Uint8List selectedImage;
 

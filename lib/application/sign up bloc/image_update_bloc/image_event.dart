@@ -7,6 +7,7 @@ sealed class ImageEvent extends Equatable {
   List<Object> get props => [];
 }
 
+// ignore: must_be_immutable
 class ImageChangedEvent extends ImageEvent{
   Uint8List selectedImage;
 

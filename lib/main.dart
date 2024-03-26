@@ -21,7 +21,6 @@ import 'package:code_geeks/infrastructure/post_repo.dart';
 import 'package:code_geeks/infrastructure/subscription_repo.dart';
 import 'package:code_geeks/infrastructure/user_repo.dart';
 import 'package:code_geeks/presentation/screens/error_pages/no_internet.dart';
-import 'package:code_geeks/presentation/screens/login/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,12 +32,11 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   bool internetResult = await InternetConnectionChecker().hasConnection;
-    if(internetResult == true) {
-      print('YAY! Free cute dog pics!');
-    } else {
-      print('No internet :( Reason:');
-      // print(InternetConnectionChecker().lastTryResults);
-    }
+    // if(internetResult == true) {
+    //   print('YAY! Free cute dog pics!');
+    // } else {
+    //   print('No internet :( Reason:');
+    // }
 
   Platform.isAndroid? await Firebase.initializeApp( 
       options: const FirebaseOptions( 
@@ -117,7 +115,7 @@ class MyApp extends StatelessWidget {
                     darkTheme: darkTheme,
                     
             
-                    home: internetResult ? LoginCheckPage() : NoInternetPage(),
+                    home: internetResult ? const LoginCheckPage() : const NoInternetPage(),
                   ),
       ),)
     );

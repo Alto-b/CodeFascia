@@ -13,7 +13,7 @@ class HistoryEmptyState extends HistoryState{}
 
 class HistoryLoadedState extends HistoryState{
   final List<BookingModel> historyList;
-  HistoryLoadedState({
+  const HistoryLoadedState({
     required this.historyList
   });
   @override

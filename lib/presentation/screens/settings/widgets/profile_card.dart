@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glass_kit/glass_kit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:shimmer/shimmer.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({
@@ -45,12 +44,12 @@ class ProfileCard extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
               
-                  child: Container(
+                  child: SizedBox(
                     height: 150,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SizedBox(width: 10,),
+                        const SizedBox(width: 10,),
                          CircleAvatar(
                           radius: 40,
                           // backgroundImage:NetworkImage(data.profile),

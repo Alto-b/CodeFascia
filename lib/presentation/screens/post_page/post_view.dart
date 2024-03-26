@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -24,7 +26,7 @@ class SpecificPostView extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(onPressed: (){
           Navigator.pop(context);
-        }, icon: Icon(Icons.arrow_back_ios)),
+        }, icon: const Icon(Icons.arrow_back_ios)),
       ),
 
       body: SingleChildScrollView(
@@ -40,18 +42,18 @@ class SpecificPostView extends StatelessWidget {
               Row(
                 children: [
                   CircleAvatar(backgroundImage: NetworkImage(author_avatar),),
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                   Text(author,style: GoogleFonts.poppins(
                     fontSize: 15,
                     fontWeight: FontWeight.w500
                   ),),
                 ],
               ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               Text(description),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               Text(content),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
             ],
           ),
         ),

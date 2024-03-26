@@ -2,6 +2,7 @@
 import 'package:code_geeks/domain/gemini_model.dart';
 import 'package:code_geeks/infrastructure/constants.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 class GeminiRepo{ 
   static Future<String> geminiTextGenerationRepo(List<GeminiMessageModel> previousMessages)async{
@@ -9,7 +10,7 @@ class GeminiRepo{
     try{
       Dio dio = Dio();
 
-    final response = await dio.post('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro:generateContent?key=${api_key}',
+    final response = await dio.post('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro:generateContent?key=$api_key',
     
     data: {
   "contents": previousMessages.map((e) => e.toMap()).toList(),
@@ -42,15 +43,12 @@ class GeminiRepo{
 
     );
     if(response.statusCode!>=200 && response.statusCode!<300){
-      print("statss ${response.statusCode}");
       return response.data['candidates'].first['content']['parts'].first['text'];
     }
-    print("statss1 ${response.statusCode}");
     return '';
     }
     catch(e){
-      
-      print(e.toString());
+      debugPrint(e.toString());
       return '';
     }
   } 

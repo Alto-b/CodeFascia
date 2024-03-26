@@ -1,6 +1,6 @@
+// ignore_for_file: use_build_context_synchronously, unused_field, unused_local_variable
+
 import 'package:code_geeks/presentation/widgets/bnb.dart';
-import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
-import 'package:easy_loading_button/easy_loading_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,8 +10,8 @@ import 'package:passwordfield/passwordfield.dart';
 class LoginPage extends StatelessWidget {
    LoginPage({super.key});
 
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -26,13 +26,12 @@ class LoginPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 100),
+              const SizedBox(height: 100),
               Card(
                 color: Colors.white,
-                child: Container(
+                child: SizedBox(
                   height: 150,
                   width: 150,
-                  // color: Colors.green,
                   child: Image.asset('lib/assets/logo.png',fit: BoxFit.cover,height: 100,width: 100,),
                 ),
               ),
@@ -63,22 +62,7 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 10,),
-                      // Card(
-                      //   color: Colors.transparent,
-                      //   child: TextFormField(
-                      //     // validator: validatePassword,
-                      //     controller: _passwordController,
-                      //     decoration: const InputDecoration(
-                      //       // hintText: "email id",
-                      //       label: Text("Password"),
-                      //       border: OutlineInputBorder(
-                              
-                      //       )
-                      //     ),
-                      //   ),
-                      // ),
                       Card(
-                        // color: Colors.black12,
                         child: PasswordField(
                           controller: _passwordController,
                           color: Colors.blue,
@@ -109,28 +93,15 @@ class LoginPage extends StatelessWidget {
                       ),
                       Align(
                         alignment: Alignment.centerRight,
-                        child: TextButton(onPressed: (){forgotPassword(_emailController.text);}, child: Text("Forgot password?",style: TextStyle(fontSize: 12),),)),
+                        child: TextButton(onPressed: (){forgotPassword(_emailController.text);}, child: const Text("Forgot password?",style: TextStyle(fontSize: 12),),)),
                       const SizedBox(height: 30,),
-        
-                    //   Container(
-                    //     width: double.infinity,
-                    //     child: ElevatedButton(onPressed: (){
-                    //       if(_formKey.currentState!.validate()){
-                        
-                    //       signIn(context);
-                    //       }
-                          
-                    //     }, child: const Text("Login"),style: const ButtonStyle(
-                    //       foregroundColor: MaterialStatePropertyAll(Colors.white),
-                    // backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 110, 132, 214))
-                    //     ),)),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 child: LoadingBtn(
                     height: 40,
                     borderRadius: 8,
                     animate: true,
-                    color: Color.fromARGB(255, 110, 132, 214),
+                    color: const Color.fromARGB(255, 110, 132, 214),
                     width: MediaQuery.of(context).size.width * 0.45,
                     loader: Container(
                         padding: const EdgeInsets.all(10),
@@ -152,12 +123,8 @@ class LoginPage extends StatelessWidget {
                         }
                     },
                 ),
-              ),
-        
+              ),    
                         const SizedBox(height: 10,),
-        
-                        // TextButton.icon(onPressed: (){}, icon: Icon(Icons.arrow_back_ios), label: Text("")),
-                        // IconButton.outlined(onPressed: (){}, icon: Icon(Icons.arrow_back)),
                         IconButton(onPressed: (){
                           Navigator.pop(context);
                         }, icon:  const Icon(Icons.arrow_back),)
@@ -178,16 +145,13 @@ class LoginPage extends StatelessWidget {
     await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: _emailController.text, 
       password: _passwordController.text);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Welcome aboard !"),backgroundColor: Colors.green,duration: Duration(seconds: 1),));
-      await Future.delayed(Duration(seconds:2));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Welcome aboard !"),backgroundColor: Colors.green,duration: Duration(seconds: 1),));
+      await Future.delayed(const Duration(seconds:2));
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder:(context) => BnbPage() ), (route) => false);
    }
    on FirebaseAuthException catch(e){  
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("${e.message}"),backgroundColor: Colors.red));
-    // _scaffoldKey.currentState?.showSnackBar(SnackBar(
-    //     content: Text(e.toString()),
-    //   ));
-    print(e);
+    debugPrint(e.message);
    }
   }
 
@@ -235,6 +199,5 @@ String? validatePassword(String? value) {
 
   return null;
 }
-
 
 }

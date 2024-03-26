@@ -14,12 +14,11 @@ class MentorsPage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(onPressed: (){
           Navigator.pop(context);
-        }, icon: Icon(Icons.arrow_back_ios)),
+        }, icon: const Icon(Icons.arrow_back_ios)),
       ),
 
       body: BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
-        print(state.runtimeType);
          if(state is HomeContentLoadedState){
           return SingleChildScrollView(
             child: Padding(
@@ -28,11 +27,11 @@ class MentorsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
               
-                      Text("Meet our mentors",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 20,),),
+                      const Text("Meet our mentors",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 20,),),
             
-                      SizedBox(height: 20,),
+                      const SizedBox(height: 20,),
               
-                  Container(
+                  SizedBox(
                                 height: (screenHeight)-150,
                                 width: screenWidth,
                                 child: GridView.builder(
@@ -62,7 +61,7 @@ class MentorsPage extends StatelessWidget {
                                           clipBehavior: Clip.antiAlias,
                                           height: screenHeight/5,
                                           width: screenWidth/2,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))
                                           ),
                                           child: Image.network(state.mentorList[index].photo,fit: BoxFit.cover,
@@ -70,8 +69,8 @@ class MentorsPage extends StatelessWidget {
                                         ),
                                         // Text(state.mentorList[index].name)
                                         ListTile(
-                                          title: Text(state.mentorList[index].name,style: TextStyle(fontWeight: FontWeight.w600)),
-                                          subtitle: Text(state.mentorList[index].qualification,style: TextStyle(fontWeight: FontWeight.w500)),
+                                          title: Text(state.mentorList[index].name,style: const TextStyle(fontWeight: FontWeight.w600)),
+                                          subtitle: Text(state.mentorList[index].qualification,style: const TextStyle(fontWeight: FontWeight.w500)),
                                         )
                                           ],
                                         ),
@@ -85,7 +84,7 @@ class MentorsPage extends StatelessWidget {
           );
           
         }
-        return SizedBox();
+        return const SizedBox();
       },
     )
 

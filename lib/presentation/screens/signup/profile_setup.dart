@@ -1,20 +1,16 @@
+// ignore_for_file: use_build_context_synchronously, must_be_immutable
+
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:code_geeks/application/image_picker_bloc/image_picker_bloc.dart';
-import 'package:code_geeks/application/user_bloc/user_bloc.dart';
-import 'package:code_geeks/infrastructure/user_repo.dart';
-import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
 import 'package:code_geeks/presentation/widgets/bnb.dart';
-import 'package:code_geeks/presentation/widgets/loader.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebasestorage;
 
 
@@ -34,12 +30,6 @@ class ProfileSetupPage extends StatelessWidget {
   String? selectedSkill;
 
   XFile? newImge;
-
-  // @override
-  // void dispose(){
-  //   _bloc.close();
-  // }
-
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +136,7 @@ class ProfileSetupPage extends StatelessWidget {
                         return ActionChip.elevated(label: const Text("Proceed"),onPressed: () {
                                           // profileSetup(context,selectedImage);
                                           profileSetup(context,state.file!.path.toString());
-                                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Creating profile !"),backgroundColor: Colors.blue,duration: Duration(seconds: 5),));
+                                           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Creating profile !"),backgroundColor: Colors.blue,duration: Duration(seconds: 5),));
                                         },);
                       },
                     )
@@ -159,31 +149,10 @@ class ProfileSetupPage extends StatelessWidget {
     );
   } 
 
-  // void pickUploadImage()async{
-  //   final result = await ImagePicker().pickImage(source: ImageSource.gallery,maxHeight: 512,maxWidth: 512,imageQuality: 75);
-  //   Reference ref = FirebaseStorage.instance.ref().child("profilepic.jpg");
-  //   await ref.putFile(File(result!.path));
-  //   ref.getDownloadURL().then((value){
-  //     print("image link $value");
-  //   });
-  // }
-
-  //  Future uploadImageToFirebase(BuildContext context) async {
-  //   String fileName = basename(selectedImage!.path);
-  //   Reference ref = FirebaseStorage.instance.ref().child("profilepic.jpg");
-  //   await ref.putFile(File(fileName));
-  //   ref.getDownloadURL().then((value){
-  //     print("image link $value");
-  //     return value;
-  //   });
-  // }
-
 Future<void> profileSetup(BuildContext context, String newImg) async {
-  print("selected image $newImg");
   File file = File(newImg);
 
   if (!file.existsSync()) {
-    print("Error: File does not exist");
     return;
   }
 
@@ -194,14 +163,13 @@ Future<void> profileSetup(BuildContext context, String newImg) async {
   try {
     await uploadTask;
     var downloadUrl = await ref.getDownloadURL();
-    print("image link $downloadUrl");
 
      Map<String, String> data = {
     "id": FirebaseAuth.instance.currentUser!.uid,
     "Name": _nameController.text,
     "Profession": selectedSkill!,
     "Email": _emailController.text,
-    "profile": downloadUrl // Use imageLink here
+    "profile": downloadUrl 
   };
 
     //trying to fix the user data accuracy issue 
@@ -212,58 +180,18 @@ Future<void> profileSetup(BuildContext context, String newImg) async {
       .collection('users')
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .set(data)
-      .then((_) {
-    // Navigate to BnbPage after Firestore operation is complete
-    
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Profile Created !"),backgroundColor: Colors.green,duration: Duration(seconds: 2),));
+      .then((_) {  
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Profile Created !"),backgroundColor: Colors.green,duration: Duration(seconds: 2),));
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => BnbPage()),
       (route) => false,
     );
       });
-
-    // Rest of your code to save the downloadUrl to Firestore...
-
   }
   on FirebaseAuthException catch (error) {
-    print("Error uploading file: $error");
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("${error.message}"),backgroundColor: Colors.red,duration: Duration(seconds: 2),));
-    // Handle the error gracefully, e.g., show an error message to the user
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("${error.message}"),backgroundColor: Colors.red,duration: const Duration(seconds: 2),));
+
   }
 }
-
-
-
-  // Future _photoImage() async {
-  //   // final picker = ImagePicker();
-  //   // final pickedImage = await picker.pickImage(source: ImageSource.camera);
-
-  //   // if (pickedImage != null) {
-  //   //   // setState(() {
-  //   //   //   _selectedImage = File(pickedImage.path);
-  //   //   // });
-  //   // }
-  //   final result = await FilePicker.platform.pickFiles(type: FileType.image);
-  //   if(result==null)return;
-  //   final  pickedFile = result.files.first;
-  // }
-
-//   Future pickImage( context) async {
-//     final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-//   _imageFile = File(pickedFile!.path);
-//     // setState(() {
-//     //   _imageFile = File(pickedFile.path);
-//     // });
-// uploadImageToFirebase(context);
-//   }
-
-  // Future uploadImageToFirebase(BuildContext context) async {
-  //   String fileName = basename(_imageFile!.path);
-  //   Reference ref = FirebaseStorage.instance.ref().child("profilepic.jpg");
-  //   await ref.putFile(File(fileName));
-  //   ref.getDownloadURL().then((value){
-  //     print("image link $value");
-  //   });
-  // }
 }

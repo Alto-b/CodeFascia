@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, must_be_immutable
+
 part of 'subscription_bloc.dart';
 
  class SubscriptionEvent extends Equatable {
@@ -38,11 +40,7 @@ class BookSubscriptionEvent extends SubscriptionEvent{
 
 class MySubscritpionLoadEvent extends SubscriptionEvent{
     String uid;
-    // Map<String,dynamic> data = {};
-    // String subId;
     MySubscritpionLoadEvent({
       required this.uid,
-      // required this.subId
-      // required this.data
     });
 }

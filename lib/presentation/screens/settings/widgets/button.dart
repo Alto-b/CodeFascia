@@ -12,11 +12,11 @@ class ModeButton extends StatelessWidget {
     return GestureDetector(
 
       onTap: () => showPopover(context: context, 
-                bodyBuilder: (context)=>MenuItems(),
+                bodyBuilder: (context)=>const MenuItems(),
                 width: screenWidth/3,
                 height: screenHeight/14,
                 direction: PopoverDirection.bottom),
-                child: Icon(Icons.light_mode),
+                child: const Icon(Icons.light_mode),
     );
   }
 }

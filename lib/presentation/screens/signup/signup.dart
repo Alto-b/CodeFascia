@@ -1,6 +1,6 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:code_geeks/presentation/screens/signup/profile_setup.dart';
-import 'package:code_geeks/presentation/widgets/bnb.dart';
-import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,9 +10,9 @@ import 'package:passwordfield/passwordfield.dart';
 class SignUpPage extends StatelessWidget {
    SignUpPage({super.key});
 
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _cpasswordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _cpasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
 
@@ -25,10 +25,10 @@ class SignUpPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 80,),
+              const SizedBox(height: 80,),
               Card(
                 color: Colors.white,
-                child: Container(
+                child: SizedBox(
                   height: 150,
                   width: 150,
                   // color: Colors.green,
@@ -64,23 +64,7 @@ class SignUpPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 10,),
-                      // Card(
-                      //   color: Colors.transparent,
-                      //   child: TextFormField(
-                      //     // validator: validatePassword,
-                      //     autovalidateMode: AutovalidateMode.onUserInteraction,
-                      //     controller: _passwordController,
-                      //     decoration: const InputDecoration(
-                      //       // hintText: "email id",
-                      //       label: Text("Password"),
-                      //       border: OutlineInputBorder(
-                              
-                      //       )
-                      //     ),
-                      //   ),
-                      // ),
                       Card(
-                        // color: Colors.transparent,
                         child: PasswordField(
                           controller: _passwordController,
                           color: Colors.blue,
@@ -110,23 +94,7 @@ class SignUpPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 10,),
-                      // Card(
-                      //   color: Colors.transparent,
-                      //   child: TextFormField(
-                      //     // validator: validatePassword,
-                      //     autovalidateMode: AutovalidateMode.onUserInteraction,
-                      //     controller: _cpasswordController,
-                      //     decoration: const InputDecoration(
-                      //       hintText: "Confirm Password",
-                      //       // label: Text("password"),
-                      //       border: OutlineInputBorder(
-                              
-                      //       )
-                      //     ),
-                      //   ),
-                      // ),
                       Card(
-                        // color: Colors.transparent,
                         child: PasswordField(
                           controller: _cpasswordController,
                           color: Colors.blue,
@@ -156,27 +124,13 @@ class SignUpPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 40,),
-
-                     
-       
-                    //   Container(
-                    //     width: double.infinity,
-                    //     child: ElevatedButton(onPressed: (){
-                    //       if(_formKey.currentState!.validate()){
-                    //                   signUp(context);
-                    //                 }
-                    //       // signUp(context);
-                    //     }, child: const Text("Sign up"),style: const ButtonStyle(
-                    //       foregroundColor: MaterialStatePropertyAll(Colors.white),
-                    // backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 110, 132, 214))
-                    //     ),)),
-                    Container(
+                    SizedBox(
                 width: double.infinity,
                 child: LoadingBtn(
                     height: 40,
                     borderRadius: 8,
                     animate: true,
-                    color: Color.fromARGB(255, 110, 132, 214),
+                    color: const Color.fromARGB(255, 110, 132, 214),
                     width: MediaQuery.of(context).size.width * 0.45,
                     loader: Container(
                         padding: const EdgeInsets.all(10),
@@ -199,11 +153,7 @@ class SignUpPage extends StatelessWidget {
                     },
                 ),
               ),
-       
                         const SizedBox(height: 10,),
-       
-                        // TextButton.icon(onPressed: (){}, icon: Icon(Icons.arrow_back_ios), label: Text("")),
-                        // IconButton.outlined(onPressed: (){}, icon: Icon(Icons.arrow_back)),
                         IconButton(onPressed: (){
                           Navigator.pop(context);
                         }, icon:  const Icon(Icons.arrow_back))
@@ -220,12 +170,6 @@ class SignUpPage extends StatelessWidget {
     );
   }
 
-  // void validateForm(){
-  //   if(_formKey.currentState!.validate()){
-  //     signUp(context);
-  //   }
-  // }
-
   Future signUp(BuildContext context)async{
     if(_passwordController.text.trim()==_cpasswordController.text.trim() && _formKey.currentState!.validate()){
        try{
@@ -236,17 +180,16 @@ class SignUpPage extends StatelessWidget {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _emailController.text, 
         password: _passwordController.text);
-      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text(""),backgroundColor: Colors.green,duration: Duration(seconds: 2),));
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ProfileSetupPage(),), (route) => false);
    }
     on FirebaseAuthException catch(e){ 
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("${e.message}"),backgroundColor: Colors.red)); 
-    print(e);
+    debugPrint(e.message);
    }
     }
   }
 
-       //to validate email
+//to validate email
 String? validateEmail(String? value) {
   
   final trimmedValue = value?.trim();

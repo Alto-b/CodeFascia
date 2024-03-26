@@ -9,7 +9,7 @@ sealed class GeminiEvent extends Equatable {
 
 class ChatGenerateNewTextMessageEvent extends GeminiEvent{
   final String inputMessage;
-  ChatGenerateNewTextMessageEvent({required this.inputMessage});
+  const ChatGenerateNewTextMessageEvent({required this.inputMessage});
 }
 // @immutable
 // sealed class GeminiEvent {}

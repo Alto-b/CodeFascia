@@ -41,7 +41,7 @@ class HomeLoadingScreen extends StatelessWidget {
                     //community card
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => CommunityPage(),));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const CommunityPage(),));
                       },
                       child: Shimmer.fromColors(
                         baseColor: Colors.grey,
@@ -62,7 +62,7 @@ class HomeLoadingScreen extends StatelessWidget {
                           // fit: BoxFit.contain,),
                           child: CachedNetworkImage(imageUrl: 'https://www.2020spaces.com/wp-content/uploads/2022/11/1280x720-Community_EN_Transparent-Draft04D.gif',
                           fadeInCurve: Curves.bounceIn,
-                          fadeInDuration: Duration(seconds: 1),
+                          fadeInDuration: const Duration(seconds: 1),
                           filterQuality: FilterQuality.high,
                           fit: BoxFit.contain,
                           placeholder: (context, url) => Center(child: Text("Community",style: GoogleFonts.orbitron(

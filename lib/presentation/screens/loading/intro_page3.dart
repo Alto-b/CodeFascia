@@ -15,7 +15,7 @@ class _IntroPage3State extends State<IntroPage3> {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.amber,
- backgroundColor: Color.fromARGB(255, 110, 132, 214),
+ backgroundColor: const Color.fromARGB(255, 110, 132, 214),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -26,8 +26,8 @@ class _IntroPage3State extends State<IntroPage3> {
                 letterSpacing: 2,
                 fontWeight: FontWeight.w600
                 ),),
-              SizedBox(height: 20,),
-              Container(
+              const SizedBox(height: 20,),
+              SizedBox(
                 width: 300,
                 height: 300,
                 child: Lottie.asset('lib/assets/intro3.json'),

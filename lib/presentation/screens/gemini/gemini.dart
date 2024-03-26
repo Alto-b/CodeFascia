@@ -1,10 +1,10 @@
 import 'package:code_geeks/application/gemini_bloc/gemini_bloc.dart';
 import 'package:code_geeks/domain/gemini_model.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 
+// ignore: must_be_immutable
 class GeminiPage extends StatelessWidget {
    GeminiPage({super.key});
 
@@ -17,7 +17,7 @@ class GeminiPage extends StatelessWidget {
     if (chatScrollController.hasClients) {
       final position = chatScrollController.position.maxScrollExtent;
       chatScrollController.animateTo(position,
-          duration: Duration(seconds: 1), curve: Curves.easeOut);
+          duration: const Duration(seconds: 1), curve: Curves.easeOut);
     }
   }
   
@@ -27,7 +27,6 @@ class GeminiPage extends StatelessWidget {
     return BlocConsumer<GeminiBloc, GeminiState>(
       bloc: geminiBloc,
       listener: (context, state) {
-        // TODO: implement listener
       },
       builder: (context, state) {
         switch (state.runtimeType) {
@@ -36,7 +35,7 @@ class GeminiPage extends StatelessWidget {
             return Scaffold(
           appBar: AppBar(
             actions: [
-              IconButton(onPressed: (){scrollToBottom();}, icon: Icon(Icons.abc))
+              IconButton(onPressed: (){scrollToBottom();}, icon: const Icon(Icons.abc))
             ],
           ),
           extendBodyBehindAppBar: true,
@@ -44,7 +43,7 @@ class GeminiPage extends StatelessWidget {
           body:Container(
             width: MediaQuery.of(context).size.width,
             height: double.maxFinite,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               // color: Colors.red,
             ),
             child: Column(
@@ -58,14 +57,14 @@ class GeminiPage extends StatelessWidget {
                     child: Container(
                       width: 10,
                       decoration: BoxDecoration(
-                        color: messages[index].role == "user" ? Color(0XFF04A3FF).withOpacity(.4) :Color.fromARGB(255, 79, 79, 79)
+                        color: messages[index].role == "user" ? const Color(0XFF04A3FF).withOpacity(.4) :const Color.fromARGB(255, 79, 79, 79)
                                         .withOpacity(.5),
                          borderRadius: messages[index].role == "user"
-                                    ? BorderRadius.only(
+                                    ? const BorderRadius.only(
                                         bottomRight: Radius.circular(50),
                                         topLeft: Radius.circular(50),
                                         bottomLeft: Radius.circular(50))
-                                    : BorderRadius.only(
+                                    : const BorderRadius.only(
                                         bottomRight: Radius.circular(50),
                                         // bottomLeft: Radius.circular(50),
                                         topLeft: Radius.circular(50),
@@ -85,11 +84,11 @@ class GeminiPage extends StatelessWidget {
                 })
                 ),
                 if(geminiBloc.generating)
-                Container(
+                SizedBox(
                   width: 80,height: 80,
                   child: Lottie.asset('lib/assets/loader.json')),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 30,horizontal: 16),
+                  padding: const EdgeInsets.symmetric(vertical: 30,horizontal: 16),
     
                   child: Stack(
                     children: [
@@ -99,7 +98,7 @@ class GeminiPage extends StatelessWidget {
                         decoration: InputDecoration(
                           prefixIcon: Image.asset('lib/assets/logo.png',width: 15,height: 15,),
                           border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.green),
+                            borderSide: const BorderSide(color: Colors.green),
                             borderRadius: BorderRadius.circular(100),
                           ),fillColor: Colors.transparent,filled: true,hintText: "Ask me something",
                           focusedBorder: OutlineInputBorder(
@@ -108,7 +107,7 @@ class GeminiPage extends StatelessWidget {
                           )
                         ),
                       ),
-                      SizedBox(width: 12,),
+                      const SizedBox(width: 12,),
                       Positioned(
                         right: 0,
                         bottom: 1,
@@ -121,7 +120,7 @@ class GeminiPage extends StatelessWidget {
                               textEditingController.clear();
                               geminiBloc.add(ChatGenerateNewTextMessageEvent(inputMessage: text));
                             }
-                          }, icon: Icon(Icons.send,
+                          }, icon: const Icon(Icons.send,
                           // color: Colors.blue,
                           )),
                         ),
@@ -135,7 +134,7 @@ class GeminiPage extends StatelessWidget {
           )
         );
           default:
-        return SizedBox();
+        return const SizedBox();
         }
       },
     );

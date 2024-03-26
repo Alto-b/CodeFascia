@@ -9,7 +9,7 @@ class LanguageRepo{
       List<LanguageModel> langaugeList = [];
       try{
         final datas = await FirebaseFirestore.instance.collection('language').get();
-        datas.docs.forEach((element) {
+        for (var element in datas.docs) {
         final data = element.data();
 
         final lang = LanguageModel(
@@ -18,7 +18,7 @@ class LanguageRepo{
           photo: data['photo']); 
 
           langaugeList.add(lang);
-        });
+        }
         return langaugeList;        
       }
       on FirebaseException catch(e){

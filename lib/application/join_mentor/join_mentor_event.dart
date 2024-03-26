@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of 'join_mentor_bloc.dart';
 
  class JoinMentorEvent extends Equatable {

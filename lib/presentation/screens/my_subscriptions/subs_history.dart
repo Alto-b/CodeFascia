@@ -17,7 +17,7 @@ class SubsHistoryPage extends StatelessWidget {
     context.read<HistoryBloc>().add(HistoryLoadEvent(uid: FirebaseAuth.instance.currentUser!.uid));
     return Scaffold(
       appBar: AppBar(
-        title: Text("Subscription History"),
+        title: const Text("Subscription History"),
         // centerTitle: true,
         titleTextStyle: GoogleFonts.orbitron(
           fontSize: 15,fontWeight: FontWeight.w600,color: Colors.grey
@@ -29,9 +29,8 @@ class SubsHistoryPage extends StatelessWidget {
           children: [
             BlocBuilder<HistoryBloc, HistoryState>(
               builder: (context, state) {
-                print(state.runtimeType);
                 if(state is HistoryLoadedState){
-                  return Container(
+                  return SizedBox(
                     // color: Colors.amber,
                     width: screenWidth,
                     height: screenHeight-(screenHeight/8),
@@ -49,11 +48,11 @@ class SubsHistoryPage extends StatelessWidget {
                                       Text("${state.historyList[index].sub_title}  /  ${state.historyList[index].sub_lang}",style: GoogleFonts.poppins(
                                         fontSize: 12,fontWeight: FontWeight.w600
                                       ),),
-                                  SizedBox(height: 5,),
+                                  const SizedBox(height: 5,),
                                   Text(state.historyList[index].date),
-                                  Text("       |   "),
+                                  const Text("       |   "),
                                   Text(state.historyList[index].expiry),
-                                  SizedBox(height: 5,)
+                                  const SizedBox(height: 5,)
                                 ],
                               ),
                             ),

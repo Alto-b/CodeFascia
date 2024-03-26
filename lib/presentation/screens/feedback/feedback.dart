@@ -1,34 +1,34 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:code_geeks/application/feedback_bloc/feedback_bloc.dart';
 import 'package:code_geeks/presentation/widgets/bnb.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FeedBackPage extends StatelessWidget {
    FeedBackPage({super.key});
 
-  TextEditingController _feedbackController = TextEditingController();
+  final TextEditingController _feedbackController = TextEditingController();
   final _key = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Feedback"),),
+      appBar: AppBar(title: const Text("Feedback"),),
 
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 40,),
-            Text("Write to us !"),
+            const SizedBox(height: 40,),
+            const Text("Write to us !"),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Form(
                 key:_key,
                 child: Column(
                 children: [
-                  SizedBox(height: 30,),
+                  const SizedBox(height: 30,),
                   TextFormField(
                     validator: (value) {
                       if(value == null || value.isEmpty){
@@ -39,15 +39,15 @@ class FeedBackPage extends StatelessWidget {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
 
                     controller: _feedbackController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(
               
                       )
                     ),
                     maxLines: 15,
                   ),
-                  SizedBox(height: 20,),
-                  ActionChip(label: Icon(Icons.send),onPressed: () {
+                  const SizedBox(height: 20,),
+                  ActionChip(label: const Icon(Icons.send),onPressed: () {
                     if(_key.currentState!.validate()){
                       sendFeedback(context);
                     }
@@ -67,8 +67,8 @@ class FeedBackPage extends StatelessWidget {
       "Feedback" : _feedbackController.text.trim()
     };
     context.read<FeedbackBloc>().add(FeedbackSentEvent(data: data));
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Feedback send"),backgroundColor: Colors.green,duration: Duration(seconds: 1),));
-      await Future.delayed(Duration(seconds:2));
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Feedback send"),backgroundColor: Colors.green,duration: Duration(seconds: 1),));
+      await Future.delayed(const Duration(seconds:2));
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => BnbPage()),

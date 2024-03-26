@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, deprecated_member_use
+
 import 'dart:io';
 
 import 'package:adaptive_theme/adaptive_theme.dart';
@@ -12,7 +14,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CommunityPage extends StatefulWidget {
-   CommunityPage({super.key});
+   const CommunityPage({super.key});
 
   @override
   State<CommunityPage> createState() => _CommunityPageState();
@@ -27,7 +29,7 @@ class _CommunityPageState extends State<CommunityPage> {
 
   final DatabaseReference chatRef = FirebaseDatabase.instance.reference().child('community');
 
-  TextEditingController _content = TextEditingController();
+  final TextEditingController _content = TextEditingController();
 
   late ScrollController _scrollController;
 
@@ -35,7 +37,7 @@ class _CommunityPageState extends State<CommunityPage> {
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    Future.delayed(Duration(milliseconds: 600), () {
+    Future.delayed(const Duration(milliseconds: 600), () {
     _scrollToBottom();
   });
   }
@@ -51,7 +53,7 @@ class _CommunityPageState extends State<CommunityPage> {
       if (_scrollController.hasClients) {
         _scrollController.animateTo(
           _scrollController.position.maxScrollExtent,
-          duration: Duration(milliseconds: 600),
+          duration: const Duration(milliseconds: 600),
           curve: Curves.easeOut,
         );
       }
@@ -63,27 +65,26 @@ class _CommunityPageState extends State<CommunityPage> {
     
     DateTime currentDate = DateTime.now();
     String currentDateString = "${currentDate.year}-${currentDate.month.toString().padLeft(2, '0')}-${currentDate.day.toString().padLeft(2, '0')}";
-    print(currentDateString);
     final user = FirebaseAuth.instance.currentUser;
     final DatabaseReference chatRef = FirebaseDatabase.instance.reference().child('community');
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Community"),
+        title: const Text("Community"),
         actions: [
           IconButton(onPressed: (){
             _scrollToBottom();
-          }, icon: Icon(Icons.arrow_drop_down)),
+          }, icon: const Icon(Icons.arrow_drop_down)),
           IconButton(onPressed: (){
           AdaptiveTheme.of(context).toggleThemeMode();
-        }, icon: Icon(Icons.light_mode_outlined))],
+        }, icon: const Icon(Icons.light_mode_outlined))],
       ),
 
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: screenHeight - screenHeight/5,
               width: screenWidth,
               // color: Colors.greenAccent,
@@ -93,12 +94,12 @@ class _CommunityPageState extends State<CommunityPage> {
                     if (snapshot.hasData && snapshot.data!.snapshot.value != null) {
                      Map<dynamic, dynamic> map = snapshot.data!.snapshot.value as Map<dynamic, dynamic>;
                           List<dynamic> list = map.values.toList();
-                          list.forEach((chat) {
+                          for (var chat in list) {
                             if (chat['dateTime'] is String) {
                               // Parse the ISO 8601 string to a DateTime object
                               chat['dateTime'] = DateTime.parse(chat['dateTime']);
                             }
-                          });
+                          }
                           list.sort((a, b) => b['dateTime'].compareTo(a['dateTime']));
                           list = list.reversed.toList();
                       return ListView.builder(
@@ -119,13 +120,10 @@ class _CommunityPageState extends State<CommunityPage> {
                               children: [
                                 if (displayDate)
                                 Center(child: Text(messageDate == currentDateString ? "Today" : messageDate.substring(0, 10),style: DateTextStyle(),)),
-                                // (list[index]['dateTime'].toString().substring(0,10) == currentDateString) ?
-                                // Center(child: Text("Today")) : Center(child: Text(list[index]['dateTime'].toString().substring(0,11))),
-                                // Text(DateTime.now().toString()),
                                 ChatBubble(
                                     clipper: ChatBubbleClipper1(type: BubbleType.sendBubble),
                                     alignment: Alignment.topRight,
-                                    margin: EdgeInsets.only(top: 20),
+                                    margin: const EdgeInsets.only(top: 20),
                                     backGroundColor: Colors.blue,
                                     child: Container(
                                       constraints: BoxConstraints(
@@ -138,7 +136,7 @@ class _CommunityPageState extends State<CommunityPage> {
                                             child: (list[index]['content_type'] == "text")
                                                 ? Text(
                                                     list[index]['content'],
-                                                    style: TextStyle(color: Colors.white, fontSize: 18),
+                                                    style: const TextStyle(color: Colors.white, fontSize: 18),
                                                   )
                                                 : Container(
                                                     height: 100,
@@ -151,7 +149,7 @@ class _CommunityPageState extends State<CommunityPage> {
                                                     ),
                                                   ),
                                           ),
-                                          SizedBox(width: 10),
+                                          const SizedBox(width: 10),
                                           CircleAvatar(
                                             backgroundImage: NetworkImage(list[index]['avatar']),
                                             radius: 10,
@@ -159,12 +157,12 @@ class _CommunityPageState extends State<CommunityPage> {
                                         ],
                                       ),
                                     ),
-                                  ),SizedBox(height: 5,),
+                                  ),const SizedBox(height: 5,),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Text(list[index]['dateTime'].toString().substring(10,16),style: TimeTextStyle(),),
-                                      SizedBox(width: 20,)
+                                      const SizedBox(width: 20,)
                                     ],
                                   ),
                               ],
@@ -178,8 +176,8 @@ class _CommunityPageState extends State<CommunityPage> {
                                 Center(child: Text(messageDate == currentDateString ? "Today" : messageDate.substring(0, 10),style: DateTextStyle(),)),
                                 ChatBubble(
                                     clipper: ChatBubbleClipper1(type: BubbleType.receiverBubble),
-                                    backGroundColor: Color(0xffE7E7ED),
-                                    margin: EdgeInsets.only(top: 20),
+                                    backGroundColor: const Color(0xffE7E7ED),
+                                    margin: const EdgeInsets.only(top: 20),
                                     child: Container(
                                       constraints: BoxConstraints(
                                         maxWidth: MediaQuery.of(context).size.width * 0.7,
@@ -191,13 +189,13 @@ class _CommunityPageState extends State<CommunityPage> {
                                             backgroundImage: NetworkImage(list[index]['avatar']),
                                             radius: 10,
                                           ),
-                                          SizedBox(width: 10),
+                                          const SizedBox(width: 10),
                                           Flexible(
                                             child: (list[index]['content_type'] == "text")
                                                 ? Text(
                                                     list[index]['content'],
-                                                    style: TextStyle(
-                                                      color: const Color.fromARGB(255, 3, 3, 3),
+                                                    style: const TextStyle(
+                                                      color: Color.fromARGB(255, 3, 3, 3),
                                                       fontSize: 18,
                                                     ),
                                                   )
@@ -215,11 +213,11 @@ class _CommunityPageState extends State<CommunityPage> {
                                         ],
                                       ),
                                     ),
-                                  ),SizedBox(height: 5,),
+                                  ),const SizedBox(height: 5,),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      SizedBox(width: 20,),
+                                      const SizedBox(width: 20,),
                                       Text(list[index]['dateTime'].toString().substring(10,16),style: TimeTextStyle(),),
                                       
                                     ],
@@ -230,7 +228,7 @@ class _CommunityPageState extends State<CommunityPage> {
                         },
                         );
                     } else if (snapshot.hasError) {
-                      return Icon(Icons.error);
+                      return const Icon(Icons.error);
                     } else {
                       return Center(
                         child: Text("Chat responsibly ",style: GoogleFonts.orbitron(
@@ -249,7 +247,7 @@ class _CommunityPageState extends State<CommunityPage> {
                  decoration: InputDecoration(
                   prefixIcon: IconButton(onPressed: (){
                           _imagePickerDialog(context);
-                        }, icon: Icon(Icons.attach_file_outlined)),
+                        }, icon: const Icon(Icons.attach_file_outlined)),
                   suffixIcon: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
@@ -268,7 +266,7 @@ class _CommunityPageState extends State<CommunityPage> {
                           "dateTime" : DateTime.now().toIso8601String()
                       };
                           sendMessage(context,data);
-                        }, icon: Icon(Icons.send_rounded)),
+                        }, icon: const Icon(Icons.send_rounded)),
                       ],
                     ),
                   ),
@@ -306,7 +304,6 @@ class _CommunityPageState extends State<CommunityPage> {
             children: <Widget>[
               BlocBuilder<ImagePickerBloc, ImagePickerState>(
                 builder: (context, state) {
-                  print(state.runtimeType);
                   if(state.file==null){
                         return InkWell(
                           onTap: () {
@@ -331,10 +328,10 @@ class _CommunityPageState extends State<CommunityPage> {
                                       backgroundImage: FileImage(File(state.file!.path.toString()))
                                     ),
                                   ),
-                                  SizedBox(height: 20,),
+                                  const SizedBox(height: 20,),
                             IconButton(onPressed: (){
                               sendImage(state.file!.path);
-                            }, icon: Icon(Icons.send))
+                            }, icon: const Icon(Icons.send))
                           ],
                         );
                       }
@@ -343,9 +340,6 @@ class _CommunityPageState extends State<CommunityPage> {
             ],
           ),
         ),
-        // actions: <Widget>[
-        //   IconButton(onPressed: (){}, icon: Icon(Icons.send))
-        // ],
       );
     },
   );
@@ -354,17 +348,15 @@ class _CommunityPageState extends State<CommunityPage> {
 void sendImage(String newImg)async{
   File file = File(newImg);
    if (!file.existsSync()) {
-    print("Error: File does not exist");
+    debugPrint("Error: File does not exist");
     return;
   }
 
-  // String fileName = basename(newImg);
   firebasestorage.Reference ref = firebasestorage.FirebaseStorage.instance.ref("file${FirebaseAuth.instance.currentUser!.uid}");
   firebasestorage.UploadTask uploadTask = ref.putFile(file);
   try{
     await uploadTask;
     var downloadUrl = await ref.getDownloadURL();
-    print("image link $downloadUrl");
     Map<String,dynamic> data = {
                           "senderId" :FirebaseAuth.instance.currentUser!.uid,
                           "avatar" : FirebaseAuth.instance.currentUser!.photoURL ?? "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
@@ -373,20 +365,17 @@ void sendImage(String newImg)async{
                           "dateTime" : DateTime.now().toIso8601String()
                       };
        databaseReference.child('community').push().set(data).whenComplete((){
-      print("snd success");
       Navigator.pop(context);
       _content.clear();
-      // context.read<ImagePickerBloc>().add(PickerInitial());
 }) ;
   }
   on FirebaseException catch(e){
-
+    debugPrint(e.message);
   }
 }
 
   void sendMessage(BuildContext context,Map<String,dynamic> data) {
       databaseReference.child('community').push().set(data).whenComplete((){
-      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("done")));
       _content.clear();
 }) ;
   }

@@ -11,7 +11,7 @@ final class PostInitial extends PostState {}
 
 class FeedLoadedState extends PostState{
   final List<PostModel> postList;
-  FeedLoadedState({
+  const FeedLoadedState({
     required this.postList
   });
   @override

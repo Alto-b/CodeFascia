@@ -7,6 +7,7 @@ sealed class HistoryEvent extends Equatable {
   List<Object> get props => [];
 }
 
+// ignore: must_be_immutable
 class HistoryLoadEvent extends HistoryEvent{
   String uid;
   HistoryLoadEvent({

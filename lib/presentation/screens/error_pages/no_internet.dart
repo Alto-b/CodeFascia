@@ -2,7 +2,6 @@ import 'package:animated_icon/animated_icon.dart';
 import 'package:code_geeks/main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:loading_btn/loading_btn.dart';
 import 'package:lottie/lottie.dart';
 
 class NoInternetPage extends StatelessWidget {
@@ -24,7 +23,7 @@ class NoInternetPage extends StatelessWidget {
                 color: Colors.grey,
               ),
             ),
-            SizedBox(height: 20), // Adjust spacing as needed
+            const SizedBox(height: 20), // Adjust spacing as needed
             TextButton(
               onPressed: () {
                 // Navigate back to the main page where internet connection is checked
@@ -45,7 +44,7 @@ class NoInternetPage extends StatelessWidget {
         iconType: IconType.animatedOnTap,
         height: 70,
         width: 70,
-        color: Color.fromARGB(255, 110, 138, 185),
+        color: const Color.fromARGB(255, 110, 138, 185),
         animateIcon: AnimateIcons.refresh,
         toolTip: "Reload",
             ),
