@@ -39,7 +39,7 @@ class MentorCardHPWidget extends StatelessWidget {
                             width: screenWidth,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
-                              itemCount: state.mentorList.length,
+                              itemCount:  (state.mentorList.length < 3)?state.mentorList.length:3 ,
                               itemBuilder: (context, index) {
                               return Padding(
                                 padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
