@@ -6,7 +6,7 @@ class MentorRepo{
   Future<List<MentorModel>> getMentor()async{
     List<MentorModel> mentorList = [];
     try{
-      final datas = await FirebaseFirestore.instance.collection('mentors').get();
+      final datas = await FirebaseFirestore.instance.collection('mentors').orderBy('name').get();
       for (var element in datas.docs) {
         final data = element.data();
         final mentor = MentorModel(

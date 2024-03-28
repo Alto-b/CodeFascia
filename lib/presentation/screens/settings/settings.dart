@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:code_geeks/login_check.dart';
+import 'package:code_geeks/presentation/screens/about%20page/about.dart';
 import 'package:code_geeks/presentation/screens/feedback/feedback.dart';
 import 'package:code_geeks/presentation/screens/join_mentor/mentor_join.dart';
 import 'package:code_geeks/presentation/screens/my_subscriptions/my_subs.dart';
@@ -61,10 +62,10 @@ class SettingsPage extends StatelessWidget {
                 title: const Text("Privacy Policy"),
                 onTap: () => _launchPPURL('https://www.freeprivacypolicy.com/live/a5b1f3bb-5e9e-413f-8a11-cdc2e099c214'),
               ),
-              const ListTile(
-                leading: Icon(Icons.info_outline),
-                title: Text("About us"),
-                // onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FeedBackPage(),)),
+               ListTile(
+                leading: const Icon(Icons.info_outline),
+                title: const Text("About us"),
+                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutPage(),)),
               ),
               ListTile(
                 leading: const Icon(Icons.logout),

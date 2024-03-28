@@ -87,7 +87,6 @@ class _CommunityPageState extends State<CommunityPage> {
             SizedBox(
               height: screenHeight - screenHeight/5,
               width: screenWidth,
-              // color: Colors.greenAccent,
               child: StreamBuilder(
                 stream: chatRef.onValue, 
                 builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
@@ -96,7 +95,6 @@ class _CommunityPageState extends State<CommunityPage> {
                           List<dynamic> list = map.values.toList();
                           for (var chat in list) {
                             if (chat['dateTime'] is String) {
-                              // Parse the ISO 8601 string to a DateTime object
                               chat['dateTime'] = DateTime.parse(chat['dateTime']);
                             }
                           }
@@ -167,7 +165,7 @@ class _CommunityPageState extends State<CommunityPage> {
                                   ),
                               ],
                             )
-                              :
+                            :
                             //recieve bubble
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -237,7 +235,6 @@ class _CommunityPageState extends State<CommunityPage> {
                       );
                     }
                   },
-
                 ),
             ),
             Padding(
@@ -254,9 +251,6 @@ class _CommunityPageState extends State<CommunityPage> {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        // IconButton(onPressed: (){
-                        //   _imagePickerDialog(context);
-                        // }, icon: Icon(Icons.photo_outlined)),
                         IconButton(onPressed: (){
                           Map<String,dynamic> data = {
                           "senderId" : user?.uid,
