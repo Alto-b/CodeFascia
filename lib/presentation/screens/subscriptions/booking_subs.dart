@@ -49,11 +49,13 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
   void _handlePaymentSuccess(PaymentSuccessResponse response){
     Fluttertoast.showToast(msg: "Payment successful");    
      context.read<SubscriptionBloc>().add(BookSubscriptionEvent(data: detail, bookingId: bookId!));
+     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => BnbPage(),), (route) => false);
   }
 
   void _handlePaymentError(PaymentFailureResponse response){
     Fluttertoast.showToast(msg: "Subscription successfull !");
     context.read<SubscriptionBloc>().add(BookSubscriptionEvent(data: detail, bookingId: bookId!));
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => BnbPage(),), (route) => false);
   }
 
   void _handleExternalWallet(ExternalWalletResponse response){
