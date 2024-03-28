@@ -27,13 +27,14 @@ class OngoingSubsSlider extends StatelessWidget {
                                     itemCount: state.mySubsList.length,
                                     options: CarouselOptions(
                                       autoPlay: true,
-                                      autoPlayInterval: const Duration(seconds: 2),
+                                      autoPlayInterval: const Duration(seconds: 5),
                                       enlargeCenterPage: true,
                                       pauseAutoPlayOnTouch: true,
                                       animateToClosest: true,
                                     ),
                                     itemBuilder: (context, index, realIndex) {
                                       return ListTile(
+                                        titleAlignment: ListTileTitleAlignment.center,
                                         shape: ContinuousRectangleBorder(
                                           borderRadius: BorderRadius.circular(20)
                                         ),

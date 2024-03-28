@@ -16,14 +16,14 @@ class HomeScreen extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(),
+      // appBar: AppBar(),
        body: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: [
                     //carousal
-                    const HomeCarousal(),
+                    // const HomeCarousal(),
                        
                     const SizedBox(height: 20,),
                        
