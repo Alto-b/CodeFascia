@@ -1,5 +1,5 @@
-import 'package:code_geeks/application/gemini_bloc/gemini_bloc.dart';
-import 'package:code_geeks/domain/gemini_model.dart';
+import 'package:CodeFascia/application/gemini_bloc/gemini_bloc.dart';
+import 'package:CodeFascia/domain/gemini_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';

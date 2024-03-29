@@ -1,9 +1,9 @@
 
 import 'package:any_link_preview/any_link_preview.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:code_geeks/application/subscription_bloc/subscription_bloc.dart';
-import 'package:code_geeks/presentation/screens/chat/chat_page.dart';
-import 'package:code_geeks/presentation/screens/feedback/feedback.dart';
+import 'package:CodeFascia/application/subscription_bloc/subscription_bloc.dart';
+import 'package:CodeFascia/presentation/screens/chat/chat_page.dart';
+import 'package:CodeFascia/presentation/screens/feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animated_icon/animated_icon.dart';
@@ -49,7 +49,7 @@ class MySpecificSubsPage extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              const SizedBox(height: 20,),
+              const SizedBox(height: 5,),
              (state.mySubsList[index].subscriptionDetails['videos']?.length > 0)?
               SizedBox(
                 height: screenHeight-(screenHeight/7),
@@ -59,7 +59,7 @@ class MySpecificSubsPage extends StatelessWidget {
                   itemCount: state.mySubsList[index].subscriptionDetails['videos']?.length,
                   itemBuilder: (context, i) {
                     return Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
                       child: AnyLinkPreview(
                                       link: state.mySubsList[index].subscriptionDetails['videos'][i],
                                       displayDirection: UIDirection.uiDirectionHorizontal, 

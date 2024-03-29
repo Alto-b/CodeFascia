@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:code_geeks/presentation/screens/community/community_chat.dart';
-import 'package:code_geeks/presentation/screens/homepage/widgets/carousal.dart';
-import 'package:code_geeks/presentation/screens/homepage/widgets/language_avatar.dart';
-import 'package:code_geeks/presentation/screens/homepage/widgets/mentor_card_list.dart';
+import 'package:CodeFascia/presentation/screens/community/community_chat.dart';
+import 'package:CodeFascia/presentation/screens/homepage/widgets/carousal.dart';
+import 'package:CodeFascia/presentation/screens/homepage/widgets/language_avatar.dart';
+import 'package:CodeFascia/presentation/screens/homepage/widgets/mentor_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';

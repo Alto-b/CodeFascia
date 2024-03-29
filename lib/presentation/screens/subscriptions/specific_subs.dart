@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
-import 'package:code_geeks/application/subscription_bloc/subscription_bloc.dart';
-import 'package:code_geeks/presentation/screens/subscriptions/booking_subs.dart';
-import 'package:code_geeks/presentation/widgets/bnb.dart';
+import 'package:CodeFascia/application/subscription_bloc/subscription_bloc.dart';
+import 'package:CodeFascia/presentation/screens/subscriptions/booking_subs.dart';
+import 'package:CodeFascia/presentation/widgets/bnb.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';

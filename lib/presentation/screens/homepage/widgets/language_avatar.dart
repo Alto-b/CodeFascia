@@ -1,7 +1,7 @@
 // ignore_for_file: camel_case_types
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:code_geeks/application/home_page_bloc/home_bloc.dart';
+import 'package:CodeFascia/application/home_page_bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';

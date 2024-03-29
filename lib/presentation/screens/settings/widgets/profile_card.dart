@@ -1,5 +1,5 @@
-import 'package:code_geeks/application/user_bloc/user_bloc.dart';
-import 'package:code_geeks/domain/user_model.dart';
+import 'package:CodeFascia/application/user_bloc/user_bloc.dart';
+import 'package:CodeFascia/domain/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

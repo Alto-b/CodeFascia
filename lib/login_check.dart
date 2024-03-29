@@ -2,15 +2,15 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:code_geeks/presentation/widgets/bnb.dart';
-import 'package:code_geeks/presentation/screens/loading/onboarding_screen.dart';
-import 'package:code_geeks/presentation/screens/login/login.dart';
-import 'package:code_geeks/presentation/screens/signup/signup.dart';
+import 'package:CodeFascia/presentation/widgets/bnb.dart';
+import 'package:CodeFascia/presentation/screens/loading/onboarding_screen.dart';
+import 'package:CodeFascia/presentation/screens/login/login.dart';
+import 'package:CodeFascia/presentation/screens/signup/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+
 
 // ignore: unused_element
 final GoogleSignIn _googleSignIn = GoogleSignIn(scopes:['email'] );
@@ -165,9 +165,9 @@ class EntryPage extends StatelessWidget {
     }
   }
 
-Future<UserCredential> signInWithFacebook() async {
-  final LoginResult loginResult = await FacebookAuth.instance.login();
-  final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.token);
-  return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
-}
+// Future<UserCredential> signInWithFacebook() async {
+//   final LoginResult loginResult = await FacebookAuth.instance.login();
+//   final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.token);
+//   return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+// }
 }

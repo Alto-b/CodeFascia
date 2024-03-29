@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:code_geeks/domain/booking_model.dart';
-import 'package:code_geeks/domain/subscription_model.dart';
+import 'package:CodeFascia/domain/booking_model.dart';
+import 'package:CodeFascia/domain/subscription_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

@@ -3,8 +3,8 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:code_geeks/application/join_mentor/join_mentor_bloc.dart';
-import 'package:code_geeks/presentation/widgets/bnb.dart';
+import 'package:CodeFascia/application/join_mentor/join_mentor_bloc.dart';
+import 'package:CodeFascia/presentation/widgets/bnb.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

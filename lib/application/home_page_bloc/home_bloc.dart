@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:code_geeks/domain/language_model.dart';
-import 'package:code_geeks/domain/mentor_model.dart';
-import 'package:code_geeks/infrastructure/language_repo.dart';
-import 'package:code_geeks/infrastructure/mentor_repo.dart';
+import 'package:CodeFascia/domain/language_model.dart';
+import 'package:CodeFascia/domain/mentor_model.dart';
+import 'package:CodeFascia/infrastructure/language_repo.dart';
+import 'package:CodeFascia/infrastructure/mentor_repo.dart';
 import 'package:equatable/equatable.dart';
 
 part 'home_event.dart';

@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:code_geeks/domain/gemini_model.dart';
-import 'package:code_geeks/infrastructure/gemini_repo.dart';
+import 'package:CodeFascia/domain/gemini_model.dart';
+import 'package:CodeFascia/infrastructure/gemini_repo.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 

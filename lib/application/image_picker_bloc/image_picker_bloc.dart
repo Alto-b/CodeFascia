@@ -3,7 +3,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:code_geeks/application/image_picker_utils.dart';
+import 'package:CodeFascia/application/image_picker_utils.dart';
 import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
 

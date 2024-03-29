@@ -1,8 +1,8 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:code_geeks/application/subscription_bloc/subscription_bloc.dart';
-import 'package:code_geeks/presentation/screens/my_subscriptions/my_subs.dart';
+import 'package:CodeFascia/application/subscription_bloc/subscription_bloc.dart';
+import 'package:CodeFascia/presentation/screens/my_subscriptions/my_subs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

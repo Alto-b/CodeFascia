@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:code_geeks/domain/booking_model.dart';
-import 'package:code_geeks/domain/subscription_model.dart';
-import 'package:code_geeks/domain/user_model.dart';
-import 'package:code_geeks/infrastructure/subscription_repo.dart';
-import 'package:code_geeks/infrastructure/user_repo.dart';
+import 'package:CodeFascia/domain/booking_model.dart';
+import 'package:CodeFascia/domain/subscription_model.dart';
+import 'package:CodeFascia/domain/user_model.dart';
+import 'package:CodeFascia/infrastructure/subscription_repo.dart';
+import 'package:CodeFascia/infrastructure/user_repo.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 

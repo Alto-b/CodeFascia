@@ -1,5 +1,5 @@
-import 'package:code_geeks/application/subscription_bloc/subscription_bloc.dart';
-import 'package:code_geeks/presentation/screens/subscriptions/widget/subscription_card.dart';
+import 'package:CodeFascia/application/subscription_bloc/subscription_bloc.dart';
+import 'package:CodeFascia/presentation/screens/subscriptions/widget/subscription_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

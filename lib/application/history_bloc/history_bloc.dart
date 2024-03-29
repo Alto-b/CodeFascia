@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:code_geeks/domain/booking_model.dart';
-import 'package:code_geeks/infrastructure/subscription_repo.dart';
+import 'package:CodeFascia/domain/booking_model.dart';
+import 'package:CodeFascia/infrastructure/subscription_repo.dart';
 import 'package:equatable/equatable.dart';
 
 part 'history_event.dart';

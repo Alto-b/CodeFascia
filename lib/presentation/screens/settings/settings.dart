@@ -1,13 +1,13 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:code_geeks/login_check.dart';
-import 'package:code_geeks/presentation/screens/about%20page/about.dart';
-import 'package:code_geeks/presentation/screens/feedback/feedback.dart';
-import 'package:code_geeks/presentation/screens/join_mentor/mentor_join.dart';
-import 'package:code_geeks/presentation/screens/my_subscriptions/my_subs.dart';
-import 'package:code_geeks/presentation/screens/settings/profile.dart';
-import 'package:code_geeks/presentation/screens/settings/widgets/button.dart';
-import 'package:code_geeks/presentation/screens/settings/widgets/profile_card.dart';
+import 'package:CodeFascia/login_check.dart';
+import 'package:CodeFascia/presentation/screens/about%20page/about.dart';
+import 'package:CodeFascia/presentation/screens/feedback/feedback.dart';
+import 'package:CodeFascia/presentation/screens/join_mentor/mentor_join.dart';
+import 'package:CodeFascia/presentation/screens/my_subscriptions/my_subs.dart';
+import 'package:CodeFascia/presentation/screens/settings/profile.dart';
+import 'package:CodeFascia/presentation/screens/settings/widgets/button.dart';
+import 'package:CodeFascia/presentation/screens/settings/widgets/profile_card.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

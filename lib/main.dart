@@ -1,26 +1,25 @@
 import 'dart:io';
 
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:code_geeks/application/bnb_bloc/bnb_bloc.dart';
-import 'package:code_geeks/application/feedback_bloc/feedback_bloc.dart';
-import 'package:code_geeks/application/gemini_bloc/gemini_bloc.dart';
-import 'package:code_geeks/application/history_bloc/history_bloc.dart';
-import 'package:code_geeks/application/home_page_bloc/home_bloc.dart';
-import 'package:code_geeks/application/image_picker_bloc/image_picker_bloc.dart';
-import 'package:code_geeks/application/image_picker_utils.dart';
-import 'package:code_geeks/application/join_mentor/join_mentor_bloc.dart';
-import 'package:code_geeks/application/post_bloc/post_bloc.dart';
-import 'package:code_geeks/application/sign%20up%20bloc/image_update_bloc/image_bloc.dart';
-import 'package:code_geeks/application/subscription_bloc/subscription_bloc.dart';
-import 'package:code_geeks/application/user_bloc/user_bloc.dart';
-import 'package:code_geeks/infrastructure/firebase_api.dart';
-import 'package:code_geeks/login_check.dart';
-import 'package:code_geeks/infrastructure/language_repo.dart';
-import 'package:code_geeks/infrastructure/mentor_repo.dart';
-import 'package:code_geeks/infrastructure/post_repo.dart';
-import 'package:code_geeks/infrastructure/subscription_repo.dart';
-import 'package:code_geeks/infrastructure/user_repo.dart';
-import 'package:code_geeks/presentation/screens/error_pages/no_internet.dart';
+import 'package:CodeFascia/application/bnb_bloc/bnb_bloc.dart';
+import 'package:CodeFascia/application/feedback_bloc/feedback_bloc.dart';
+import 'package:CodeFascia/application/gemini_bloc/gemini_bloc.dart';
+import 'package:CodeFascia/application/history_bloc/history_bloc.dart';
+import 'package:CodeFascia/application/home_page_bloc/home_bloc.dart';
+import 'package:CodeFascia/application/image_picker_bloc/image_picker_bloc.dart';
+import 'package:CodeFascia/application/image_picker_utils.dart';
+import 'package:CodeFascia/application/join_mentor/join_mentor_bloc.dart';
+import 'package:CodeFascia/application/post_bloc/post_bloc.dart';
+import 'package:CodeFascia/application/sign%20up%20bloc/image_update_bloc/image_bloc.dart';
+import 'package:CodeFascia/application/subscription_bloc/subscription_bloc.dart';
+import 'package:CodeFascia/application/user_bloc/user_bloc.dart';
+import 'package:CodeFascia/login_check.dart';
+import 'package:CodeFascia/infrastructure/language_repo.dart';
+import 'package:CodeFascia/infrastructure/mentor_repo.dart';
+import 'package:CodeFascia/infrastructure/post_repo.dart';
+import 'package:CodeFascia/infrastructure/subscription_repo.dart';
+import 'package:CodeFascia/infrastructure/user_repo.dart';
+import 'package:CodeFascia/presentation/screens/error_pages/no_internet.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,7 +48,7 @@ Future<void> main() async {
   ):
  await Firebase.initializeApp();
 
- await FirebaseApi().initNotifications();
+//  await FirebaseApi().initNotifications();
 
 //  final fcmToken = await FirebaseMessaging.instance.getToken();
 //   await FirebaseMessaging.instance.setAutoInitEnabled(true);
@@ -113,8 +112,6 @@ class MyApp extends StatelessWidget {
                     debugShowCheckedModeBanner: false,
                     theme: theme,
                     darkTheme: darkTheme,
-                    
-            
                     home: internetResult ? const LoginCheckPage() : const NoInternetPage(),
                   ),
       ),)

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:code_geeks/domain/user_model.dart';
-import 'package:code_geeks/infrastructure/user_repo.dart';
+import 'package:CodeFascia/domain/user_model.dart';
+import 'package:CodeFascia/infrastructure/user_repo.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 

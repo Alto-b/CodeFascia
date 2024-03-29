@@ -1,5 +1,5 @@
 import 'package:animated_icon/animated_icon.dart';
-import 'package:code_geeks/main.dart';
+import 'package:CodeFascia/main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';

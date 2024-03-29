@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:code_geeks/application/subscription_bloc/subscription_bloc.dart';
-import 'package:code_geeks/presentation/widgets/bnb.dart';
+import 'package:CodeFascia/application/subscription_bloc/subscription_bloc.dart';
+import 'package:CodeFascia/presentation/widgets/bnb.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -166,7 +166,7 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
                                             var options ={
                                               'key' : 'rzp_test_om7emjnNEbQYMJ',
                                               'amount' : '${(int.parse(state.specSubsList[0].amount) * duration[index]*100)}',
-                                              'name' : 'Code Geeks',
+                                              'name' : 'CodeFascia',
                                               'description' : state.specSubsList[0].title,
                                               'prefill' : '${FirebaseAuth.instance.currentUser?.email}'
                                             };

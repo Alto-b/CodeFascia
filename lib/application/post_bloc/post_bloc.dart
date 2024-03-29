@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:code_geeks/domain/post_model.dart';
-import 'package:code_geeks/infrastructure/post_repo.dart';
+import 'package:CodeFascia/domain/post_model.dart';
+import 'package:CodeFascia/infrastructure/post_repo.dart';
 import 'package:equatable/equatable.dart';
 
 part 'post_event.dart';

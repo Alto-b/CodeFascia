@@ -1,10 +1,10 @@
 
-import 'package:code_geeks/application/bnb_bloc/bnb_bloc.dart';
-import 'package:code_geeks/presentation/screens/gemini/gemini.dart';
-import 'package:code_geeks/presentation/screens/homepage/homepage.dart';
-import 'package:code_geeks/presentation/screens/post_page/feed_view.dart';
-import 'package:code_geeks/presentation/screens/settings/settings.dart';
-import 'package:code_geeks/presentation/screens/subscriptions/subscriptions.dart';
+import 'package:CodeFascia/application/bnb_bloc/bnb_bloc.dart';
+import 'package:CodeFascia/presentation/screens/gemini/gemini.dart';
+import 'package:CodeFascia/presentation/screens/homepage/homepage.dart';
+import 'package:CodeFascia/presentation/screens/post_page/feed_view.dart';
+import 'package:CodeFascia/presentation/screens/settings/settings.dart';
+import 'package:CodeFascia/presentation/screens/subscriptions/subscriptions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

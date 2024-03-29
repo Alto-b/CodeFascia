@@ -1,9 +1,9 @@
-// ignore_for_file: non_constant_identifier_names, deprecated_member_use
+// ignore_for_file: non_constant_identifier_names
 
 import 'dart:io';
 
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:code_geeks/application/image_picker_bloc/image_picker_bloc.dart';
+import 'package:CodeFascia/application/image_picker_bloc/image_picker_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebasestorage;
@@ -27,7 +27,7 @@ class _CommunityPageState extends State<CommunityPage> {
 
   final DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
 
-  final DatabaseReference chatRef = FirebaseDatabase.instance.reference().child('community');
+  final DatabaseReference chatRef = FirebaseDatabase.instance.ref().child('community');
 
   final TextEditingController _content = TextEditingController();
 
@@ -66,7 +66,7 @@ class _CommunityPageState extends State<CommunityPage> {
     DateTime currentDate = DateTime.now();
     String currentDateString = "${currentDate.year}-${currentDate.month.toString().padLeft(2, '0')}-${currentDate.day.toString().padLeft(2, '0')}";
     final user = FirebaseAuth.instance.currentUser;
-    final DatabaseReference chatRef = FirebaseDatabase.instance.reference().child('community');
+    final DatabaseReference chatRef = FirebaseDatabase.instance.ref().child('community');
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(

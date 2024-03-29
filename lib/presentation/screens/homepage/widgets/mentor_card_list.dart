@@ -1,6 +1,6 @@
 
-import 'package:code_geeks/application/home_page_bloc/home_bloc.dart';
-import 'package:code_geeks/presentation/screens/mentors/mentors_page.dart';
+import 'package:CodeFascia/application/home_page_bloc/home_bloc.dart';
+import 'package:CodeFascia/presentation/screens/mentors/mentors_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:code_geeks/presentation/screens/community/community_chat.dart';
-import 'package:code_geeks/presentation/screens/homepage/widgets/carousal.dart';
-import 'package:code_geeks/presentation/screens/homepage/widgets/language_avatar.dart';
-import 'package:code_geeks/presentation/screens/homepage/widgets/mentor_card_list.dart';
-import 'package:code_geeks/presentation/screens/homepage/widgets/subs_slider.dart';
+import 'package:CodeFascia/application/subscription_bloc/subscription_bloc.dart';
+import 'package:CodeFascia/presentation/screens/community/community_chat.dart';
+import 'package:CodeFascia/presentation/screens/homepage/widgets/language_avatar.dart';
+import 'package:CodeFascia/presentation/screens/homepage/widgets/mentor_card_list.dart';
+import 'package:CodeFascia/presentation/screens/homepage/widgets/subs_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
@@ -72,9 +73,27 @@ class HomeScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           const SizedBox(height: 10,),
-                          Text("Active Subscriptions",style: GoogleFonts.poppins(
-                            fontSize: 15,fontWeight: FontWeight.w600,
-                          ),),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Active Subscriptions",style: GoogleFonts.poppins(
+                                fontSize: 15,fontWeight: FontWeight.w600,
+                              ),),
+                              const SizedBox(width: 15,),
+                              BlocBuilder<SubscriptionBloc, SubscriptionState>(
+                                builder: (context, state) {
+                                  if(state is MySubscritpionsLoadedState){
+                                    return CircleAvatar(
+                                      backgroundColor: Colors.white,
+                                    radius: 10,
+                                     child: Text(state.mySubsList.length.toString()),
+                                   );
+                                  }
+                                  return const SizedBox();
+                                },
+                              )
+                            ],
+                          ),
                           const SizedBox(height: 10,),
                           const OngoingSubsSlider(),
                           const SizedBox(height: 20,),

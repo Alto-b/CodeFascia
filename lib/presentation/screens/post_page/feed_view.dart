@@ -1,5 +1,5 @@
-import 'package:code_geeks/application/post_bloc/post_bloc.dart';
-import 'package:code_geeks/presentation/screens/post_page/post_view.dart';
+import 'package:CodeFascia/application/post_bloc/post_bloc.dart';
+import 'package:CodeFascia/presentation/screens/post_page/post_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';

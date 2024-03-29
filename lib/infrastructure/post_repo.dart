@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:code_geeks/domain/post_model.dart';
+import 'package:CodeFascia/domain/post_model.dart';
 import 'package:flutter/material.dart';
 
 class PostRepo{

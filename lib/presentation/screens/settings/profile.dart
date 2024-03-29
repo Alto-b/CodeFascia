@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:code_geeks/application/image_picker_bloc/image_picker_bloc.dart';
-import 'package:code_geeks/application/user_bloc/user_bloc.dart';
-import 'package:code_geeks/domain/user_model.dart';
-import 'package:code_geeks/presentation/widgets/bnb.dart';
+import 'package:CodeFascia/application/image_picker_bloc/image_picker_bloc.dart';
+import 'package:CodeFascia/application/user_bloc/user_bloc.dart';
+import 'package:CodeFascia/domain/user_model.dart';
+import 'package:CodeFascia/presentation/widgets/bnb.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebasestorage;

@@ -1,6 +1,6 @@
 
-import 'package:code_geeks/domain/gemini_model.dart';
-import 'package:code_geeks/infrastructure/constants.dart';
+import 'package:CodeFascia/domain/gemini_model.dart';
+import 'package:CodeFascia/infrastructure/constants.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 

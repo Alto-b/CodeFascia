@@ -1,8 +1,8 @@
-// ignore_for_file: non_constant_identifier_names, deprecated_member_use, unused_local_variable
+// ignore_for_file: non_constant_identifier_names,unused_local_variable
 
 import 'dart:io';
 
-import 'package:code_geeks/application/image_picker_bloc/image_picker_bloc.dart';
+import 'package:CodeFascia/application/image_picker_bloc/image_picker_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebasestorage;
@@ -88,7 +88,7 @@ class _SubsChatPageState extends State<SubsChatPage> {
     String currentDateString = "${currentDate.year}-${currentDate.month.toString().padLeft(2, '0')}-${currentDate.day.toString().padLeft(2, '0')}";
   
   final user = FirebaseAuth.instance.currentUser;
-  final DatabaseReference chatRef = FirebaseDatabase.instance.reference().child(widget.booking_id);
+  final DatabaseReference chatRef = FirebaseDatabase.instance.ref().child(widget.booking_id);
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(

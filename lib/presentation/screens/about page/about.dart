@@ -21,7 +21,7 @@ class AboutPage extends StatelessWidget {
           children: [
             Image.asset('lib/assets/logo.png'),
 
-            Text("At Code Geeks, we're passionate about fostering a vibrant and supportive community for individuals who are new to the field of software development and programming. Whether you're just starting your journey or looking to enhance your skills, we're here to provide you with the resources, guidance, and mentorship you need to succeed.",textAlign: TextAlign.justify,style: textStyle(),),
+            Text("At CodeFascia, we're passionate about fostering a vibrant and supportive community for individuals who are new to the field of software development and programming. Whether you're just starting your journey or looking to enhance your skills, we're here to provide you with the resources, guidance, and mentorship you need to succeed.",textAlign: TextAlign.justify,style: textStyle(),),
             const SizedBox(height: 30,),
             Text("- Empowering Developers, Building Futures -",textAlign: TextAlign.center,style: textStyle().copyWith(
               fontSize: 15,fontWeight: FontWeight.w600,color: Colors.grey
