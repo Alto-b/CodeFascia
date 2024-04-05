@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 class CommunityPage extends StatefulWidget {
    const CommunityPage({super.key});
@@ -104,6 +105,16 @@ class _CommunityPageState extends State<CommunityPage> {
                         controller: _scrollController,
                         itemCount: snapshot.data!.snapshot.children.length,
                         itemBuilder: (context, index) {
+// Assuming list[index]['dateTime'] is a DateTime object
+DateTime dateTime = list[index]['dateTime'];
+
+// Format the DateTime object to 12-hour format with AM/PM
+String formattedTime = DateFormat('h:mm a').format(dateTime);
+
+// Display the formatted time
+// Text(formattedTime, style: TimeTextStyle())
+
+
                           String messageDate = list[index]['dateTime'].toString().substring(0, 10);
                           bool displayDate = false;
 
@@ -159,7 +170,7 @@ class _CommunityPageState extends State<CommunityPage> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      Text(list[index]['dateTime'].toString().substring(10,16),style: TimeTextStyle(),),
+                                      Text(formattedTime,style: TimeTextStyle(),),                                      
                                       const SizedBox(width: 20,)
                                     ],
                                   ),
@@ -216,8 +227,8 @@ class _CommunityPageState extends State<CommunityPage> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       const SizedBox(width: 20,),
-                                      Text(list[index]['dateTime'].toString().substring(10,16),style: TimeTextStyle(),),
-                                      
+                                      // Text(list[index]['dateTime'].toString().substring(10,16),style: TimeTextStyle(),),
+                                      Text(formattedTime,style: TimeTextStyle(),),                                      
                                     ],
                                   ),
                               ],

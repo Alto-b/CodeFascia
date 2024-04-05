@@ -45,7 +45,7 @@ class _SubscriptionBookingPageState extends State<SubscriptionBookingPage> {
   String? bookId;
   Map<String,dynamic> detail = {};
   
-
+ 
   void _handlePaymentSuccess(PaymentSuccessResponse response){
     Fluttertoast.showToast(msg: "Payment successful");    
      context.read<SubscriptionBloc>().add(BookSubscriptionEvent(data: detail, bookingId: bookId!));
