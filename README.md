@@ -1,16 +1,6 @@
-# code_geeks
+# CodeFascia
 
-A new Flutter project.
+A mobile platform built on focusing about connecting people who are interested in the field of development through free community.
+Also there are subscriptions available within the application which provides the users with a set of tutorials.
+One-to-one mentorship is also available for the subscribers.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
