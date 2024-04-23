@@ -1,5 +1,6 @@
 
 import 'package:CodeFascia/application/bnb_bloc/bnb_bloc.dart';
+import 'package:CodeFascia/application/user_bloc/user_bloc.dart';
 import 'package:CodeFascia/presentation/screens/gemini/gemini.dart';
 import 'package:CodeFascia/presentation/screens/homepage/homepage.dart';
 import 'package:CodeFascia/presentation/screens/post_page/feed_view.dart';
@@ -23,6 +24,7 @@ class BnbPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<UserBloc>().add(LoadUserEvent());
     return BlocConsumer<BnbBloc, BnbState>(
       
       listener: (context, state) {
@@ -41,29 +43,58 @@ class BnbPage extends StatelessWidget {
                 
               ),
               
-              child: BottomNavigationBar(
-                
-                items: const [
-                  BottomNavigationBarItem(icon: Icon(Icons.home_outlined),label: "Home"),
-                  BottomNavigationBarItem(icon: Icon(Icons.feed_outlined,),label: "Feed"),
-                  BottomNavigationBarItem(icon: Icon(Icons.subscriptions_outlined),label: "Subscriptions"),
-                  BottomNavigationBarItem(icon: Icon(Icons.person_outline),label: "Settings"),
-              ],
-              showUnselectedLabels: false,
-              showSelectedLabels: false,
+              child: BlocBuilder<UserBloc, UserState>(
+                builder: (context, state1) {
+                  if(state1 is UserLoadedState){
+                    return BottomNavigationBar(
+                              items:  [
+                                BottomNavigationBarItem(icon: Icon(Icons.home_outlined,size: 25),label: "Home"),
+                                BottomNavigationBarItem(icon: Icon(Icons.feed_outlined,size: 25),label: "Feed"),
+                                BottomNavigationBarItem(icon: Icon(Icons.subscriptions_outlined,size: 25,),label: "Subscriptions"),
+                                // BottomNavigationBarItem(icon: Icon(Icons.person_outline),label: "Settings"),
+                                BottomNavigationBarItem(icon: CircleAvatar(backgroundImage: NetworkImage(state1.userList.profile),radius: 12,),label: "Me")
+                            ],
+                            showUnselectedLabels: false,
+                            showSelectedLabels: false,
+                            
+                            backgroundColor:  const Color.fromARGB(255, 110, 132, 214),
+                            selectedIconTheme: const IconThemeData(
+                              size: 30,
               
-              backgroundColor:  const Color.fromARGB(255, 110, 132, 214),
-              selectedIconTheme: const IconThemeData(
-                size: 30,
-
-              ),
-              selectedItemColor: Colors.white,
-              unselectedItemColor: Colors.white.withOpacity(.45),
-              currentIndex: state.tabIndex,
-              type: BottomNavigationBarType.fixed,
-              onTap: (index) {
-               BlocProvider.of<BnbBloc>(context).add(TabChangeEvent(tabIndex: index));
-               
+                            ),
+                            selectedItemColor: Colors.white,
+                            unselectedItemColor: Colors.white.withOpacity(.45),
+                            currentIndex: state.tabIndex,
+                            type: BottomNavigationBarType.fixed,
+                            onTap: (index) {
+                             BlocProvider.of<BnbBloc>(context).add(TabChangeEvent(tabIndex: index));
+                              },
+                            );
+                  }
+                  return BottomNavigationBar(
+                              items:  [
+                                BottomNavigationBarItem(icon: Icon(Icons.home_outlined),label: "Home"),
+                                BottomNavigationBarItem(icon: Icon(Icons.feed_outlined,),label: "Feed"),
+                                BottomNavigationBarItem(icon: Icon(Icons.subscriptions_outlined),label: "Subscriptions"),
+                                BottomNavigationBarItem(icon: Icon(Icons.person_outline),label: "Settings"),
+                                // BottomNavigationBarItem(icon: ImageIcon(state1.userList.profile as ImageProvider<Object>?))
+                            ],
+                            showUnselectedLabels: false,
+                            showSelectedLabels: false,
+                            
+                            backgroundColor:  const Color.fromARGB(255, 110, 132, 214),
+                            selectedIconTheme: const IconThemeData(
+                              size: 30,
+              
+                            ),
+                            selectedItemColor: Colors.white,
+                            unselectedItemColor: Colors.white.withOpacity(.45),
+                            currentIndex: state.tabIndex,
+                            type: BottomNavigationBarType.fixed,
+                            onTap: (index) {
+                             BlocProvider.of<BnbBloc>(context).add(TabChangeEvent(tabIndex: index));
+                              },
+                            );
                 },
               ),
             ),

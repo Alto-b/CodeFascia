@@ -22,7 +22,7 @@ class UserRepo{
     return UserModel(id: "", name: "", email: "", profile: "", profession: "");
   }
   catch(e){
-    throw Exception(e.toString());
+    throw Exception(e.toString()); 
   }
 }
 

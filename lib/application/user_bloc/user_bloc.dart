@@ -18,8 +18,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc(this.userRepo) : super(UserInitialState()) {
 
     on<LoadUserEvent>((event, emit)async {
-    emit(UserLoadingState());
-      await Future.delayed(const Duration(seconds: 1));
+    // emit(UserLoadingState());
+      // await Future.delayed(const Duration(seconds: 1));
     try{
       final data = await userRepo.getUser();
       emit(UserLoadedState(userList:data ));

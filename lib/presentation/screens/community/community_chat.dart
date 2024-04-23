@@ -115,6 +115,7 @@ String formattedTime = DateFormat('h:mm a').format(dateTime);
 // Text(formattedTime, style: TimeTextStyle())
 
 
+
                           String messageDate = list[index]['dateTime'].toString().substring(0, 10);
                           bool displayDate = false;
 
@@ -122,13 +123,18 @@ String formattedTime = DateFormat('h:mm a').format(dateTime);
                             displayDate = true;
                             previousDate = messageDate;
                           }
+                          // Assuming messageDate is a String in the format 'yyyy-MM-dd'
+DateTime parsedDate = DateTime.parse(messageDate);
+String formattedDate = DateFormat('dd MMM yyyy').format(parsedDate);
+
+// Now, formattedDate will contain the date in the desired format ('02 Apr 2024')
                           return (list[index]['senderId']==user!.uid)?
                           //send bubble
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 if (displayDate)
-                                Center(child: Text(messageDate == currentDateString ? "Today" : messageDate.substring(0, 10),style: DateTextStyle(),)),
+                                Center(child: Text(messageDate == currentDateString ? "Today" : formattedDate,style: DateTextStyle(),)),
                                 ChatBubble(
                                     clipper: ChatBubbleClipper1(type: BubbleType.sendBubble),
                                     alignment: Alignment.topRight,
@@ -182,7 +188,7 @@ String formattedTime = DateFormat('h:mm a').format(dateTime);
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 if (displayDate)
-                                Center(child: Text(messageDate == currentDateString ? "Today" : messageDate.substring(0, 10),style: DateTextStyle(),)),
+                                Center(child: Text(messageDate == currentDateString ? "Today" : formattedDate,style: DateTextStyle(),)),
                                 ChatBubble(
                                     clipper: ChatBubbleClipper1(type: BubbleType.receiverBubble),
                                     backGroundColor: const Color(0xffE7E7ED),

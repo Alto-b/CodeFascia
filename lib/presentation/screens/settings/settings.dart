@@ -24,7 +24,10 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(
         toolbarHeight: screenHeight/8,
          title:  Text("Settings",style: GoogleFonts.orbitron(fontSize: 30,fontWeight: FontWeight.w800,color: Colors.grey)),
-        actions: [const ModeButton(),const SizedBox(width: 5,), IconButton(onPressed: (){showLogOutDialog(context);}, icon: const Icon(Icons.logout))],
+        actions: [const ModeButton(),const SizedBox(width: 5,), 
+        // IconButton(onPressed: (){showLogOutDialog(context);}, icon: const Icon(Icons.logout))
+        SizedBox(width: 20,)
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(

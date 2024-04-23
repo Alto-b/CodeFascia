@@ -43,8 +43,6 @@ class MySpecificSubsPage extends StatelessWidget {
         ),
       ),
 
-
-
       body: SingleChildScrollView(
         child: Center(
           child: Column(

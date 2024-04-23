@@ -1,5 +1,6 @@
 import 'package:CodeFascia/application/subscription_bloc/subscription_bloc.dart';
 import 'package:CodeFascia/presentation/screens/subscriptions/specific_subs.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
@@ -40,7 +41,9 @@ class SubscriptionCard extends StatelessWidget {
                           SizedBox(
                             height: screenHeight/8,
                             width: screenWidth/2,
-                            child: Image.network(state.subscritpionList[index].photo,filterQuality: FilterQuality.high,fit: BoxFit.fill,),
+                            // child: Image.network(state.subscritpionList[index].photo,filterQuality: FilterQuality.high,fit: BoxFit.fill,),
+                            child: CachedNetworkImage(imageUrl: state.subscritpionList[index].photo,filterQuality: FilterQuality.high,fit: BoxFit.cover,
+                            placeholder: (context, url) => Icon(Icons.browse_gallery_outlined),),
                           ),
                           ListTile(
                             title: Text(state.subscritpionList[index].title,
