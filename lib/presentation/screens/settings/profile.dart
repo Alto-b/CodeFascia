@@ -87,11 +87,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                 child:  Stack(
                                   children: [
                                     ClipRRect(
-                                      child: CircleAvatar(
-                                        radius: 60,
-                                        backgroundImage: NetworkImage(data.profile),
-                                        
-                                        ),
+                                      child: Hero(
+                                        tag: "profile_avatar",
+                                        child: CircleAvatar(
+                                          radius: 60,
+                                          backgroundImage: NetworkImage(data.profile),
+                                          
+                                          ),
+                                      ),
                                     ),
                                       const Positioned(
                                         bottom: 15,right: 15,

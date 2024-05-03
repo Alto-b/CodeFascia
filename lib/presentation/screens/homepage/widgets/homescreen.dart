@@ -1,11 +1,12 @@
+import 'package:CodeFascia/presentation/screens/homepage/widgets/active_subs_card.dart';
+import 'package:CodeFascia/presentation/screens/homepage/widgets/homepapge_buttons.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:CodeFascia/application/subscription_bloc/subscription_bloc.dart';
 import 'package:CodeFascia/presentation/screens/community/community_chat.dart';
 import 'package:CodeFascia/presentation/screens/homepage/widgets/language_avatar.dart';
 import 'package:CodeFascia/presentation/screens/homepage/widgets/mentor_card_list.dart';
-import 'package:CodeFascia/presentation/screens/homepage/widgets/subs_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
@@ -64,50 +65,30 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                        
-                    const SizedBox(height: 40,),
-                    //ongoing subs
-                    Card(
-                      color: Colors.transparent,
-                      child: Padding(
+                    const SizedBox(height: 30,),
+
+                    //redirect options
+                    Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Column(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          const SizedBox(height: 10,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Active Subscriptions",style: GoogleFonts.poppins(
-                                fontSize: 15,fontWeight: FontWeight.w600,
-                              ),),
-                              const SizedBox(width: 15,),
-                              BlocBuilder<SubscriptionBloc, SubscriptionState>(
-                                builder: (context, state) {
-                                  if(state is MySubscritpionsLoadedState){
-                                    return CircleAvatar(
-                                      backgroundColor: Colors.white,
-                                    radius: 10,
-                                     child: Text(state.mySubsList.length.toString()),
-                                   );
-                                  }
-                                  return const SizedBox();
-                                },
-                              )
-                            ],
-                          ),
-                          const SizedBox(height: 10,),
-                          const OngoingSubsSlider(),
-                          const SizedBox(height: 20,),
+                          LogoCard(screenHeight: screenHeight, screenWidth: screenWidth, imagePath: "lib/assets/discord.png"),
+                          LogoCard(screenHeight: screenHeight, screenWidth: screenWidth, imagePath: "lib/assets/github.png"),
+                          LogoCard(screenHeight: screenHeight, screenWidth: screenWidth, imagePath: "lib/assets/medium.png")
                         ],
                       ),
-                    )),
+                    ),
+
+                    const SizedBox(height: 40,),
+                    //ongoing subs
+                    active_subs_card(),
 
                     const SizedBox(height: 30,),
                        
                     //mentors
                     MentorCardHPWidget(runtimeType: runtimeType, screenHeight: screenHeight, screenWidth: screenWidth),
                        
-                       
-                    
                   ],
                 ),
               ),

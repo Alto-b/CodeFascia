@@ -2,6 +2,7 @@ import 'package:CodeFascia/application/user_bloc/user_bloc.dart';
 import 'package:CodeFascia/domain/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glass_kit/glass_kit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -50,11 +51,14 @@ class ProfileCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const SizedBox(width: 10,),
-                         CircleAvatar(
-                          radius: 40,
-                          // backgroundImage:NetworkImage(data.profile),
-                          backgroundImage: NetworkImage(currUser!.photoURL ?? data.profile),
-                        ),
+                         Hero(
+                          tag: "profile_avatar",
+                           child: CircleAvatar(
+                            radius: 40,
+                            // backgroundImage:NetworkImage(data.profile),
+                            backgroundImage: NetworkImage(currUser!.photoURL ?? data.profile),
+                                                   ),
+                         ),
                         const SizedBox(width: 20,),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
