@@ -31,22 +31,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   bool internetResult = await InternetConnectionChecker().hasConnection;
-  // if(internetResult == true) {
-  //   print('YAY! Free cute dog pics!');
-  // } else {
-  //   print('No internet :( Reason:');
-  // }
 
   Platform.isAndroid
-      ? await Firebase.initializeApp(
-          // options: const FirebaseOptions(
-          //     apiKey: "AIzaSyDFLURsPEzl6KV3Aau3POzWV3JUJd9plz0",
-          //     projectId: "code-geeks-ff98c",
-          //     messagingSenderId: "688360665265",
-          //     appId: "1:688360665265:android:a76df499c29b711251f290",
-          //     storageBucket: 'code-geeks-ff98c.appspot.com',
-          //   )
-          options: FirebaseConfig.options)
+      ? await Firebase.initializeApp(options: FirebaseConfig.options)
       : await Firebase.initializeApp();
 
 //  await FirebaseApi().initNotifications();
@@ -64,7 +51,6 @@ class MyApp extends StatelessWidget {
   final bool internetResult;
   const MyApp({super.key, required this.internetResult});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
