@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, must_be_immutable
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,13 +36,16 @@ class SpecificPostView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Hero(
-                tag: title,
-                child: Text(
-                  title,
-                  style: GoogleFonts.poppins(
-                      fontSize: 35, fontWeight: FontWeight.w600),
-                ),
+              Text(
+                title,
+                style: GoogleFonts.poppins(
+                    // color: Colors.black,
+                    fontSize: 35,
+                    fontWeight: FontWeight.w600,
+                    decoration: TextDecoration.none),
+              ),
+              SizedBox(
+                height: 10,
               ),
               Row(
                 children: [
