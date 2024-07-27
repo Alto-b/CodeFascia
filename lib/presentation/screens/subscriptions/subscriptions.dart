@@ -30,12 +30,15 @@ class SubscriptionsPage extends StatelessWidget {
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(35)),
             child: TextFormField(
+              keyboardType: TextInputType.text,
               controller: searchController,
               onChanged: (value) {
                 context.read<SubscriptionBloc>().add(
                     SearchSubscriptionsEvent(searchWord: value.toLowerCase()));
               },
               decoration: InputDecoration(
+                hintText: "Search subscriptions",
+                hintStyle: TextStyle(color: Colors.grey),
                 fillColor: Colors.white,
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(35)),

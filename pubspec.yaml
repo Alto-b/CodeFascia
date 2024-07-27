@@ -5,7 +5,7 @@ description: "A new Flutter project."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # Define the version and build number for your application
-version: 1.0.0+3
+version: 2.1.1+1
 
 # Define the minimum Dart SDK version required for your project
 environment:
@@ -77,10 +77,11 @@ flutter:
 
   # Specify assets used in your application
   assets:
-    - lib/assets/anim1.gif # Path to directory containing assets
+    - lib/assets/anim1.gif
     - lib/assets/anim2.gif
     - lib/assets/logo.png
     - lib/assets/loader.json
     - lib/assets/signup_loader.json
     - lib/assets/community-button-web-banner-templates-illustration-vector.jpg
     - lib/assets/
+    - shorebird.yaml
