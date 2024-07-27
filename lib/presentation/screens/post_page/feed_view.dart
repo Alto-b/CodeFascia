@@ -22,7 +22,7 @@ class PostViewPage extends StatelessWidget {
             "FEED",
             style: GoogleFonts.orbitron(
                 fontWeight: FontWeight.w700,
-                color: Colors.grey,
+                color: Colors.black,
                 letterSpacing: 2),
           ),
           centerTitle: true,

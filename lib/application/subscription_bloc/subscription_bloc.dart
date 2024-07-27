@@ -16,8 +16,8 @@ part 'subscription_state.dart';
 class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
   SubscriptionRepo subscriptionRepo = SubscriptionRepo();
   UserRepo userRepo = UserRepo();
-  SubscriptionBloc(this.subscriptionRepo,this.userRepo) : super(SubscriptionInitial()) {
-    
+  SubscriptionBloc(this.subscriptionRepo, this.userRepo)
+      : super(SubscriptionInitial()) {
     on<SubscriptionLoadEvent>(getSubsriptions);
     on<SpecificSubsLoadEvent>(getSpecificSubs);
     on<SearchSubscriptionsEvent>(searchSubscriptions);
@@ -25,58 +25,61 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
     on<MySubscritpionLoadEvent>(mySubscriptions);
   }
 
-  FutureOr<void> getSubsriptions(SubscriptionLoadEvent event, Emitter<SubscriptionState> emit)async{
+  FutureOr<void> getSubsriptions(
+      SubscriptionLoadEvent event, Emitter<SubscriptionState> emit) async {
     final subs = await subscriptionRepo.getSubscriptions();
     emit(SubscriptionLoadedState(subscritpionList: subs));
   }
 
-
-  FutureOr<void> getSpecificSubs(SpecificSubsLoadEvent event, Emitter<SubscriptionState> emit)async {
+  FutureOr<void> getSpecificSubs(
+      SpecificSubsLoadEvent event, Emitter<SubscriptionState> emit) async {
     final specSubs = await subscriptionRepo.getSpecificSubs(event.SubsId);
     emit(SpecificSubsLoadedState(specSubsList: specSubs));
   }
 
-  FutureOr<void> searchSubscriptions(SearchSubscriptionsEvent event, Emitter<SubscriptionState> emit)async{
-    try{
-      if(event.searchWord.isNotEmpty){
-        final searchSubs = await subscriptionRepo.searchSubscriptions(event.searchWord);
+  FutureOr<void> searchSubscriptions(
+      SearchSubscriptionsEvent event, Emitter<SubscriptionState> emit) async {
+    try {
+      if (event.searchWord.isNotEmpty) {
+        final searchSubs =
+            await subscriptionRepo.searchSubscriptions(event.searchWord);
         emit(SearchLoadedState(searchSubsList: searchSubs));
-        
-      }
-      else{
+      } else {
         final subs = await subscriptionRepo.getSubscriptions();
         emit(SubscriptionLoadedState(subscritpionList: subs));
       }
-    }
-    catch(e){
-     debugPrint("searchSubs${e.toString()}");
+    } catch (e) {
+      debugPrint("searchSubs${e.toString()}");
     }
   }
 
-  FutureOr<void> bookSubscritpion(BookSubscriptionEvent event, Emitter<SubscriptionState> emit)async{
-    try{
-      await FirebaseFirestore.instance.collection("bookings")
-      .doc(event.bookingId)
-      .set(event.data).then((value){
+  FutureOr<void> bookSubscritpion(
+      BookSubscriptionEvent event, Emitter<SubscriptionState> emit) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection("bookings")
+          .doc(event.bookingId)
+          .set(event.data)
+          .then((value) {
         debugPrint("booking successful");
       });
-    }
-    on FirebaseException catch(e){
+    } on FirebaseException catch (e) {
       debugPrint("bookingSubs ${e.message}");
     }
   }
 
-
-
-  FutureOr<void> mySubscriptions(MySubscritpionLoadEvent event, Emitter<SubscriptionState> emit)async{
+  FutureOr<void> mySubscriptions(
+      MySubscritpionLoadEvent event, Emitter<SubscriptionState> emit) async {
     subscriptionRepo.updateSubsStats();
     final mySubs = await subscriptionRepo.mySubscriptions(event.uid);
     final user = await userRepo.getUser();
-    if(mySubs.isEmpty){
+    if (mySubs.isEmpty) {
       emit(MySubscriptionErrorState());
+    } else {
+      emit(MySubscritpionsLoadedState(
+        mySubsList: mySubs,
+        userList: user,
+      ));
     }
-   else{
-     emit(MySubscritpionsLoadedState(mySubsList: mySubs, userList: user,));
-   }
   }
 }
